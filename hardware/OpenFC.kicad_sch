@@ -65,6 +65,16 @@
 		)
 		(uuid "14548272-a038-4ece-abc4-37d565af50ed")
 	)
+	(bus
+		(pts
+			(xy 86.36 82.55) (xy 102.87 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c320843-b610-408b-b90b-ce6da614ba57")
+	)
 	(wire
 		(pts
 			(xy 161.29 36.83) (xy 191.77 36.83)
@@ -74,16 +84,6 @@
 			(type default)
 		)
 		(uuid "1e623da3-f96a-4ba8-851a-81d96e46a0bf")
-	)
-	(bus
-		(pts
-			(xy 86.36 82.55) (xy 102.87 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2936b044-4cf0-4a9c-948e-4f7f168f9f8f")
 	)
 	(wire
 		(pts
@@ -185,16 +185,6 @@
 		)
 		(uuid "74d65897-4715-4ec4-b2a1-304db0f6149f")
 	)
-	(bus
-		(pts
-			(xy 86.36 100.33) (xy 102.87 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7e83b87e-2db6-4bf1-a023-68df5d5642b0")
-	)
 	(wire
 		(pts
 			(xy 86.36 80.01) (xy 102.87 80.01)
@@ -264,6 +254,16 @@
 			(type default)
 		)
 		(uuid "b03c2f7e-d70a-42e9-9bec-cbfb9e6618c0")
+	)
+	(bus
+		(pts
+			(xy 86.36 100.33) (xy 102.87 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b744c53d-f356-4e40-9c49-2122889a3ee3")
 	)
 	(wire
 		(pts
@@ -383,9 +383,9 @@
 				(justify left top)
 			)
 		)
-		(pin "SPI1{SCK,MOSI,MISO}" bidirectional
-			(at 86.36 82.55 0)
-			(uuid "f0727fa2-cfc5-4a6e-9015-0aaabdeb947d")
+		(pin "FLASH_CS" input
+			(at 86.36 80.01 0)
+			(uuid "1f1666b0-d45a-44fd-9c93-0f670f7e7056")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -393,9 +393,9 @@
 				(justify right)
 			)
 		)
-		(pin "FLASH_CS" input
-			(at 86.36 80.01 0)
-			(uuid "1f1666b0-d45a-44fd-9c93-0f670f7e7056")
+		(pin "SPI0{SCK,MOSI,MISO}" bidirectional
+			(at 86.36 82.55 0)
+			(uuid "116601ae-fdaa-4beb-b430-adf17c58a288")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -479,9 +479,9 @@
 				(justify right)
 			)
 		)
-		(pin "SPI0{SCK,MOSI,MISO}" bidirectional
+		(pin "SPI1{SCK,MOSI,MISO}" bidirectional
 			(at 86.36 100.33 0)
-			(uuid "8118814b-581e-4f77-9e23-8c186bf467ac")
+			(uuid "2420740e-e164-4f47-88be-d2d3b4d30dfa")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -752,7 +752,7 @@
 			)
 		)
 		(pin "SPI1{SCK,MOSI,MISO}" bidirectional
-			(at 102.87 82.55 180)
+			(at 102.87 100.33 180)
 			(uuid "8bd1ee90-a7f7-478a-b785-fc395a7ee414")
 			(effects
 				(font
@@ -842,7 +842,7 @@
 			)
 		)
 		(pin "SPI0{SCK,MOSI,MISO}" bidirectional
-			(at 102.87 100.33 180)
+			(at 102.87 82.55 180)
 			(uuid "d6dbd76b-8c71-4fc8-812b-af268e9698bb")
 			(effects
 				(font

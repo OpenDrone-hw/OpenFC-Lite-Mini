@@ -428,10 +428,16 @@ The board grounds pins 2/3. For an **unused** aux interface this is correct/beni
 - **ST LSM6D\*** (DSV16X / DSK320X / DSO): datasheet sanctions pins 2/3 → "VDDIO **or GND**". ✓
 - **TDK ICM-426xx/IIM and ICM-456xx/56xx-gen** (confirmed from ICM-56686 pinout: pins 2/3/10/11 =
   RESV/AUX1, pin 9 = INT2/FSYNC/CLKIN — same universal layout): RESV = "NC **or GND**". ✓
-- **Bosch BMI270:** pins 2/3 (ASDx/ASCx) are *inputs* when aux/OIS is disabled (BF default), so GND
-  is benign. Bosch's table prefers VDDIO/DNC and DNC(=NC) is explicitly allowed, but grounding an
-  undriven input causes no contention — and the whole universal-footprint FC industry does exactly
-  this. **Earlier "GND not allowed for BMI270" was paper-spec pedantry; corrected.**
+- **Bosch BMI270 — GND is safe (mechanism verified in datasheet, 2026-06-03):** aux/OIS is disabled
+  by default (`PWR_CTRL.aux_en=0`; BF never enables it for a bare gyro), so ASDx/ASCx are **high-Z
+  inputs** — nothing drives them, GND = no contention. The only "pull-up" is a *configurable* internal
+  pull-up on ASDA (`AUX_IF_TRIM.asda_pupsel`: off/40k/10k/2k) used for the aux-I2C SDA line; inactive
+  when aux is off (worst case a 40k pull → ~80 µA to GND, harmless). Bosch's "VDDIO or DNC" is
+  conservative guidance for the aux-*enabled* case; it does **not** mean GND damages the part. Bosch's
+  own power-off note even says interface pins "must be kept close to GNDIO potential." The *only*
+  failure case is firmware enabling the aux **I2C master** (ASCx becomes a driven clock → GND short) —
+  which BF does not do. **GND is the correct universal tie** (VDDIO fails TDK RESV; NC fails ST's
+  "needs a level"). One firmware caveat: never enable the BMI270 aux interface.
 
 **So the footprint is a genuine universal drop-in** for every ST LSM6D\*, every TDK ICM-426xx/IIM,
 the 456xx/56xx-generation TDK parts, and the BMI270 — **no schematic change needed.**

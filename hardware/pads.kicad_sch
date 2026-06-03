@@ -2362,16 +2362,6 @@
 		)
 		(uuid "9430c01b-9f52-4ebe-ae1b-0aa31f407260")
 	)
-	(label "PU1RX"
-		(at 218.44 135.89 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "991414f6-7eae-4be0-92e5-63e27377abf5")
-	)
 	(label "I2C0.SDA"
 		(at 83.82 146.05 90)
 		(effects

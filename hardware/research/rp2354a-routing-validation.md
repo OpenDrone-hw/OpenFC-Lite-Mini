@@ -45,13 +45,15 @@ I2C0 cannot remap the polarity. **Fix (Stan, schematic): swap so GPIO4=I2C0_SDA,
 (Matches the rule already noted in CLAUDE.md.) Only matters if I2C is used (external/optional —
 no onboard baro), but it's wrong as drawn.
 
-## Issue 2 — PIO2 instruction overflow: OSD + LED strip (FIRMWARE config, no respin)
-FB_OSD program = 31 instr, WS2812 = 4 instr → **35 > 32 instruction slots per PIO block.** BF's
-RP2350A `target.h` defaults *both* `PIO_LEDSTRIP_INDEX=2` and `PIO_OSD_INDEX=2` → they collide.
-**Resolution is in firmware, not hardware:** the board wires only **one** PIO UART (PIOUART0 on
-GPIO2/3), so PIO1 has 2 free SMs + instruction room. Set `PIO_LEDSTRIP_INDEX=1` (LED on PIO1) and
-keep OSD alone on PIO2. PIO budget then: PIO0 = 4× DShot SM; PIO1 = PIOUART0 (2 SM) + LED (1 SM);
-PIO2 = OSD (1 SM, 31 instr). Fits. **No board change** — config-only.
+## Issue 2 — OSD + LED cannot share one PIO block (FIRMWARE config, no respin)
+Verified program sizes in BF source: OSD steady-state `osd_tx_pal/ntsc` = **31 instr / 1 SM**
+(`osd_tx.pio.h:60`); WS2812 = **4 instr / 1 SM** (4-entry array, `light_ws2811strip_pico.c:63`).
+A PIO block has **32 instruction slots** total. 31 + 4 = **35 > 32** → `pio_add_program` for the
+second one fails. SM count is fine (2/4); instruction memory is the limiter. BF's RP2350A
+`target.h` defaults *both* `PIO_LEDSTRIP_INDEX=2` and `PIO_OSD_INDEX=2` → latent collision.
+**Fix is firmware-only:** board wires only **one** PIO UART (PIOUART0 GPIO2/3), so PIO1 has room.
+Set **`PIO_LEDSTRIP_INDEX=1`**. Final PIO map: PIO0 = 4× DShot; PIO1 = PIOUART0 (2 SM) + WS2812
+(1 SM, 4 instr); PIO2 = OSD (1 SM, 31 instr). All fit. **No board change.**
 
 ## BMI270 / IMU — fully valid ✅
 - SPI0 on GPIO18/19/20/21 is a textbook-correct SCK/MOSI/MISO/CSn quad. BMI270 driver SPI = 10 MHz,
