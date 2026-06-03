@@ -5774,6 +5774,17 @@
 		)
 		(uuid "0116a87f-0805-42d8-8169-74b0d1fcedf8")
 	)
+	(hierarchical_label "UART1_TX"
+		(shape output)
+		(at 321.31 219.71 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "049eec5c-cd26-47a7-b83e-e877278e2aa9")
+	)
 	(hierarchical_label "MOTOR2"
 		(shape bidirectional)
 		(at 321.31 204.47 0)
@@ -5807,16 +5818,16 @@
 		)
 		(uuid "2dc0c56a-cbdf-4101-8202-6872ed41a6af")
 	)
-	(hierarchical_label "UART1_TX"
-		(shape output)
-		(at 321.31 226.06 0)
+	(hierarchical_label "PIOUART0_RX"
+		(shape input)
+		(at 321.31 228.6 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "5d0ecd7e-5145-4136-b6bd-5a80fb6a28d4")
+		(uuid "5ba55100-daa0-4fd4-9a6a-16af56712a5d")
 	)
 	(hierarchical_label "UART0_TX"
 		(shape output)
@@ -5839,17 +5850,6 @@
 			(justify left)
 		)
 		(uuid "67728d57-4b7e-404c-b156-9a9ee816e626")
-	)
-	(hierarchical_label "PIOUART0_RX"
-		(shape input)
-		(at 321.31 222.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "94ce5ed0-229b-4d43-aae1-d01d8211e3c8")
 	)
 	(hierarchical_label "OSD_EN"
 		(shape output)
@@ -5906,17 +5906,6 @@
 		)
 		(uuid "a6d8709e-1879-4026-890c-88871d77615a")
 	)
-	(hierarchical_label "UART1_RX"
-		(shape input)
-		(at 321.31 228.6 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a7b0b5f6-8841-471f-90c2-d3475201e302")
-	)
 	(hierarchical_label "UART0_RX"
 		(shape input)
 		(at 321.31 215.9 0)
@@ -5927,6 +5916,17 @@
 			(justify left)
 		)
 		(uuid "ad56976d-3668-4903-9137-18389c99be94")
+	)
+	(hierarchical_label "UART1_RX"
+		(shape input)
+		(at 321.31 222.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b2cb7794-318b-426e-b2e5-3981ad6ac1c2")
 	)
 	(hierarchical_label "ESC_CURRENT"
 		(shape input)
@@ -5939,6 +5939,17 @@
 		)
 		(uuid "b6ee8f95-b1e7-4e46-bc0d-2d50ebe428e1")
 	)
+	(hierarchical_label "PIOUART0_TX"
+		(shape output)
+		(at 321.31 226.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b81ed2d1-4151-484a-99c7-116f5be9fd1b")
+	)
 	(hierarchical_label "I2C0{SCL,SDA}"
 		(shape bidirectional)
 		(at 400.05 229.87 0)
@@ -5949,17 +5960,6 @@
 			(justify left)
 		)
 		(uuid "bc874d77-9c99-4f64-aa77-ab6391013824")
-	)
-	(hierarchical_label "PIOUART0_TX"
-		(shape output)
-		(at 321.31 219.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c08b91ba-fb7b-4793-b41d-6c35a5c57f04")
 	)
 	(hierarchical_label "SPI0{SCK,MOSI,MISO}"
 		(shape bidirectional)

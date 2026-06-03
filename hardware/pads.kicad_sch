@@ -1334,7 +1334,7 @@
 	)
 	(text "Free UART (GPS)"
 		(exclude_from_sim no)
-		(at 159.512 125.984 0)
+		(at 159.512 120.142 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1844,7 +1844,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 146.05) (xy 161.29 143.51)
+			(xy 161.29 146.05) (xy 161.29 138.43)
 		)
 		(stroke
 			(width 0)
@@ -2094,16 +2094,6 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 107.95) (xy 55.88 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b4038948-10e0-4b3a-9f3f-4f5e858eb710")
-	)
-	(wire
-		(pts
 			(xy 115.57 146.05) (xy 115.57 143.51)
 		)
 		(stroke
@@ -2184,7 +2174,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 107.95) (xy 62.23 115.57)
+			(xy 62.23 107.95) (xy 62.23 119.38)
 		)
 		(stroke
 			(width 0)
@@ -2241,6 +2231,16 @@
 			(type default)
 		)
 		(uuid "e0234675-f02d-46f2-a115-e51125dec8b9")
+	)
+	(wire
+		(pts
+			(xy 55.88 107.95) (xy 55.88 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1b8c9e8-c962-42a7-a6fb-2e7386037eda")
 	)
 	(wire
 		(pts
@@ -2304,7 +2304,7 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 146.05) (xy 167.64 143.51)
+			(xy 167.64 146.05) (xy 167.64 138.43)
 		)
 		(stroke
 			(width 0)
@@ -2332,17 +2332,27 @@
 		)
 		(uuid "f7246fdc-7998-4da0-9d3e-e0510bf8594f")
 	)
-	(label "UP0RX"
-		(at 172.72 39.37 180)
+	(label "PU0RX"
+		(at 167.64 146.05 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
-		(uuid "77d3232c-befe-4e3c-a6cb-99374313bdf2")
+		(uuid "0697446f-23e0-4e2f-b34e-87303f2fea8b")
 	)
-	(label "UP0RX"
+	(label "PU0RX"
+		(at 133.35 45.72 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2aab57a4-bba0-4d60-b9d6-c2628089c826")
+	)
+	(label "U1RX"
 		(at 55.88 114.3 90)
 		(effects
 			(font
@@ -2351,6 +2361,16 @@
 			(justify left bottom)
 		)
 		(uuid "9430c01b-9f52-4ebe-ae1b-0aa31f407260")
+	)
+	(label "PU1RX"
+		(at 218.44 135.89 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "991414f6-7eae-4be0-92e5-63e27377abf5")
 	)
 	(label "I2C0.SDA"
 		(at 83.82 146.05 90)
@@ -2362,15 +2382,15 @@
 		)
 		(uuid "a5f2967c-2293-4c44-a4fb-8156f7207be0")
 	)
-	(label "PU1RX"
-		(at 133.35 45.72 90)
+	(label "U1RX"
+		(at 173.99 39.37 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "b6a22822-a88f-44ec-b278-2c595a27e4f3")
+		(uuid "bfe12f78-3a93-4fc7-950a-e42d386c7cc7")
 	)
 	(label "PU1RX"
 		(at 200.66 143.51 90)
@@ -2526,12 +2546,12 @@
 	)
 	(hierarchical_label "PIOUART0_TX"
 		(shape input)
-		(at 62.23 115.57 270)
+		(at 161.29 138.43 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "7a488d22-6cb8-4582-923a-3d7ec0771cce")
 	)
@@ -2570,12 +2590,12 @@
 	)
 	(hierarchical_label "PIOUART0_RX"
 		(shape output)
-		(at 55.88 115.57 270)
+		(at 167.64 138.43 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "9dd13547-3488-49cb-bf09-b124c1497201")
 	)
@@ -2603,12 +2623,12 @@
 	)
 	(hierarchical_label "UART1_RX"
 		(shape output)
-		(at 167.64 143.51 90)
+		(at 55.88 119.38 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "bbc2ab7a-89e1-48e0-b236-eccb329070af")
 	)
@@ -2680,12 +2700,12 @@
 	)
 	(hierarchical_label "UART1_TX"
 		(shape input)
-		(at 161.29 143.51 90)
+		(at 62.23 119.38 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "f75148f3-482f-4796-a916-8c7a193ea2fa")
 	)
