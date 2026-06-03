@@ -1382,9 +1382,9 @@
 		)
 		(uuid "7dfb9253-97b7-4748-9840-83edd3c60aec")
 	)
-	(text "RX pads for when broken off"
+	(text "RX pads"
 		(exclude_from_sim no)
-		(at 62.484 97.536 0)
+		(at 59.436 96.774 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1401,6 +1401,16 @@
 			)
 		)
 		(uuid "883576be-8083-4c30-82c9-7838fb1e7270")
+	)
+	(text "Camera + VTX"
+		(exclude_from_sim no)
+		(at 128.27 97.028 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "a4b98625-f8b6-4591-aec3-36217f23403b")
 	)
 	(text "Digital video connector"
 		(exclude_from_sim no)
@@ -1445,7 +1455,7 @@
 		(uuid "78761f73-17e6-496a-b1f2-2d632ddccf7f")
 	)
 	(bus_entry
-		(at 80.01 134.62)
+		(at 81.28 134.62)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -1474,6 +1484,16 @@
 	)
 	(wire
 		(pts
+			(xy 78.74 138.43) (xy 77.47 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "04d435ac-23a2-43b8-b3ea-02a9aa96a332")
+	)
+	(wire
+		(pts
 			(xy 111.76 107.95) (xy 111.76 110.49)
 		)
 		(stroke
@@ -1494,6 +1514,16 @@
 	)
 	(wire
 		(pts
+			(xy 77.47 138.43) (xy 77.47 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a862a0a-0682-460b-8b32-39afaa177182")
+	)
+	(wire
+		(pts
 			(xy 52.07 33.02) (xy 52.07 35.56)
 		)
 		(stroke
@@ -1504,7 +1534,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 137.16) (xy 77.47 146.05)
+			(xy 78.74 137.16) (xy 78.74 138.43)
 		)
 		(stroke
 			(width 0)
@@ -2064,6 +2094,16 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 107.95) (xy 55.88 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4038948-10e0-4b3a-9f3f-4f5e858eb710")
+	)
+	(wire
+		(pts
 			(xy 115.57 146.05) (xy 115.57 143.51)
 		)
 		(stroke
@@ -2144,7 +2184,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 107.95) (xy 62.23 119.38)
+			(xy 62.23 107.95) (xy 62.23 115.57)
 		)
 		(stroke
 			(width 0)
@@ -2154,7 +2194,7 @@
 	)
 	(bus
 		(pts
-			(xy 80.01 128.27) (xy 80.01 134.62)
+			(xy 81.28 128.27) (xy 81.28 134.62)
 		)
 		(stroke
 			(width 0)
@@ -2201,16 +2241,6 @@
 			(type default)
 		)
 		(uuid "e0234675-f02d-46f2-a115-e51125dec8b9")
-	)
-	(wire
-		(pts
-			(xy 55.88 107.95) (xy 55.88 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e1b8c9e8-c962-42a7-a6fb-2e7386037eda")
 	)
 	(wire
 		(pts
@@ -2302,17 +2332,17 @@
 		)
 		(uuid "f7246fdc-7998-4da0-9d3e-e0510bf8594f")
 	)
-	(bus
-		(pts
-			(xy 80.01 134.62) (xy 81.28 134.62)
+	(label "UP0RX"
+		(at 172.72 39.37 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fb97be02-7974-4741-aff1-12787e9d3e1c")
+		(uuid "77d3232c-befe-4e3c-a6cb-99374313bdf2")
 	)
-	(label "U1RX"
+	(label "UP0RX"
 		(at 55.88 114.3 90)
 		(effects
 			(font
@@ -2341,16 +2371,6 @@
 			(justify left bottom)
 		)
 		(uuid "b6a22822-a88f-44ec-b278-2c595a27e4f3")
-	)
-	(label "U1RX"
-		(at 173.99 39.37 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bfe12f78-3a93-4fc7-950a-e42d386c7cc7")
 	)
 	(label "PU1RX"
 		(at 200.66 143.51 90)
@@ -2438,17 +2458,6 @@
 		)
 		(uuid "27e68f5d-f403-4e1e-b9f6-3a612122c824")
 	)
-	(hierarchical_label "PIOUART0_RX"
-		(shape output)
-		(at 167.64 143.51 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "2f42b2b2-b131-4647-861f-a1513884ddfa")
-	)
 	(hierarchical_label "CAMERA"
 		(shape output)
 		(at 124.46 107.95 270)
@@ -2517,14 +2526,14 @@
 	)
 	(hierarchical_label "PIOUART0_TX"
 		(shape input)
-		(at 161.29 143.51 90)
+		(at 62.23 115.57 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
-		(uuid "89f5f98a-fbc6-414c-8238-40f2e96c2aaf")
+		(uuid "7a488d22-6cb8-4582-923a-3d7ec0771cce")
 	)
 	(hierarchical_label "ADC2"
 		(shape output)
@@ -2539,7 +2548,7 @@
 	)
 	(hierarchical_label "I2C0{SCL,SDA}"
 		(shape bidirectional)
-		(at 80.01 128.27 0)
+		(at 81.28 128.27 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2558,6 +2567,17 @@
 			(justify right)
 		)
 		(uuid "990436f3-f57f-494d-a31b-a6244caea79f")
+	)
+	(hierarchical_label "PIOUART0_RX"
+		(shape output)
+		(at 55.88 115.57 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9dd13547-3488-49cb-bf09-b124c1497201")
 	)
 	(hierarchical_label "M1"
 		(shape bidirectional)
@@ -2581,6 +2601,17 @@
 		)
 		(uuid "b8b740ed-6d8d-4445-b5e0-310f8ccd95fc")
 	)
+	(hierarchical_label "UART1_RX"
+		(shape output)
+		(at 167.64 143.51 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "bbc2ab7a-89e1-48e0-b236-eccb329070af")
+	)
 	(hierarchical_label "CURRENT"
 		(shape output)
 		(at 130.81 59.69 90)
@@ -2602,17 +2633,6 @@
 			(justify right)
 		)
 		(uuid "d8858867-fdeb-464b-bb1b-28300e6ee60c")
-	)
-	(hierarchical_label "UART1_RX"
-		(shape output)
-		(at 55.88 119.38 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d8f0d3ec-5521-4fc3-be23-d1586718efc0")
 	)
 	(hierarchical_label "PIOUART1_TX"
 		(shape input)
@@ -2636,17 +2656,6 @@
 		)
 		(uuid "e9fcf882-7eaf-49e7-bc7b-e9ce28043ccb")
 	)
-	(hierarchical_label "UART1_TX"
-		(shape input)
-		(at 62.23 119.38 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "ea262e2f-a52c-49f5-a002-9069a02b0b72")
-	)
 	(hierarchical_label "PIOUART1_RX"
 		(shape output)
 		(at 200.66 135.89 90)
@@ -2668,6 +2677,17 @@
 			(justify left)
 		)
 		(uuid "f7410927-73aa-487b-ba1e-bdb8c122b329")
+	)
+	(hierarchical_label "UART1_TX"
+		(shape input)
+		(at 161.29 143.51 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f75148f3-482f-4796-a916-8c7a193ea2fa")
 	)
 	(hierarchical_label "VTX"
 		(shape input)
@@ -3161,9 +3181,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "0e87757e-8300-4dd2-93a6-df66c0681af3")
 		(property "Reference" "J50"
 			(at 189.484 153.924 90)
@@ -3240,9 +3260,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "0eb35e44-0bf3-4045-a3da-222f5f865f4f")
 		(property "Reference" "#PWR087"
@@ -4236,9 +4256,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "33908e13-09dc-473e-a9d1-86fe3bcd750b")
 		(property "Reference" "J36"
 			(at 135.636 100.076 90)
@@ -5027,9 +5047,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "46387901-eebf-4db1-a65d-6dced2247e10")
 		(property "Reference" "J38"
 			(at 141.986 100.076 90)
@@ -5186,9 +5206,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "49adf456-5e77-44a3-9601-998bc0895c90")
 		(property "Reference" "J1"
 			(at 31.496 100.076 90)
@@ -5423,9 +5443,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "522d5879-5e71-4bca-8f00-43eff0e25014")
 		(property "Reference" "J13"
 			(at 62.484 153.924 90)
@@ -5661,9 +5681,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "570cbe7c-cd27-4d23-be44-0e8c0c0a7996")
 		(property "Reference" "J2"
 			(at 39.116 100.076 90)
@@ -5979,9 +5999,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "596907a2-7af1-4d49-9b7d-a503974d64f0")
 		(property "Reference" "J54"
 			(at 202.184 153.924 90)
@@ -7776,9 +7796,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "92d369fa-e390-46b4-9c18-b0bb9cc5fd30")
 		(property "Reference" "J11"
 			(at 54.864 153.924 90)
@@ -8331,9 +8351,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "a4f8de6c-19da-49b1-88f9-fa9d12ad5bfe")
 		(property "Reference" "J47"
 			(at 183.134 153.924 90)
@@ -8410,9 +8430,9 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom no)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "a9b6d5c2-6c14-4fac-880b-e389d3ee23df")
 		(property "Reference" "J52"
 			(at 195.834 153.924 90)

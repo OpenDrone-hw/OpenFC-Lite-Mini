@@ -5,6 +5,26 @@
 	(uuid "fb88b6f9-ee39-4640-a9d4-04a17ceeac64")
 	(paper "A4")
 	(lib_symbols)
+	(no_connect
+		(at 165.1 83.82)
+		(uuid "389391fb-69fc-4a16-879f-f128131ed70e")
+	)
+	(no_connect
+		(at 165.1 119.38)
+		(uuid "5b96f5a8-f9df-41ac-997a-3d40e46a9285")
+	)
+	(no_connect
+		(at 165.1 86.36)
+		(uuid "a7495a87-c1ca-4aa9-8783-1b6064172ff0")
+	)
+	(no_connect
+		(at 102.87 102.87)
+		(uuid "feb1e0ff-80cd-4279-9de6-cbb19a65694b")
+	)
+	(no_connect
+		(at 165.1 121.92)
+		(uuid "fefe00e4-5303-4534-aed9-396797992c42")
+	)
 	(wire
 		(pts
 			(xy 165.1 86.36) (xy 179.07 86.36)
@@ -631,16 +651,6 @@
 				(justify right)
 			)
 		)
-		(pin "EXTERNAL" input
-			(at 165.1 86.36 0)
-			(uuid "d6303f68-4b9e-47b3-9bb5-7a81df3ad2b4")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
 		(pin "FLASH_CS" output
 			(at 102.87 80.01 180)
 			(uuid "adfc1c30-ab45-4cfb-aec7-42a425a3186a")
@@ -741,36 +751,6 @@
 				(justify right)
 			)
 		)
-		(pin "PIOUART1_RX" input
-			(at 165.1 121.92 0)
-			(uuid "e9c5b717-a198-4a25-83e9-0bf33b31ee19")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "PIOUART1_TX" output
-			(at 165.1 119.38 0)
-			(uuid "2a69ac8f-b8de-413b-b939-1dff74391914")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "RSSI" input
-			(at 165.1 83.82 0)
-			(uuid "480af7d4-a8a8-4eff-aa4a-2a850c595c03")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
 		(pin "SPI1{SCK,MOSI,MISO}" bidirectional
 			(at 102.87 82.55 180)
 			(uuid "8bd1ee90-a7f7-478a-b785-fc395a7ee414")
@@ -864,16 +844,6 @@
 		(pin "SPI0{SCK,MOSI,MISO}" bidirectional
 			(at 102.87 100.33 180)
 			(uuid "d6dbd76b-8c71-4fc8-812b-af268e9698bb")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "GYRO_CLKIN" output
-			(at 102.87 102.87 180)
-			(uuid "02a5ca44-bca8-4266-a576-06a8426cc51e")
 			(effects
 				(font
 					(size 1.27 1.27)

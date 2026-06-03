@@ -12891,7 +12891,7 @@
 			)
 		)
 		(property "Value" "RP2354A"
-			(at 0 -64.77 0)
+			(at 0 -48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -12911,8 +12911,8 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
-			(at 0 0 0)
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C41378174.pdf"
+			(at 0 -69.85 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(hide yes)
@@ -12933,8 +12933,30 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Raspberry Pi(树莓派)"
+			(at 0 -72.39 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RP2354A"
+			(at 0 -74.93 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "LCSC Part" "C41378174"
-			(at 0 -69.85 0)
+			(at 0 -77.47 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(hide yes)
@@ -12946,8 +12968,8 @@
 		)
 		(symbol "RP2354A_0_1"
 			(rectangle
-				(start -19.05 57.15)
-				(end 19.05 -57.15)
+				(start -22.86 66.04)
+				(end 22.86 -66.04)
 				(stroke
 					(width 0)
 					(type default)
@@ -12968,7 +12990,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -5.08 59.69 270)
+				(at -5.08 68.58 270)
 				(length 2.54)
 				(name "IOVDD"
 					(effects
@@ -12986,7 +13008,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 36.83 180)
+				(at 25.4 0 180)
 				(length 2.54)
 				(name "GPIO0"
 					(effects
@@ -13004,7 +13026,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 34.29 180)
+				(at 25.4 -2.54 180)
 				(length 2.54)
 				(name "GPIO1"
 					(effects
@@ -13022,7 +13044,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 31.75 180)
+				(at 25.4 -12.7 180)
 				(length 2.54)
 				(name "GPIO2"
 					(effects
@@ -13040,7 +13062,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 29.21 180)
+				(at 25.4 -15.24 180)
 				(length 2.54)
 				(name "GPIO3"
 					(effects
@@ -13058,7 +13080,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -12.7 59.69 270)
+				(at -15.24 68.58 270)
 				(length 2.54)
 				(name "DVDD"
 					(effects
@@ -13076,7 +13098,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 26.67 180)
+				(at 25.4 -19.05 180)
 				(length 2.54)
 				(name "GPIO4"
 					(effects
@@ -13094,7 +13116,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 24.13 180)
+				(at 25.4 -21.59 180)
 				(length 2.54)
 				(name "GPIO5"
 					(effects
@@ -13112,7 +13134,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 21.59 180)
+				(at 25.4 -25.4 180)
 				(length 2.54)
 				(name "GPIO6"
 					(effects
@@ -13130,7 +13152,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 19.05 180)
+				(at 25.4 -27.94 180)
 				(length 2.54)
 				(name "GPIO7"
 					(effects
@@ -13148,7 +13170,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -2.54 59.69 270)
+				(at -2.54 68.58 270)
 				(length 2.54)
 				(name "IOVDD"
 					(effects
@@ -13166,7 +13188,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 16.51 180)
+				(at 25.4 -6.35 180)
 				(length 2.54)
 				(name "GPIO8"
 					(effects
@@ -13184,7 +13206,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 13.97 180)
+				(at 25.4 -8.89 180)
 				(length 2.54)
 				(name "GPIO9"
 					(effects
@@ -13202,7 +13224,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 11.43 180)
+				(at 25.4 48.26 180)
 				(length 2.54)
 				(name "GPIO10"
 					(effects
@@ -13220,7 +13242,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 8.89 180)
+				(at 25.4 45.72 180)
 				(length 2.54)
 				(name "GPIO11"
 					(effects
@@ -13238,7 +13260,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 6.35 180)
+				(at 25.4 43.18 180)
 				(length 2.54)
 				(name "GPIO12"
 					(effects
@@ -13256,7 +13278,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 3.81 180)
+				(at 25.4 40.64 180)
 				(length 2.54)
 				(name "GPIO13"
 					(effects
@@ -13274,7 +13296,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 1.27 180)
+				(at 25.4 -50.8 180)
 				(length 2.54)
 				(name "GPIO14"
 					(effects
@@ -13292,7 +13314,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -1.27 180)
+				(at 25.4 -53.34 180)
 				(length 2.54)
 				(name "GPIO15"
 					(effects
@@ -13310,7 +13332,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 0 59.69 270)
+				(at 0 68.58 270)
 				(length 2.54)
 				(name "IOVDD"
 					(effects
@@ -13328,7 +13350,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 3.81 0)
+				(at -25.4 34.29 0)
 				(length 2.54)
 				(name "XIN"
 					(effects
@@ -13346,7 +13368,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 1.27 0)
+				(at -25.4 31.75 0)
 				(length 2.54)
 				(name "XOUT"
 					(effects
@@ -13364,7 +13386,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -10.16 59.69 270)
+				(at -12.7 68.58 270)
 				(length 2.54)
 				(name "DVDD"
 					(effects
@@ -13382,7 +13404,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 24.13 0)
+				(at -25.4 16.51 0)
 				(length 2.54)
 				(name "SWCLK"
 					(effects
@@ -13400,7 +13422,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 21.59 0)
+				(at -25.4 13.97 0)
 				(length 2.54)
 				(name "SWDIO"
 					(effects
@@ -13418,7 +13440,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 31.75 0)
+				(at -25.4 40.64 0)
 				(length 2.54)
 				(name "RUN"
 					(effects
@@ -13436,7 +13458,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -3.81 180)
+				(at 25.4 -55.88 180)
 				(length 2.54)
 				(name "GPIO16"
 					(effects
@@ -13454,7 +13476,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -6.35 180)
+				(at 25.4 33.02 180)
 				(length 2.54)
 				(name "GPIO17"
 					(effects
@@ -13472,7 +13494,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -8.89 180)
+				(at 25.4 30.48 180)
 				(length 2.54)
 				(name "GPIO18"
 					(effects
@@ -13490,7 +13512,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 2.54 59.69 270)
+				(at 2.54 68.58 270)
 				(length 2.54)
 				(name "IOVDD"
 					(effects
@@ -13508,7 +13530,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -11.43 180)
+				(at 25.4 27.94 180)
 				(length 2.54)
 				(name "GPIO19"
 					(effects
@@ -13526,7 +13548,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -13.97 180)
+				(at 25.4 25.4 180)
 				(length 2.54)
 				(name "GPIO20"
 					(effects
@@ -13544,7 +13566,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -16.51 180)
+				(at 25.4 22.86 180)
 				(length 2.54)
 				(name "GPIO21"
 					(effects
@@ -13562,7 +13584,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -19.05 180)
+				(at 25.4 13.97 180)
 				(length 2.54)
 				(name "GPIO22"
 					(effects
@@ -13580,7 +13602,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -21.59 180)
+				(at 25.4 11.43 180)
 				(length 2.54)
 				(name "GPIO23"
 					(effects
@@ -13598,7 +13620,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -24.13 180)
+				(at 25.4 8.89 180)
 				(length 2.54)
 				(name "GPIO24"
 					(effects
@@ -13616,7 +13638,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -26.67 180)
+				(at 25.4 6.35 180)
 				(length 2.54)
 				(name "GPIO25"
 					(effects
@@ -13634,7 +13656,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 5.08 59.69 270)
+				(at 5.08 68.58 270)
 				(length 2.54)
 				(name "IOVDD"
 					(effects
@@ -13652,7 +13674,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -7.62 59.69 270)
+				(at -10.16 68.58 270)
 				(length 2.54)
 				(name "DVDD"
 					(effects
@@ -13670,7 +13692,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -29.21 180)
+				(at 25.4 -34.29 180)
 				(length 2.54)
 				(name "GPIO26_ADC0"
 					(effects
@@ -13688,7 +13710,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -31.75 180)
+				(at 25.4 -36.83 180)
 				(length 2.54)
 				(name "GPIO27_ADC1"
 					(effects
@@ -13706,7 +13728,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -34.29 180)
+				(at 25.4 -39.37 180)
 				(length 2.54)
 				(name "GPIO28_ADC2"
 					(effects
@@ -13724,7 +13746,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 21.59 -36.83 180)
+				(at 25.4 -41.91 180)
 				(length 2.54)
 				(name "GPIO29_ADC3"
 					(effects
@@ -13742,7 +13764,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -15.24 59.69 270)
+				(at -20.32 68.58 270)
 				(length 2.54)
 				(name "ADC_AVDD"
 					(effects
@@ -13760,7 +13782,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 7.62 59.69 270)
+				(at 7.62 68.58 270)
 				(length 2.54)
 				(name "IOVDD"
 					(effects
@@ -13778,7 +13800,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 15.24 59.69 270)
+				(at 20.32 68.58 270)
 				(length 2.54)
 				(name "VREG_AVDD"
 					(effects
@@ -13796,7 +13818,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -3.81 -59.69 90)
+				(at -3.81 -68.58 90)
 				(length 2.54)
 				(name "VREG_PGND"
 					(effects
@@ -13814,7 +13836,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 -8.89 0)
+				(at -25.4 -21.59 0)
 				(length 2.54)
 				(name "VREG_LX"
 					(effects
@@ -13832,7 +13854,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 -11.43 0)
+				(at -25.4 -29.21 0)
 				(length 2.54)
 				(name "VREG_VIN"
 					(effects
@@ -13850,7 +13872,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 -6.35 0)
+				(at -25.4 -13.97 0)
 				(length 2.54)
 				(name "VREG_FB"
 					(effects
@@ -13868,7 +13890,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 13.97 0)
+				(at -25.4 25.4 0)
 				(length 2.54)
 				(name "USB_DM"
 					(effects
@@ -13886,7 +13908,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 11.43 0)
+				(at -25.4 22.86 0)
 				(length 2.54)
 				(name "USB_DP"
 					(effects
@@ -13904,7 +13926,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 12.7 59.69 270)
+				(at 12.7 68.58 270)
 				(length 2.54)
 				(name "USB_OTP_VDD"
 					(effects
@@ -13922,7 +13944,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 10.16 59.69 270)
+				(at 10.16 68.58 270)
 				(length 2.54)
 				(name "QSPI_IOVDD"
 					(effects
@@ -13940,7 +13962,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 -29.21 0)
+				(at -25.4 -6.35 0)
 				(length 2.54)
 				(name "QSPI_SD3"
 					(effects
@@ -13958,7 +13980,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 -19.05 0)
+				(at -25.4 3.81 0)
 				(length 2.54)
 				(name "QSPI_SCLK"
 					(effects
@@ -13976,7 +13998,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 -21.59 0)
+				(at -25.4 1.27 0)
 				(length 2.54)
 				(name "QSPI_SD0"
 					(effects
@@ -13994,7 +14016,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 -26.67 0)
+				(at -25.4 -3.81 0)
 				(length 2.54)
 				(name "QSPI_SD2"
 					(effects
@@ -14012,7 +14034,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 -24.13 0)
+				(at -25.4 -1.27 0)
 				(length 2.54)
 				(name "QSPI_SD1"
 					(effects
@@ -14030,7 +14052,7 @@
 				)
 			)
 			(pin unspecified line
-				(at -21.59 -31.75 0)
+				(at -25.4 6.35 0)
 				(length 2.54)
 				(name "QSPI_SS"
 					(effects
@@ -14048,7 +14070,7 @@
 				)
 			)
 			(pin unspecified line
-				(at 3.81 -59.69 90)
+				(at 3.81 -68.58 90)
 				(length 2.54)
 				(name "EP"
 					(effects

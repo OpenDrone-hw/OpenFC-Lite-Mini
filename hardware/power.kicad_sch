@@ -2752,7 +2752,7 @@
 	)
 	(text "3.3V 1A MAIN LDO "
 		(exclude_from_sim no)
-		(at 218.186 89.662 0)
+		(at 183.134 81.788 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -2762,9 +2762,9 @@
 		)
 		(uuid "883fa794-5b73-4868-94f1-050d08875e7c")
 	)
-	(text "FPWM version of the LMR51420YFDDCR for less output ripple at low voltage and more consistency but less efficient"
+	(text "FPWM version of the LMR51430 for less output ripple at low voltage and more consistency but less efficient"
 		(exclude_from_sim no)
-		(at 72.136 23.876 0)
+		(at 71.12 23.622 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2811,11 +2811,11 @@
 	(text_box "Switches up to 4A (TPS2117) from +5V_USB or +5V_BUCK to +5V. Prefers buck over USB, threshold voltage is about 3.5V. The threshold voltage is low to prevent accidental switchover to USB during peak consumption (worst case in flight). Emergency diode for if that happens during flight."
 		(exclude_from_sim no)
 		(at 21.336 129.54 0)
-		(size 63.5 11.43)
+		(size 63.5 12.1268)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
 			(width 0)
-			(type default)
+			(type solid)
 		)
 		(fill
 			(type none)
@@ -7807,10 +7807,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "95094ad2-8d67-41ba-8de8-6fbc260f6952")
 		(property "Reference" "U5"
-			(at 114.3 144.78 0)
+			(at 114.3 162.306 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7820,7 +7819,7 @@
 			)
 		)
 		(property "Value" "TPS2116DRLR"
-			(at 114.3 147.32 0)
+			(at 114.3 165.1 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
