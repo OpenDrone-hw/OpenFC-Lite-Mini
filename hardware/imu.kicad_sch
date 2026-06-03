@@ -1042,10 +1042,10 @@
 			(embedded_fonts no)
 		)
 	)
-	(text_box "CLKIN not supported by LSM6DSV16XTR, but it is just a simple wire and it might be used when using other pin-compatible IMUs.\nThis will be left inside, at least for testing."
+	(text_box "CLKIN not supported by LSM6DSV16XTR, but it is just a simple wire and it might be used when using other pin-compatible IMUs.\nThis will be left inside, at least for testing (lite max only)."
 		(exclude_from_sim no)
 		(at 113.03 38.1 0)
-		(size 30.48 16.2161)
+		(size 34.29 16.2161)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
 			(width 0)
