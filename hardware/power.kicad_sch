@@ -5054,7 +5054,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "200R"
+		(property "Value" "2.4k"
 			(at 251.46 55.8799 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5098,7 +5098,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C270359"
+		(property "LCSC" "C166281"
 			(at 248.92 54.61 0)
 			(hide yes)
 			(show_name no)
@@ -5109,7 +5109,7 @@
 				)
 			)
 		)
-		(property "MPN" "0201WMF2000TEE"
+		(property "MPN" ""
 			(at -8.89 15.24 0)
 			(hide yes)
 			(show_name no)
@@ -5120,7 +5120,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "UNI-ROYAL"
+		(property "Manufacturer" ""
 			(at -8.89 15.24 0)
 			(hide yes)
 			(show_name no)
@@ -6065,121 +6065,6 @@
 			(project "OpenFC"
 				(path "/fb88b6f9-ee39-4640-a9d4-04a17ceeac64/f8522f96-c979-41d2-ae00-e5ad899a3161"
 					(reference "R32")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 140.97 88.9 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "706eef98-eed1-4769-b972-e8c10f240171")
-		(property "Reference" "R34"
-			(at 143.51 87.6299 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "200R"
-			(at 143.51 90.1699 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0201_0603Metric"
-			(at 139.192 88.9 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 140.97 88.9 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 140.97 88.9 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C270359"
-			(at 140.97 88.9 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MPN" "0201WMF2000TEE"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Manufacturer" "UNI-ROYAL"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e05821f0-79ca-4ea4-b467-5e26125d7202")
-		)
-		(pin "2"
-			(uuid "298dff04-50ac-4570-87e6-041cfb7ea1e5")
-		)
-		(instances
-			(project "OpenFC"
-				(path "/fb88b6f9-ee39-4640-a9d4-04a17ceeac64/f8522f96-c979-41d2-ae00-e5ad899a3161"
-					(reference "R34")
 					(unit 1)
 				)
 			)
@@ -7746,6 +7631,121 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 140.97 88.9 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bb6c3edd-0801-4b98-a3d5-1fbbee0bf710")
+		(property "Reference" "R50"
+			(at 143.51 87.6299 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "2.4k"
+			(at 143.51 90.1699 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0201_0603Metric"
+			(at 139.192 88.9 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 140.97 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C166281"
+			(at 140.97 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at -116.84 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" ""
+			(at -116.84 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5c3e85ec-38f1-4937-8a21-795becb09297")
+		)
+		(pin "2"
+			(uuid "6d12eac0-9568-4312-9ff6-014e23a0eed1")
+		)
+		(instances
+			(project "OpenFC"
+				(path "/fb88b6f9-ee39-4640-a9d4-04a17ceeac64/f8522f96-c979-41d2-ae00-e5ad899a3161"
+					(reference "R50")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 92.71 104.14 0)
 		(unit 1)
@@ -7961,7 +7961,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6.34K"
+		(property "Value" "6.49k"
 			(at 119.38 58.4199 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8005,7 +8005,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C100502"
+		(property "LCSC" "C2107920"
 			(at 116.84 57.15 0)
 			(hide yes)
 			(show_name no)
@@ -8027,7 +8027,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "LIZ Elec"
+		(property "Manufacturer" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -8076,7 +8076,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "470R"
+		(property "Value" "7.5k"
 			(at 143.51 48.2599 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8120,7 +8120,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C473464"
+		(property "LCSC" "C474437"
 			(at 140.97 46.99 0)
 			(hide yes)
 			(show_name no)
@@ -8131,7 +8131,7 @@
 				)
 			)
 		)
-		(property "MPN" "0201WMF4700TEE"
+		(property "MPN" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -8142,7 +8142,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "UNI-ROYAL"
+		(property "Manufacturer" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -9314,7 +9314,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "30R"
+		(property "Value" "510R"
 			(at 255.27 106.6799 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9358,7 +9358,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C778391"
+		(property "LCSC" "C57784"
 			(at 252.73 105.41 0)
 			(hide yes)
 			(show_name no)
@@ -9369,7 +9369,7 @@
 				)
 			)
 		)
-		(property "MPN" "NQ01WMJ0300TEE"
+		(property "MPN" ""
 			(at 0 1.27 0)
 			(hide yes)
 			(show_name no)
@@ -9380,7 +9380,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "UNI-ROYAL"
+		(property "Manufacturer" ""
 			(at 0 1.27 0)
 			(hide yes)
 			(show_name no)
