@@ -4381,6 +4381,16 @@
 	)
 	(wire
 		(pts
+			(xy 334.01 250.19) (xy 321.31 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37c617cf-e0d4-4926-b383-314f3c5ef5a4")
+	)
+	(wire
+		(pts
 			(xy 252.73 187.96) (xy 259.08 187.96)
 		)
 		(stroke
@@ -4581,16 +4591,6 @@
 	)
 	(wire
 		(pts
-			(xy 321.31 247.65) (xy 341.63 247.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "66160722-9c59-445f-880e-9655a0de62cf")
-	)
-	(wire
-		(pts
 			(xy 283.21 137.16) (xy 283.21 144.78)
 		)
 		(stroke
@@ -4678,16 +4678,6 @@
 			(type default)
 		)
 		(uuid "75358e66-1a92-4800-970d-cdf5f9b1f40e")
-	)
-	(wire
-		(pts
-			(xy 321.31 250.19) (xy 341.63 250.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "75ef2d0e-6024-42cc-b04e-47df59c6053f")
 	)
 	(wire
 		(pts
@@ -5151,16 +5141,6 @@
 	)
 	(wire
 		(pts
-			(xy 321.31 255.27) (xy 341.63 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cf5c1d62-8132-4a61-abb1-eff1a708bc3e")
-	)
-	(wire
-		(pts
 			(xy 266.7 190.5) (xy 270.51 190.5)
 		)
 		(stroke
@@ -5450,13 +5430,13 @@
 		(uuid "4837b04e-9e97-4e01-956b-8daf079d5b6b")
 	)
 	(label "ESC_CURR"
-		(at 341.63 250.19 180)
+		(at 321.31 252.73 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 				(thickness 0.1588)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "4930fcd2-dc42-49e2-b9bc-927bb251415d")
 	)
@@ -5514,12 +5494,12 @@
 		(uuid "812656dc-5c97-432d-b997-571ca3076de6")
 	)
 	(label "LED0"
-		(at 341.63 255.27 180)
+		(at 321.31 247.65 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "81c85bd7-1f6c-4aba-92fa-0d72548d81bc")
 	)
@@ -5609,13 +5589,13 @@
 		(uuid "a4fe8d03-29df-40f2-b127-8aa0752ba9ac")
 	)
 	(label "ADC_VBAT"
-		(at 341.63 247.65 180)
+		(at 321.31 255.27 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 				(thickness 0.1588)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "a823e4d9-535f-435e-82ab-efe030427cec")
 	)
@@ -5683,7 +5663,7 @@
 	)
 	(hierarchical_label "10V_ENABLE"
 		(shape output)
-		(at 321.31 252.73 0)
+		(at 334.01 250.19 0)
 		(effects
 			(font
 				(size 1.27 1.27)
