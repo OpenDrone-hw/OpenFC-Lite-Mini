@@ -1,7 +1,7 @@
 # OpenFC-Lite-Mini — Project Instructions
 
 ## About this repo
-OpenFC-Lite-Mini is an open-source Betaflight flight controller: **20×20 mm**, 6-layer, 3S–6S, built around the RP2354B. This repository covers the **Mini only**. The larger **30.5×30.5 mm OpenFC-Lite** will be a separate project derived from this one once the Mini is finalized; the two share the same schematic.
+OpenFC-Lite-Mini is an open-source Betaflight flight controller: **20×20 mm**, 6-layer, 3S–6S, built around the RP2354A (QFN-60). This repository covers the **Mini only**. The larger **30.5×30.5 mm OpenFC-Lite** will be a separate project derived from this one once the Mini is finalized; the two share the same schematic.
 
 Design intent — a compact, low-cost FC:
 - No barometer.
@@ -11,7 +11,7 @@ Design intent — a compact, low-cost FC:
 
 ## Working agreement
 - Stan is a hardware/embedded engineer. Be direct and critical — flag problems, skip praise.
-- **Claude never edits schematics or board layouts.** Do not modify `.kicad_sch`, `.kicad_pcb`, or `.kicad_pro` — not even a value/field swap. Claude produces analysis and **change lists**; Stan makes every schematic/PCB edit in KiCad himself. Pending schematic changes live in the README **Rev 2 Change List**.
+- **Claude never edits schematics or board layouts.** Do not modify `.kicad_sch`, `.kicad_pcb`, or `.kicad_pro` — not even a value/field swap. Claude produces analysis and **change lists**; Stan makes every schematic/PCB edit in KiCad himself. Completed and pending schematic changes are logged in the README **Rev 2 Change Log**.
 - Never hand-edit a KiCad S-expression file. Read and analyze only — via kicad-skip, the pcbnew API, or kicad-cli.
 - Claude may edit documentation (README, this file, other Markdown, JSON config/export files). Keep docs accurate — no aspirational content.
 - Git: `main` is protected. Work on feature branches and open PRs via `gh`. Commit/push only when asked.
@@ -29,75 +29,76 @@ Design intent — a compact, low-cost FC:
 - **Headless net extraction (no pcbnew):** `kicad-cli sch export netlist --format kicadsexpr -o /tmp/x.net hardware/OpenFC.kicad_sch`, then `python3 hardware/tools/openfc_netlist_extract.py --netlist /tmp/x.net`.
 
 ## Revisions
-- **Rev 1** — current physical prototype; received and in bench bring-up.
-- **Rev 2** — next revision, in design. Change list in the README.
+- **Rev 1** — RP2354B (QFN-80) physical prototype; received and bench brought-up. OSD non-functional.
+- **Rev 2** — **current** design (RP2354A, QFN-60). Schematic + layout finalized, exported for fabrication. Migrated MCU QFN-80→QFN-60, re-derived the full GPIO map, reworked the OSD front end, split IMU/microSD onto separate SPI buses, added reverse-polarity protection, fully re-annotated refs. Full log in the README.
 
 (No "V0.x" numbering — the earlier V0.1–V0.3 labels were export artifacts and are retired.)
 
-## Key ICs (Rev 1 reference designators)
+## Key ICs (Rev 2 reference designators)
 | Function | Ref | Part | LCSC | Bus / notes |
 |---|---|---|---|---|
-| MCU | U2 | RP2354B (QFN-80, 2 MB flash) | C39843328 | — |
-| IMU | U9 | LSM6DSV16XTR (dev part) | C5267406 | SPI0; Rev 2 part undecided — see IMU |
-| 10V buck (switchable) | U3 | LMR51430YFDDCR (3A) | C5219261 | EN=GPIO11; 4.7µH / 22µF 16V / FB 100k:6.49k → 9.85V |
-| 5V buck (always-on) | U4 | LMR51430YFDDCR (3A) | C5219261 | 4.7µH inductor |
-| 5V power mux | U5 | TPS2116DRLR | C3235557 | USB/BATT auto-select (clarify vs TPS2117 in Rev 2) |
+| MCU | U10 | RP2354A (QFN-60, 2 MB flash, 30 GPIO) | — | 12 MHz xtal X1; core SMPS inductor L4 (3.3µH) on VREG_LX |
+| IMU | U9 | LSM6DSV16XTR (dev part) | C5267406 | SPI1; production part undecided — see IMU |
+| 10V buck (switchable) | U3 | LMR51430YFDDCR (3A) | C5219261 | EN=GPIO27; 4.7µH / 22µF 16V / FB 100k:6.49k → 9.85V. ⚠️ Value field still `TI …`, MPN field still `LMR51420` — clean for BOM |
+| 5V buck (always-on) | U4 | LMR51430YFDDCR (3A) | C5219261 | 4.7µH inductor (same MPN-field issue as U3) |
+| 5V power mux | U5 | TPS2116DRLR | C3235557 | USB/BATT auto-select |
 | 3.3V LDO | U7 | LP5912-3.3DRVR | C524780 | 500 mA |
-| 1.8V gyro LDO | U6 | NCV8187AMT180TAG | C893189 | 300 mA (Rev 2: ≥500 mA) |
-| OSD comparator | U20 | TLV3201AIDBVR | C105188 | sync separator |
-| OSD op-amp | U19 | TLV9061IDPWR | C2057878 | output buffer |
+| 1.8V gyro LDO | U6 | NCV8187AMT180TAG | C893189 | 300 mA |
+| OSD comparator | U2 | TLV7031DPWR | C2876045 | sync separator (was TLV3201/U20) |
+| OSD op-amp | U1 | COS8051SOT | C7463385 | video buffer (was TLV9061/U19) |
 | OSD SPDT switch | U18 | SN74LVC1G3157DTBR | C2673087 | OSD pixel switch |
-| microSD slot | Card1 | TF-021B-H265 | C498185 | SPI1 |
+| microSD slot | Card1 | TF-021B-H265 | C498185 | SPI0 |
 | VTX connector | U8 | SM06B-SRSS-TB (6-pin JST SH) | C160405 | digital VTX |
-| ESC connector | P1 | 8-pin TH JST SH | — | pinout reversed — see Rev 2 |
+| ESC connector | P1 | SM08B-SRSS-TB (8-pin JST SH) | — | corrected/mirrored pinout (Rev 1 was reversed generic header) |
+| RPP | D3/D10 | RB161QS-40 Schottky | C28646385 | battery reverse-polarity protection |
 
 ## IMU
 - The footprint is LGA-14 (2.5×3 mm) with pins 2/3 → GND and pins 10/11 → NC, which is electrically safe for **both TDK (ICM-426xx/456xx) and ST (LSM6D*) families**. Selecting/swapping the IMU is a field change once a part is chosen.
-- Rev 1 populates **LSM6DSV16XTR** for development only.
-- **The Rev 2 IMU is undecided** — to be chosen after more bench/flight testing.
-- Family note: TDK parts use a CLKIN line to remove sample-timing jitter; ST parts have no CLKIN/SYNC. This interacts with the SPI-bus cleanup in the Rev 2 change list.
+- Rev 1 and Rev 2 populate **LSM6DSV16XTR** for development.
+- **The production IMU is undecided** — to be chosen after more bench/flight testing.
+- Family note: TDK parts use a CLKIN line to remove sample-timing jitter; ST parts have no CLKIN/SYNC. On the QFN-60, IMU CLKIN exists on the sheet but is **not routed to the MCU** (no spare GPIO) — fine for ST; revisit if a TDK IMU is chosen.
 
-## GPIO map (RP2354B → Betaflight)
+## GPIO map (RP2354A QFN-60, 30 GPIO — all used)
 - UART0: TX=GPIO0, RX=GPIO1 (digital VTX on U8 JST SH connector)
-- UART1: TX=GPIO22, RX=GPIO21 (external RX)
-- PIO UART0: TX=GPIO2, RX=GPIO3
-- PIO UART1: TX=GPIO26, RX=GPIO27
-- Motors: M1=GPIO31, M2=GPIO30, M3=GPIO29, M4=GPIO28 (PIO0 DShot). **CRIT-2: order reversed vs the BF RP2350B reference config — resolve in firmware or swap silk (Rev 2).**
-- SPI0 (IMU): SCK=GPIO18, MOSI=GPIO19, MISO=GPIO20, CS=GPIO14, INT=GPIO13
-- IMU CLKIN: GPIO15 — wired but unused on an ST gyro; **Rev 2: drop CLKIN and group CS into the SPI bus** (revisit if a TDK IMU is chosen)
-- SPI1 (microSD): SCK=GPIO42, MOSI=GPIO43, MISO=GPIO44, CS=GPIO46
-- I2C0: SDA=GPIO16, SCL=GPIO17 (pull-ups to 3.3V; pin pairing SDA%4==0 / SCL%4==1 — keep if pins move)
-- OSD (3 consecutive pins): OSD_W=GPIO33, OSD_EN=GPIO34, OSD_SYNC=GPIO35
-- ADC (each via 1k+100nF RC): VBAT=GPIO41, CURRENT=GPIO40, RSSI=GPIO45, EXT=GPIO47
-- LED strip: GPIO23 (PIO2). Status LED (LED0): GPIO12 — green on Rev 1, **must be blue (Rev 2)**.
-- 10V enable: GPIO11. Beeper: GPIO6. SBUS invert: GPIO9 (**Rev 2: inverter removed**).
-- Freed: GPIO24 (was ESP_EN), GPIO25 (was ESP_BOOT) — available for PINIO/telem.
+- PIO UART0: TX=GPIO2, RX=GPIO3 (GPS)
+- I2C0: SDA=GPIO4, SCL=GPIO5 (pull-ups to 3.3V; pin pairing SDA%4==0 / SCL%4==1)
+- UART1: TX=GPIO6, RX=GPIO7 (external RX; SBUS inverted at the IO-mux in firmware)
+- LED strip: GPIO8 (PIO2)
+- IMU INT: GPIO9
+- SPI1 (IMU): SCK=GPIO10, MOSI=GPIO11, MISO=GPIO12, CS=GPIO13
+- OSD (3 consecutive pins): OSD_W=GPIO14, OSD_EN=GPIO15, OSD_SYNC=GPIO16
+- Beeper: GPIO17 (N-MOS low-side)
+- SPI0 (microSD): SCK=GPIO18, MOSI=GPIO19, MISO=GPIO20, CS=GPIO21
+- Motors: M4=GPIO22, M3=GPIO23, M2=GPIO24, M1=GPIO25 (PIO0 DShot). Silk order reversed — resolved in the BF DShot resource order.
+- LED0 status (blue): GPIO26
+- 10V enable (PINIO1): GPIO27
+- ADC (each via 1k+100nF RC): ESC current=GPIO28 (ADC2), VBAT=GPIO29 (ADC3). **Only 4 ADC channels exist; RSSI and external-ADC inputs dropped vs the QFN-80.**
 
 ## Power tree
 ```
-+BATT → U3 (EN=GPIO11)           → +10V (switchable VTX/cam)   [inductor L2, out cap C28, FB R29 100k / R30]
-+BATT → U4 (always-on)           → +5V_BUCK                    [inductor L3]
-+5V_BUCK + +5V_USB → U5 (TPS2116 mux) → +5V → U7 (LP5912) → +3.3V → RP2354B VREG → +1.1V core
-+5V → U6 (NCV8187)               → +1.8V_GYRO (IMU analog)
++BATT → RPP (D3/D10) → U3 (EN=GPIO27)  → +10V (switchable VTX/cam)   [inductor L2, out cap C28, FB R29 100k / R30]
++BATT → RPP          → U4 (always-on)  → +5V_BUCK                    [inductor L3]
++5V_BUCK + +5V_USB → U5 (TPS2116 mux)  → +5V → U7 (LP5912) → +3.3V → RP2354A VREG (L4 on VREG_LX) → +1.1V core
++5V → U6 (NCV8187)                     → +1.8V_GYRO (IMU analog)
 ```
 
 ## PIO allocation
-PIO0: DShot (motors). PIO1: PIO UARTs. PIO2: LED strip + OSD.
+PIO0: DShot (motors). PIO1: PIO UART0. PIO2: LED strip + OSD.
 
 ## Schematic structure
-Hierarchical KiCad 9: root `OpenFC.kicad_sch` + 6 sub-sheets — `rp2350a`, `power`, `imu`, `osd`, `blackbox`, `pads`. (`baro`, `compass`, `elrs`, `leds` `.kicad_sch` are unreferenced leftovers slated for removal.)
+Hierarchical KiCad 9: root `OpenFC.kicad_sch` + 6 sub-sheets — `rp2350a`, `power`, `imu`, `osd`, `blackbox`, `pads`.
 
 ## Connectors (JST SH, yellow preferred)
 - **U8** — 6-pin SMD VTX: +10V / GND / TX / RX / GND / SBUS — matches the BF digital VTX standard ✓
-- **P1** — 8-pin TH ESC: pinout reversed vs the BF 8-pin standard and missing a telemetry pin — **safety-critical, fix in Rev 2** (see change list).
+- **P1** — 8-pin JST SH ESC (SM08B-SRSS-TB): corrected/mirrored pinout vs Rev 1's reversed generic header (was safety-critical — old pinout shorted VBAT to a GPIO).
 
 ## Layout rules
-RP2350B buck and decoupling placement: see `hardware/tools/rp2350_layout_notes.md` (Raspberry Pi RP2350 datasheet §6.3.8.1 — buck C_IN/L/C_OUT must stay on the MCU side, copper cutaway under the switch node, etc.).
+RP2350 buck and decoupling placement: see `hardware/tools/rp2350_layout_notes.md` (Raspberry Pi RP2350 datasheet §6.3.8.1 — buck C_IN/L/C_OUT must stay on the MCU side, copper cutaway under the switch node, etc.).
 
 ## Betaflight
-- Target: Betaflight RP2350B (PICO platform); `BOARD_NAME = OPENFC_LITE_MINI_RP2350B`, `MANUFACTURER_ID = OPFC`. RP2354B uses the Pico SDK (C/C++) with PlatformIO.
+- Target: Betaflight RP2350A (PICO platform); `BOARD_NAME = OPENFC_LITE_MINI_RP2350A`, `MANUFACTURER_ID = OPFC`. RP2354A uses the Pico SDK (C/C++) with PlatformIO.
 - External RX over UART (no onboard/SPI RX).
-- Analog OSD (FB_OSD) for RP2350B is still an open upstream PR stack (#14882 chain) — no flyable upstream binary yet; track before tape-out.
+- Analog OSD (FB_OSD) for RP2350 is still an open upstream PR stack (#14882 chain) — no flyable upstream binary yet; track before tape-out.
 - Submission: schematic + config in `betaflight/config`; ~$500 T2 cloud-target fee. BF contacts: sugar K (project lead), vitroid (schematic-review channel).
 
 ## Repo conventions
