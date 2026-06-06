@@ -471,7 +471,7 @@
 					)
 				)
 			)
-			(property "LCSC Part" "C160405"
+			(property "LCSC" "C160405"
 				(at 0 -22.86 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -711,7 +711,7 @@
 					)
 				)
 			)
-			(property "LCSC Part" "C160407"
+			(property "LCSC" "C160407"
 				(at 0 -27.94 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -4684,7 +4684,7 @@
 				)
 			)
 		)
-		(property "LCSC Part" "C160405"
+		(property "LCSC" "C160405"
 			(at 161.29 64.77 0)
 			(hide yes)
 			(show_name no)
@@ -7743,7 +7743,7 @@
 				)
 			)
 		)
-		(property "LCSC Part" "C160407"
+		(property "LCSC" "C160407"
 			(at 105.41 29.21 0)
 			(hide yes)
 			(show_name no)

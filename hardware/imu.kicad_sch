@@ -498,7 +498,7 @@
 					)
 				)
 			)
-			(property "LCSC Part" "C5267406"
+			(property "LCSC" "C5267406"
 				(at 0 -17.78 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2750,7 +2750,7 @@
 				)
 			)
 		)
-		(property "LCSC Part" "C5267406"
+		(property "LCSC" "C5267406"
 			(at 72.39 87.63 0)
 			(hide yes)
 			(show_name no)
