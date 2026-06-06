@@ -27,6 +27,7 @@ replicate_layout.log
 # 3D exports (not library files)
 **/.step
 **/*.glb
+/hardware/*.step
 
 # Production output (generated, re-exportable)
 **/production/

@@ -14,7 +14,7 @@ Open-source Betaflight flight controller — **20×20 mm**, 6-layer, 3S–6S, bu
 | | |
 |---|---|
 | MCU | RP2354A — dual Cortex-M33 @ 150 MHz, 2 MB stacked flash, QFN-60 (30 GPIO) |
-| IMU | 6-axis, SPI1 (LGA-14 footprint — part TBD, see [IMU](#imu)) |
+| IMU | LSM6DSV16XTR 6-axis, SPI1 (LGA-14 footprint; production part not yet locked, see [IMU](#imu)) |
 | Blackbox | microSD card slot (TF-021B-H265) on SPI0 |
 | OSD | analog, PIO-driven (sync separator + video op-amp + SPDT switch) |
 | Power | 3S–6S; switchable 10V (VTX/cam) + always-on 5V, reverse-polarity protected |
