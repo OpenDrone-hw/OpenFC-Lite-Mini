@@ -3,8 +3,8 @@
 Open-source Betaflight flight controller — **20×20 mm**, 6-layer, 3S–6S, built around the RP2354A microcontroller. Compact and low-cost: external RX over UART, microSD blackbox, analog OSD.
 
 <p>
-<img src="images/openfc-lite-mini-rev1-top.png" width="400" alt="OpenFC-Lite-Mini Rev 1 Top" />
-<img src="images/openfc-lite-mini-rev1-bottom.png" width="400" alt="OpenFC-Lite-Mini Rev 1 Bottom" />
+<img src="images/openfc-lite-mini-rev2-top.png" width="400" alt="OpenFC-Lite-Mini Rev 2 Top" />
+<img src="images/openfc-lite-mini-rev2-bottom.png" width="400" alt="OpenFC-Lite-Mini Rev 2 Bottom" />
 </p>
 
 > This repository is the **Mini** (20×20). A larger **OpenFC-Lite** (30.5×30.5 mm, bigger pads, more I/O, full-size SD) will be derived from this design once the Mini is finalized.
