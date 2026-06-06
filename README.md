@@ -7,7 +7,7 @@ Open-source Betaflight flight controller — **20×20 mm**, 6-layer, 3S–6S, bu
 <img src="images/openfc-lite-mini-rev2-bottom.png" width="400" alt="OpenFC-Lite-Mini Rev 2 Bottom" />
 </p>
 
-> This repository is the **Mini** (20×20). A larger **OpenFC-Lite** (30.5×30.5 mm, bigger pads, more I/O, full-size SD) will be derived from this design once the Mini is finalized.
+> This repository is the **Mini** (20×20, RP2354A). Its sibling **[OpenFC-Lite](https://github.com/incutec-hw/OpenFC-Lite)** (30.5×30.5 mm, RP2354B — bigger pads, more I/O, full-size SD, and OSD debug pads) shares this design. **Both are being ordered for Rev 2.**
 
 ## At a glance
 
