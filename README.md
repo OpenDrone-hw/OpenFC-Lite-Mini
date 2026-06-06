@@ -46,7 +46,7 @@ Intentionally omitted to keep it small and cheap: barometer, integrated ELRS rec
 | +5V (always-on) | +BATT | LMR51430YFDDCR (U4, 3A) | 4.7µH inductor. |
 | +5V (USB/BATT mux) | +5V_BUCK + +5V_USB | TPS2116DRLR (U5) | Auto-selects active source. |
 | +3.3V | +5V | LP5912-3.3DRVR (U7) | 500 mA LDO. |
-| +1.8V (gyro analog) | +5V | NCV8187AMT180TAG (U6) | Isolated supply for IMU noise rejection. |
+| +1.8V (gyro analog) | +5V | NCV8187AMT180TAG (U6) | 1.2 A LDO, high PSRR (80 dB to 10 kHz). Isolated IMU analog supply; gyro draws only mA so the rating is far in excess. |
 | +1.1V (MCU core) | +3.3V | RP2354A internal VREG | External SMPS inductor (L4, 3.3µH) on VREG_LX. |
 
 Battery input has reverse-polarity protection (RB161QS-40 Schottky, D3/D10).
@@ -167,7 +167,7 @@ Rev 2 was a substantial redesign over the Rev 1 prototype. **All schematic and b
 - **R30** (10V FB, R29=100k top): 6.8k → **6.49k** (E96). Vout = 0.6·(1 + 100/6.49) = **9.85V** (~1.5% low — fine).
 - **C28** (10V buck output cap): **22µF 16V X5R 0603**. DC-bias derates effective C to ~7–11µF; with the 4.7µH inductor this raises 10V ripple but is acceptable for a digital VTX rail.
 - **L2/L3 inductors**: both rails **4.7µH (XRTC303020D4R7MBCA)**. 10V ripple ≈1.17A p-p at 6S; peak well under the 3A part.
-- **U6 gyro LDO**: **NCV8187AMT180TAG** (300 mA) kept for its PSRR — electrically ample (gyro analog is single-digit mA). ⚠️ BF §3.1.2 lists ≥500 mA; confirm whether that's hard-gated at submission. Low stock → consign if needed.
+- **U6 gyro LDO**: **NCV8187AMT180TAG** (1.2 A, high PSRR 80 dB to 10 kHz) — gyro analog is single-digit mA, so hugely overspec'd; the 1.2 A rating comfortably clears BF §3.1.2's ≥500 mA. Kept for its PSRR. Low stock → consign if needed.
 - **Battery reverse-polarity protection** added (RB161QS-40 Schottky, D3/D10).
 - **OPEN — U3/U4 BOM fields**: the symbol Value still carries a `TI ` prefix and the MPN/LCSC field still reads `LMR51420YDDCR`. Clean both so LCSC/MPN exact-match resolves to the LMR51430 (C5219261) for assembly.
 
