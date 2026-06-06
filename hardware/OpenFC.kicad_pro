@@ -760,7 +760,17 @@
       "OSD"
     ]
   ],
-  "text_variables": {},
+  "text_variables": {
+    "DOC_NAME": "OpenFC-Lite-Mini",
+    "DOC_HANDLE": "openfc-lite-mini",
+    "DOC_VARIANT": "20×20",
+    "DOC_TAGLINE": "RP2354A Betaflight flight controller — microSD blackbox, analog OSD, external RX",
+    "DOC_FIRMWARE": "Betaflight",
+    "DOC_PROTOCOL": "DShot",
+    "DOC_MCU": "RP2354A (QFN-60)",
+    "DOC_INPUT": "+BATT 3S–6S",
+    "DOC_RATING": "3S–6S input; rail currents not yet bench-characterized"
+  },
   "tuning_profiles": {
     "meta": {
       "version": 0
