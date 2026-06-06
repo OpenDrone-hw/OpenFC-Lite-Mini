@@ -39,7 +39,7 @@ fabrication-toolkit-options.json
 __pycache__/
 *.pyc
 
-# Claude (CLAUDE.md is a tracked project doc — do not ignore it)
+# Claude
 .claude/
 
 # Generated exports
@@ -60,3 +60,6 @@ hardware/schematic.json
 
 # Datasheets (downloadable)
 datasheets/
+
+# Claude agent context (local only)
+CLAUDE.md

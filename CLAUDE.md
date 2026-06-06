@@ -11,16 +11,16 @@ Design intent — a compact, low-cost FC:
 
 ## Working agreement
 - Stan is a hardware/embedded engineer. Be direct and critical — flag problems, skip praise.
-- **Claude never edits schematics or board layouts.** Do not modify `.kicad_sch`, `.kicad_pcb`, or `.kicad_pro` — not even a value/field swap. Claude produces analysis and **change lists**; Stan makes every schematic/PCB edit in KiCad himself. Completed and pending schematic changes are logged in the README **Rev 2 Change Log**.
-- Never hand-edit a KiCad S-expression file. Read and analyze only — via kicad-skip, the pcbnew API, or kicad-cli.
+- **Metadata yes, physical connections no.** Claude may edit *metadata* programmatically — KiCad text variables (`.kicad_pro`), symbol BOM/doc fields (MPN, Manufacturer, LCSC, Cost, BOM Comments, Datasheet, notes) — via kicad-skip or the pcbnew API. Claude must **never** change physical connections: nets, wiring, routing, placement, footprint assignments, or component values that alter the circuit. Those stay Stan's, done in KiCad.
+- **NEVER raw-edit** `.kicad_sch`, `.kicad_pcb`, or `.kicad_pro` as text — use kicad-skip / the pcbnew API. (`.kicad_pro` is JSON; safe programmatic metadata edits there are fine.)
 - Claude may edit documentation (README, this file, other Markdown, JSON config/export files). Keep docs accurate — no aspirational content.
 - Git: `main` is protected. Work on feature branches and open PRs via `gh`. Commit/push only when asked.
 - Single source of truth is this file + README.md. No separate memory store.
 
 ## What Claude can / cannot do here
-**Can:** review schematics, PCB, gerbers, netlists, footprints; trace nets; extract and manage the BOM; run DRC/ERC/DFM/EMC checks; power-budget and regulator analysis; SPICE simulation; component sourcing and pricing; fabrication-prep specs; documentation and diagrams; change lists and design specs.
+**Can:** review schematics, PCB, gerbers, netlists, footprints; trace nets; extract and manage the BOM; **write metadata** (text variables, symbol BOM/doc fields) via kicad-skip/pcbnew; run DRC/ERC/DFM/EMC checks; power-budget and regulator analysis; SPICE simulation; component sourcing and pricing; fabrication-prep specs; documentation and diagrams; change lists and design specs.
 
-**Cannot / will not:** edit schematic/PCB/project files; change nets or connections; add, remove, place, or route parts; place fab orders or take other irreversible external actions without explicit confirmation.
+**Cannot / will not:** change physical connections (nets, wiring, routing, placement, footprint assignments, or circuit-affecting component values); raw-edit S-expression files by hand; place fab orders or take other irreversible external actions without explicit confirmation.
 
 ## Tools
 - **Skills:** `kicad` (schematic/PCB analysis), `bom` (BOM lifecycle), `lcsc` / `digikey` / `mouser` / `element14` (sourcing + datasheets), `jlcpcb` / `pcbway` (fab prep), `emc` (pre-compliance), `spice` (simulation), `kidoc` (engineering docs).
