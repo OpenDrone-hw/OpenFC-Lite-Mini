@@ -834,6 +834,45 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "2"
+		(exclude_from_sim no)
+		(at 182.88 131.318 0)
+		(effects
+			(font
+				(size 1.778 1.778)
+				(thickness 0.3556)
+				(bold yes)
+				(color 0 0 0 1)
+			)
+		)
+		(uuid "1415a971-837e-47eb-b673-048ca23f2aec")
+	)
+	(text "SPI wiring and local decoupling"
+		(exclude_from_sim no)
+		(at 139.7 127.508 0)
+		(effects
+			(font
+				(size 1.778 1.778)
+				(thickness 0.3556)
+				(bold yes)
+				(color 0 0 0 1)
+			)
+		)
+		(uuid "59aacea0-5d4b-4dd1-b8b7-2475eb0c13c7")
+	)
+	(text "06/06/2026"
+		(exclude_from_sim no)
+		(at 128.524 131.318 0)
+		(effects
+			(font
+				(size 1.778 1.778)
+				(thickness 0.3556)
+				(bold yes)
+				(color 0 0 0 1)
+			)
+		)
+		(uuid "91aa9691-726d-4752-9a52-20a9dabfbd52")
+	)
 	(junction
 		(at 92.71 64.77)
 		(diameter 0)
