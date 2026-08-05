@@ -9,6 +9,8 @@ Open-source Betaflight flight controller — **20×20 mm**, 6-layer, 3S–6S, bu
 
 > This repository is the **Mini** (20×20, RP2354A). Its sibling **[OpenFC-Lite](https://github.com/incutec-hw/OpenFC-Lite)** (30.5×30.5 mm, RP2354B — bigger pads, more I/O, full-size SD, and OSD debug pads) shares this design. **Both are being ordered for Rev 2.**
 
+Build video: [How Flight Controllers Work (so I built my own)](https://www.youtube.com/watch?v=XDYZoMRJFeQ)
+
 ## Open source hardware certification
 
 <a href="https://certification.oshwa.org/be000027.html">
@@ -252,8 +254,11 @@ All symbol, footprint, and 3D model libraries are project-local — no external 
 - `blackbox.kicad_sch` — TF-021B-H265 microSD card slot on SPI0
 - `pads.kicad_sch` — solder pads and connectors
 
+## Links
+
+- Product page: [opendrone.be/products/openfc-lite](https://opendrone.be/products/openfc-lite)
+- Video channel: [JustFPV on YouTube](https://www.youtube.com/@justfpv1432)
+
 ## License
 
 Hardware licensed under [CERN-OHL-S-2.0](https://ohwr.org/cern_ohl_s_v2.txt). See [LICENSE](LICENSE) for details.
-</content>
-</invoke>
