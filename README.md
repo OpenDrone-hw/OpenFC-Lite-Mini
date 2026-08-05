@@ -9,6 +9,17 @@ Open-source Betaflight flight controller — **20×20 mm**, 6-layer, 3S–6S, bu
 
 > This repository is the **Mini** (20×20, RP2354A). Its sibling **[OpenFC-Lite](https://github.com/incutec-hw/OpenFC-Lite)** (30.5×30.5 mm, RP2354B — bigger pads, more I/O, full-size SD, and OSD debug pads) shares this design. **Both are being ordered for Rev 2.**
 
+## Open source hardware certification
+
+<a href="https://certification.oshwa.org/be000027.html">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/oshwa-certified-dark.svg" />
+    <img src="images/oshwa-certified.svg" width="160" alt="OSHWA Certified Open Source Hardware — BE000027" />
+  </picture>
+</a>
+
+OpenFC-Lite-Mini is **certified open source hardware** by the [Open Source Hardware Association](https://www.oshwa.org/), OSHWA UID **[BE000027](https://certification.oshwa.org/be000027.html)**.
+
 ## At a glance
 
 | | |
