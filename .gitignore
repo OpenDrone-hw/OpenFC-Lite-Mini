@@ -11,7 +11,6 @@ _autosave-*
 
 # KiCad generated/local
 *.kicad_prl
-*.kicad_dru
 *.kicad_sch-bak
 *.kicad_pcb-bak
 *.lck
@@ -25,15 +24,11 @@ replicate_layout.log
 **/.history/
 
 # 3D exports (not library files)
-**/.step
 **/*.glb
 /hardware/*.step
 
 # Production output (generated, re-exportable)
 **/production/
-
-# Fabrication toolkit config
-fabrication-toolkit-options.json
 
 # Python
 __pycache__/
