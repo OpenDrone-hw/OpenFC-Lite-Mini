@@ -389,9 +389,9 @@ Blue LED (Betaflight LED0 requirement): **MISSING** (none)
 |---|---|---|
 | USB1 | USB-TYPE-C-SMD_TYPE-C-16P-QTWT | p0→GND; p→; pA1→GND; pA4→+5V_USB; pA5→Net-(USB1-CC1); pA6→/RP2350A/D+_C; pA7→/RP2350A/D-_C; pA9→+5V_USB; pA12→GND; pB5→Net-(USB1-CC2); pB6→/RP2350A/D+_C; pB7→/RP2350A/D-_C |
 
-## 15. CLAUDE.md GPIO map cross-check
+## 15. Documented GPIO map cross-check
 
-| GPIO | CLAUDE.md function | U36 pad | Net |
+| GPIO | Documented function | U36 pad | Net |
 |---|---|---|---|
 | GPIO0 | UART0 TX | 77 | /PADS/DIGITAL_TX |
 | GPIO1 | UART0 RX | 78 | /PADS/DIGITAL_RX |
@@ -425,7 +425,7 @@ Blue LED (Betaflight LED0 requirement): **MISSING** (none)
 | GPIO45 | RSSI ADC | 56 | /PADS/RSSI |
 | GPIO47 | EXT ADC | 58 | /PADS/ADC2 |
 
-GPIOs wired on MCU but not documented in CLAUDE.md:
+GPIOs wired on MCU but missing from the documented pin plan:
 
 | GPIO | U36 pad | Net |
 |---|---|---|

@@ -167,7 +167,7 @@ The RP2350 has 3 PIO blocks × 4 state machines (12 total):
 
 ## Rev 2 Change Log
 
-Rev 2 was a substantial redesign over the Rev 1 prototype. **All schematic and board edits are made manually in KiCad.** Items below are reflected in the current schematic unless flagged **OPEN**.
+Rev 2 was a substantial redesign over the Rev 1 prototype. **All schematic and board edits are made manually in KiCad.** Items below are reflected in the current schematic. Remaining open items are tracked in [`hardware/research/open-items.md`](hardware/research/open-items.md).
 
 ### MCU
 - **RP2354B (QFN-80) → RP2354A (QFN-60).** 48 → 30 GPIO. The peripheral map was re-derived from scratch and now uses every GPIO (see [GPIO map](#gpio-map)). Reference designators were fully re-annotated. Dropped vs the QFN-80 layout: the second PIO UART, the SBUS hardware inverter, and the separate RSSI / external-ADC analog inputs.
@@ -180,11 +180,9 @@ Rev 2 was a substantial redesign over the Rev 1 prototype. **All schematic and b
 - **L2/L3 inductors**: both rails **4.7µH (XRTC303020D4R7MBCA)**. 10V ripple ≈1.17A p-p at 6S; peak well under the 3A part.
 - **U6 gyro LDO**: **NCV8187AMT180TAG** (1.2 A, high PSRR 80 dB to 10 kHz) — gyro analog is single-digit mA, so hugely overspec'd; the 1.2 A rating comfortably clears BF §3.1.2's ≥500 mA. Kept for its PSRR. Low stock → consign if needed.
 - **Battery reverse-polarity protection** added (RB161QS-40 Schottky, D3/D10).
-- **OPEN — U3/U4 BOM fields**: the symbol Value still carries a `TI ` prefix and the MPN/LCSC field still reads `LMR51420YDDCR`. Clean both so LCSC/MPN exact-match resolves to the LMR51430 (C5219261) for assembly.
 
 ### MCU / USB
 - **R12/R13/R14**: kept at 30Ω. USB FS is impedance-tolerant; single resistor value = better DFM.
-- **OPEN — D1 USB ESD (USBLC6-2P6)**: not currently placed. **Recommend restoring.** USB is the most-handled / most-exposed interface; the RP2354A PHY isn't rated for system-level (IEC 61000-4-2 8kV) ESD, and the part is tiny/cheap/low-C. Pending final call.
 
 ### LEDs
 - All indicator LEDs **0201 → 0402** (0201 too fragile — broke during nut install).
@@ -220,7 +218,6 @@ OSD was non-functional on Rev 1: in pass-through the monitor switched to AV (it 
 - **U5 power MUX** — **TPS2116DRLR** confirmed (auto-select USB/BATT).
 - **SDIO on Pico** — **stay on SPI.** Betaflight PICO supports SD blackbox over **SPI only** (PR #14567); no SDIO under `src/platform/PICO/`. SDIO would give ~10× throughput but needs a 4-bit HW bus *and* firmware that doesn't exist.
 - **Motor order** — silk left reversed (eases routing); resolved in the BF target's DShot resource order so M1–M4 map to the pads.
-- **OPEN — FB_OSD upstream**: the RP2350 analog-OSD driver PR stack (#14882) is still open; no flyable upstream binary yet. Track before tape-out.
 - **SWD connector** — **not adding.** RP2354A flashes over USB (UF2/BOOTSEL); SWD pads optional.
 
 ## Repository Structure
@@ -238,7 +235,7 @@ OpenFC-Lite-Mini/
 │   ├── lib.pretty/          ← Project-local footprint library
 │   ├── lib.3dshapes/        ← Project-local 3D models
 │   ├── production/          ← JLCPCB production exports, per revision (gitignored — re-exportable)
-│   ├── research/            ← IMU selection + routing-validation notes
+│   ├── research/            ← IMU selection, routing validation, open items
 │   └── tools/               ← Analysis scripts (Python, kicad-skip / pcbnew API)
 └── images/                  ← Board renders
 ```
