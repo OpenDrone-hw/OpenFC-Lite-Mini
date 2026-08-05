@@ -15,7 +15,7 @@ Validated build, export set `OpenFC-Lite-Mini-rev2`. Substantial redesign over t
 - **R30** (10V FB, R29=100k top): 6.8k to **6.49k** (E96). Vout = 0.6 x (1 + 100/6.49) = **9.85V**, about 1.5% low, fine.
 - **C28** (10V buck output cap): **22uF 16V X5R 0603**. DC-bias derates effective C to roughly 7-11uF; with the 4.7uH inductor this raises 10V ripple but is acceptable for a digital VTX rail.
 - **L2/L3 inductors**: both rails **4.7uH (XRTC303020D4R7MBCA)**. 10V ripple about 1.17A p-p at 6S; peak well under the 3A part.
-- **U6 gyro LDO**: **NCV8187AMT180TAG** (1.2 A, high PSRR, 80 dB to 10 kHz). Gyro analog load is single-digit mA, so the rating is far in excess; kept for its PSRR. Low stock, consign if needed.
+- **U6 gyro LDO**: **NCV8187AMT180TAG** (1.2 A, high PSRR, 80 dB to 10 kHz). Gyro analog load is single-digit mA, so the 1.2 A rating is far in excess of BF section 3.1.2's 500 mA minimum; kept for its PSRR. Low stock, consign if needed.
 - **Battery reverse-polarity protection** added (RB161QS-40 Schottky, D3/D10).
 
 ### USB
@@ -43,9 +43,9 @@ Validated build, export set `OpenFC-Lite-Mini-rev2`. Substantial redesign over t
 ### Analog OSD (front-end rework)
 OSD was non-functional on Rev 1: in pass-through the monitor switched to AV (it saw a feed) but showed snow; sync reached the monitor but was too marginal to lock. Wiring and pinouts were verified correct against datasheets; this was a component-suitability and front-end problem. Root cause: the DC-coupled gain-x2 buffer parked the sync tip on the 0 V rail.
 
-- **Op-amp**: TLV9061IDPWR to **COS8051SOT (C7463385)**, a 175 MHz / 150 V/us RRIO video amp (AD8051-class), SOT-23-5. TLV9061 was under-spec for composite video (about 5 MHz closed-loop at gain 2; chroma needs about 28 V/us vs 6.5). New ref **U1**.
+- **Op-amp**: TLV9061IDPWR to **COS8051SOT (C7463385)**, a 175 MHz / 150 V/us RRIO video amp (AD8051-class), SOT-23-5. TLV9061 was under-spec for composite video (about 5 MHz closed-loop at gain 2; chroma needs about 28 V/us vs 6.5). Ref changed U19 to **U1**.
 - **OSD output front-end**: added **AC-coupling + DC-restore (sync clamp)** to bias the sync tip 0.3-0.5 V above ground before the gain stage; op-amp powered from +5 V for headroom. New nets `VID_DC` / `VID_FILT` / `OSD_LVL`.
-- **Comparator (sync sep)**: TLV3201AIDBVR to **TLV7031DPWR (C2876045)**: push-pull, RRI, X2SON-5 (about 75% smaller), 7 mV hysteresis (vs 1.2 mV). Its 3 us prop delay is symmetric, preserving HSYNC/VSYNC pulse-width discrimination, and adds a constant ~22 px horizontal offset compensated in the PIO `hshiftA/B/C` timing (about 225 clocks). Fallback if the X2SON regresses sync: TLV3201AIDCKR (SC70-5, pin-compatible, 40 ns). New ref **U2**.
+- **Comparator (sync sep)**: TLV3201AIDBVR to **TLV7031DPWR (C2876045)**: push-pull, RRI, X2SON-5 (about 75% smaller), 7 mV hysteresis (vs 1.2 mV). Its 3 us prop delay is symmetric, preserving HSYNC/VSYNC pulse-width discrimination, and adds a constant ~22 px horizontal offset that the PIO `hshiftA/B/C` timing must absorb (about 225 clocks). Fallback if the X2SON regresses sync: TLV3201AIDCKR (SC70-5, pin-compatible, 40 ns). Ref changed U20 to **U2**.
 - **OSD_EN select pull-down**: weak pull-down on U18 pin 6 (S / OSD_EN) so the select never floats and defaults to pass-through before firmware drives the GPIO.
 - **U18 SN74LVC1G3157DTBR** and **D9 SDM02U30LP3-7B**: unchanged, verified correct.
 
