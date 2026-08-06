@@ -132,7 +132,7 @@ def main() -> int:
             for n in shown:
                 pinfn = f" {n['pinfunction']}" if n["pinfunction"] else ""
                 pad = f" pad {n['pad']}" if n["pad"] else ""
-                lines.append(f"- `{n['ref']}`{pad}{pinfn} — {n['value']}")
+                lines.append(f"- `{n['ref']}`{pad}{pinfn}: {n['value']}")
             if count > len(shown):
                 lines.append(f"- … {count - len(shown)} more nodes not shown")
             lines.append("")

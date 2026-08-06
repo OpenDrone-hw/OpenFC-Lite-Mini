@@ -2,7 +2,7 @@
 
 Source: RP2350 Datasheet §6.3.8.1, Hardware Design with RP2350 guide (Raspberry Pi).
 
-## Hard constraint — buck regulator must stay on MCU side
+## Hard constraint: buck regulator must stay on MCU side
 
 Direct quote from RP2350 Datasheet §6.3.8.1:
 
@@ -37,10 +37,10 @@ Additional rules for this zone:
 | QSPI_IOVDD 100nF (pin 69) | same |
 | USB_OTP_VDD 100nF (pin 5) | same |
 | ADC_AVDD 100nF (pin 60 area) | same |
-| Crystal (12 MHz) + load caps | Risky but doable — see crystal notes |
+| Crystal (12 MHz) + load caps | Risky but doable, see crystal notes |
 | USB ESD diode + Type-C connector | OK after R7/R8 |
 
-## Crystal on bottom — caveats
+## Crystal on bottom: caveats
 
 - RP2350 uses 10.5 pF total load, ~3 pF parasitic budget
 - Each via adds 0.3-0.5 pF → 2 vias = ~1 pF budget consumed
@@ -49,7 +49,7 @@ Additional rules for this zone:
 - May need to retune R2 (1kΩ damping) or load caps (try 12pF instead of 15pF)
 - No ground flood between XIN/XOUT; maintain GND reference plane
 
-## USB — near-MCU placement
+## USB: near-MCU placement
 
 - R7/R8 (27Ω series termination): stay on **top side** immediately adjacent to pins 66/67
 - Differential pair can transition to bottom via vias AFTER the series resistors
@@ -58,7 +58,7 @@ Additional rules for this zone:
 
 ## Summary strategy for OpenFC-Lite
 
-Top side (MCU-only vision not achievable — keeps these):
+Top side (MCU-only vision not achievable, keeps these):
 - RP2354B MCU
 - Buck cluster: C_IN, L1, C_OUT, R3, C9 (~5 small parts, ~6×4 mm)
 - 2 DVDD 100nF caps closest to regulator

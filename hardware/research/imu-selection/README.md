@@ -1,4 +1,4 @@
-# IMU Selection Investigation — OpenFC-Lite-Mini Rev 2
+# IMU Selection Investigation: OpenFC-Lite-Mini Rev 2
 
 **Status:** open · **Started:** 2026-06-02
 
@@ -25,9 +25,9 @@ imu-selection/
 |---|---|---|
 | R1 | **Betaflight driver on current master** | No driver = no flyable firmware. Authoritative list below. |
 | R2 | **Drops into LGA-14 (2.5×3 mm), pins 2/3 GND, 10/11 NC** | Existing footprint; pin-1 orientation must match. |
-| R3 | **Flyable** — low in-band gyro noise, robust to electrical + vibration noise | The whole reason DSV16X is being replaced. |
+| R3 | **Flyable**: low in-band gyro noise, robust to electrical + vibration noise | The whole reason DSV16X is being replaced. |
 | R4 | **Sourceable at volume** (LCSC/JLC preferred, real stock) | Selling the board; rest of BOM < $5. |
-| R5 | **Price target** — ideally ≤ ~$3–4 to keep the "Lite" price point | IMU currently dominates BOM cost. |
+| R5 | **Price target**: ideally ≤ ~$3-4 to keep the "Lite" price point | IMU currently dominates BOM cost. |
 | R6 | **VDDIO works at 1.8 V analog / 3.3 V IO** | Board runs IMU off +1.8V_GYRO (U6 NCV8187) + 3.3V IO. |
 
 A part failing R1 or R2 is out unless someone commits to adding the driver / reworking the
@@ -49,7 +49,7 @@ master. **Only these have flyable drivers today.**
 - **ST:** LSM6DSO, **LSM6DSV16X**, **LSM6DSK320X**, L3GD20 (gyro-only)
 - **Virtual:** SITL/HITL
 
-**NOT on master (would need a driver):** ICM-56686 (RPi is adding it — not merged),
+**NOT on master (would need a driver):** ICM-56686 (RPi is adding it, not merged),
 BMI323, BMI088, ICM-42670-P, LSM6DSV320X (the *V* high-g, ≠ the *K*).
 
 ---
@@ -65,16 +65,16 @@ flags anything that isn't a clean drop-in.
 | **ICM-42622P** | ✓ | not in paste, source | ? | LGA-14 ✓ | ~2.8 (class) | strong reports, **find pricing/stock** |
 | **IIM-42652** | ✓ | (see paste; IIM-42653 €13.15) | 42653: 4,969 | LGA-14 ✓ | 3.8 | Industrial temp, pricey |
 | **ICM-45686** | ✓ | €18.20 / €6.23 lt | 0 (353 other) | **LGA-14 3×2.5** ⚠ rotated | ~ | Newer; verify pin-1, costly |
-| **ICM-45605** | ✓ | €6.35 | 0 | LGA-14 | — | budget 456xx, 0 stock |
-| **ICM-42605** | ✓ | €5.60 / €4.90 lt | 10,000 ✓ | LGA-14 2.5×3 ✓ | (class) | **In stock, supported — solid fallback** |
+| **ICM-45605** | ✓ | €6.35 | 0 | LGA-14 | - | budget 456xx, 0 stock |
+| **ICM-42605** | ✓ | €5.60 / €4.90 lt | 10,000 ✓ | LGA-14 2.5×3 ✓ | (class) | **In stock, supported: solid fallback** |
 | **BMI270** | ✓ | €3.19 / €1.36 lt | 0 (50k @6-8d other) | LGA-14 2.5×3 | 7 (perf) | **Cheap + available + only AC-PSRR spec'd** ⚠ verify Bosch pinout |
 | **LSM6DSO** | ✓ | €3.70 | 6,312 ✓ | LGA-14 2.5×3 ✓ | (older) | cheap, available, older gen |
-| **LSM6DSV16X** | ✓ | €4.07 | 4,350 | LGA-14 2.5×3 ✓ | 2.8 | **Current Rev 1 — unflyable, being replaced** |
+| **LSM6DSV16X** | ✓ | €4.07 | 4,350 | LGA-14 2.5×3 ✓ | 2.8 | **Current Rev 1: unflyable, being replaced** |
 | **LSM6DSK320X** | ✓ | not released | 0 | LGA-14 2.5×3 ✓ | **3.8** | BF/STM target; **not orderable**, samples gated |
-| ICM-56686 | ✗ | (RPi sharing ds) | — | LGA-14 2.5×3 | 2.9 | No BF driver yet (RPi adding); 29.3kHz MEMS |
-| BMI323 | ✗ | €3.28 | 2,920 | LGA-14 | — | No BF driver; Bosch filters undocumented |
-| BMI088 | ✗ | €8.16 | 3,468 | **LGA-16 3×4.5** ✗ | 14 | No driver, wrong footprint, 2.4V floor — out |
-| LSM6DSV320X | ✗ | €10.95 | 0 | LGA-14L | — | *V* variant, no BF driver (≠ DSK) |
+| ICM-56686 | ✗ | (RPi sharing ds) | - | LGA-14 2.5×3 | 2.9 | No BF driver yet (RPi adding); 29.3kHz MEMS |
+| BMI323 | ✗ | €3.28 | 2,920 | LGA-14 | - | No BF driver; Bosch filters undocumented |
+| BMI088 | ✗ | €8.16 | 3,468 | **LGA-16 3×4.5** ✗ | 14 | No driver, wrong footprint, 2.4V floor: out |
+| LSM6DSV320X | ✗ | €10.95 | 0 | LGA-14L | - | *V* variant, no BF driver (≠ DSK) |
 
 ---
 
@@ -90,21 +90,21 @@ Mined from the PDFs in `datasheets/`. "n/s" = not specified in datasheet.
 | Accel FS max (g) | 16 | 16 | 32 | 16 | 24 | 16 | **320** (hi-g) |
 | Max gyro ODR (kHz) | 8 | 8 | 6.4 | 6.4 | 2 | 7.68 | 7.68 |
 | MEMS resonant freq | n/s | n/s | **29.3 kHz** | n/s | n/s | n/s | n/s |
-| Anti-alias filter | AAF 42–3979Hz + notch | AAF 42–3979Hz | AAF+LPF | LPF | LPF 5–532Hz | analog AAF + LPF1 | analog AAF + LPF1 |
-| VDD / VDDIO (V) | 1.71–3.6 / 1.71–3.6 | 1.71–3.6 / 1.71–3.6 | 1.71–3.6 / 1.08–3.6 | 1.71–3.6 / 1.2–3.6 | **2.4**–3.6 / 1.2 | 1.71–3.6 / 1.08 | 1.71–3.6 / 1.08 |
+| Anti-alias filter | AAF 42-3979Hz + notch | AAF 42-3979Hz | AAF+LPF | LPF | LPF 5-532Hz | analog AAF + LPF1 | analog AAF + LPF1 |
+| VDD / VDDIO (V) | 1.71-3.6 / 1.71-3.6 | 1.71-3.6 / 1.71-3.6 | 1.71-3.6 / 1.08-3.6 | 1.71-3.6 / 1.2-3.6 | **2.4**-3.6 / 1.2 | 1.71-3.6 / 1.08 | 1.71-3.6 / 1.08 |
 | SPI max (MHz) | 24 | 24 | 24 | 10 | 10 | 10 | 10 |
 | Package | LGA-14 2.5×3 | LGA-14 2.5×3 | LGA-14 2.5×3 | LGA-14 2.5×3 | **LGA-16 3×4.5** | LGA-14 2.5×3 | LGA-14 2.5×3 |
-| **PSRR / supply-noise spec** | 10mVpp tol. | 10mVpp tol. | 10mV typ/50max, to 1MHz | **AC PSRR: gyro 0.40dps/50mV, accel <8mg/50mV, 100Hz–1MHz** | DC drift only | **n/s** | **n/s** |
-| CLKIN | **yes** 31–50k | **yes** | **yes** 20–40k | no | no | no | no |
+| **PSRR / supply-noise spec** | 10mVpp tol. | 10mVpp tol. | 10mV typ/50max, to 1MHz | **AC PSRR: gyro 0.40dps/50mV, accel <8mg/50mV, 100Hz-1MHz** | DC drift only | **n/s** | **n/s** |
+| CLKIN | **yes** 31-50k | **yes** | **yes** 20-40k | no | no | no | no |
 
 ### Headline findings
 
-1. **The DSK320X is NOT a quieter gyro than the DSV16X.** On paper it's *worse* — 3.8 vs
+1. **The DSK320X is NOT a quieter gyro than the DSV16X.** On paper it's *worse*: 3.8 vs
    2.8 mdps/√Hz, identical accel noise. Neither ST datasheet documents a MEMS resonant-freq
    change or sensor-level vibration-immunity improvement. The DSK's only vibration-relevant
    edge is the **±320 g high-g channel** (clip resistance under hard impact) + quad-channel
-   UI/EIS/OIS/high-g filtering — **not** a lower-noise or more supply-robust gyro core. This
-   directly contradicts the framing that the DSK "fixes the noise" — the fix, if real, is in
+   UI/EIS/OIS/high-g filtering, **not** a lower-noise or more supply-robust gyro core. This
+   directly contradicts the framing that the DSK "fixes the noise": the fix, if real, is in
    MEMS hardware ST does not document, or in the high-g anti-clip path.
 
 2. **Neither ST part specs any PSRR / supply-noise rejection.** This is the standout gap
@@ -112,13 +112,13 @@ Mined from the PDFs in `datasheets/`. "n/s" = not specified in datasheet.
    supply-ripple budget against a number that doesn't exist.
 
 3. **BMI270 is the only candidate with a frequency-resolved AC PSRR:** gyro 0.40 dps per
-   50 mV ripple (100 Hz–1 MHz). InvenSense parts at least give a max-tolerable-ripple (10 mV).
+   50 mV ripple (100 Hz-1 MHz). InvenSense parts at least give a max-tolerable-ripple (10 mV).
    If supply-coupled noise is the real culprit, Bosch + InvenSense give you a spec; ST gives
    you nothing.
 
 4. **Vibration-aliasing immunity:** ICM-56686 is the only part publishing a MEMS drive
-   frequency (29.3 kHz — far above any propwash band, good anti-alias margin). BMI088 is the
-   only one with explicit "drone/robotics vibration suppression + ±24 g anti-clip" language —
+   frequency (29.3 kHz, far above any propwash band, good anti-alias margin). BMI088 is the
+   only one with explicit "drone/robotics vibration suppression + ±24 g anti-clip" language,
    but it's the worst on noise, wrong footprint, no driver. Out on R1/R2.
 
 ---
@@ -144,7 +144,7 @@ Mined from the PDFs in `datasheets/`. "n/s" = not specified in datasheet.
   environment is likely *better* than the cheap FCs the DSV16X was condemned on, so those
   failures may be PCB/PDN-specific, not intrinsic to the part. (For comparison, at least
   one well-regarded reference design uses a ~75 dB PSRR IMU LDO, worse than ours.)
-- DSK320X has **different MEMS hardware**. DSV320X is €5–6 at DigiKey (the *V* high-g).
+- DSK320X has **different MEMS hardware**. DSV320X is €5-6 at DigiKey (the *V* high-g).
 - One proposed strategy: ship the Lite with **BMI270** (cheap, holds the price point) now;
   a premium board with a higher-end IMU later.
 
@@ -166,26 +166,26 @@ Mined from the PDFs in `datasheets/`. "n/s" = not specified in datasheet.
 
 ## 5b. What actually matters in FPV (not bench noise density)
 
-FPV is not a clean environment — the gyro lives in heavy mechanical vibration (motors, props,
-frame/arm resonances, often 0.5–4 kHz) plus ESC switching/EMI. **Bench noise density is nearly
+FPV is not a clean environment: the gyro lives in heavy mechanical vibration (motors, props,
+frame/arm resonances, often 0.5-4 kHz) plus ESC switching/EMI. **Bench noise density is nearly
 the wrong figure of merit.** Proof: the DSV16X has the *best* noise density of every candidate
 here (2.8 mdps/√Hz, tied with the 42688) and is still unflyable. Flyability is set by how the
 part handles **out-of-band energy**, not its quiet-room floor:
 
 1. **Vibration rectification / aliasing.** Out-of-band vibration (kHz) folds into the control
-   band as a DC offset shift + low-frequency broadband — exactly the **<100 Hz broadband**
+   band as a DC offset shift + low-frequency broadband, exactly the **<100 Hz broadband**
    signature in the hover A/B data (§5). Governed by the **MEMS drive/sense resonant frequency** and
    the **analog anti-alias filter ahead of the ADC** (not the digital LPF, which is too late).
    → ICM-56686 is the only part publishing its resonant freq (29.3 kHz, big margin). ST parts
    publish neither resonant freq nor rectification behavior.
 2. **Clipping headroom under vibration.** Instantaneous rate/accel spikes that exceed FS clip,
-   and clipping rectifies into DC + harmonics. This — not "more range" — is why DSK320X has a
+   and clipping rectifies into DC + harmonics. This, not "more range", is why DSK320X has a
    ±320 g accel channel and BMI088 has ±24 g. A ±16 g accel can saturate on a rough quad.
 3. **Supply / EMI rejection.** ESC switching coupling into a part with unbounded PSRR. ST specs
    none; BMI270 specs AC PSRR; InvenSense specs a max tolerable ripple.
 
 **Consequence for this investigation:** rank candidates on (1) anti-alias/resonant-freq margin,
-(2) clip headroom, (3) PSRR — and above all on **empirical flight/blackbox data**, since
+(2) clip headroom, (3) PSRR, and above all on **empirical flight/blackbox data**, since
 datasheets barely document any of the three. The noise-density column in §4 is informational,
 not a selection criterion. This is why BF qualifies gyros by flying them, and why a
 worse-on-paper part (DSK320X) can outfly the DSV16X.
@@ -208,10 +208,10 @@ misbehaviour are **firmware/platform**, not "bad MEMS":
    oscillation), and
 2. an **accel-filter config** leaking vibration into fusion (gravity wander).
 
-Both are fixable without changing the sensor. This strongly reinforces §6 — the part may be
+Both are fixable without changing the sensor. This strongly reinforces §6: the part may be
 partly mis-integrated on RP2350, not intrinsically unflyable. Note these symptoms (200 Hz
 under-throttle oscillation; gravity wander) are **distinct from the hover A/B** result (<100 Hz
-broadband prefilter noise at hover) — so there may be ≥2 independent problems, only one of
+broadband prefilter noise at hover), so there may be ≥2 independent problems, only one of
 which the sensor swap would fix.
 
 The blackbox logs from these builds plus their baseline, and the `sysid raw` FRF CSV, are
@@ -219,7 +219,7 @@ the highest-value missing evidence (see §8).
 
 ## 5d. RESOLVED on the sister board, empirical
 
-The firmware A/B campaign concluded the DSV16X problem is **not firmware-fixable** — it's a MEMS
+The firmware A/B campaign concluded the DSV16X problem is **not firmware-fixable**: it's a MEMS
 hardware property. The sister board's firmware config records the swap rationale: the
 LSM6DSV16XTR was found to have a **MEMS resonance vulnerability in the ~25 kRPM motor band**
 on that airframe (the internal gyro **saturating from acoustic/vibration energy at the
@@ -228,21 +228,21 @@ resonator's drive frequency, producing bursts of false rotation reads up to chip
 BF targets that support both chips on the same pads) **eliminated the resonance issue**, and
 the sister board's next PCB revision is designed with the ICM-42688-P only.
 
-**What this settles — and what it does NOT.**
+**What this settles, and what it does NOT.**
 
 Settled: **swapping to ICM-42688-P made the board flyable**, and the sister board's next
 revision standardizes on it. That's a solid empirical result for *part selection*.
 
-NOT settled — the **root cause**. The "MEMS resonance in the ~25 kRPM band" wording is a
+NOT settled: the **root cause**. The "MEMS resonance in the ~25 kRPM band" wording is a
 *hypothesis writeup*, not a measured result, and it does not survive scrutiny as a single cause:
 
 - **The hover A/B noise is <100 Hz broadband at HOVER** (low RPM/vibration). A high-RPM resonance
-  should be throttle-dependent and absent at hover — which is what the *diag build* describes
+  should be throttle-dependent and absent at hover, which is what the *diag build* describes
   ("200 Hz under throttle, fine at hover"). So there are **≥2 distinct symptoms**, not one.
 - **"~25 kRPM band" is physically shaky:** 25 kRPM ≈ 417 Hz fundamental; a MEMS gyro drive
-  resonance is ~20–25 **kHz** (~50× higher). 417 Hz vibration doesn't excite a 20 kHz drive
+  resonance is ~20-25 **kHz** (~50× higher). 417 Hz vibration doesn't excite a 20 kHz drive
   mode directly. The plausible mechanism is **aliasing** (out-of-band energy folding in through
-  an inadequate AAF) — a filtering/architecture issue, not "resonator saturation."
+  an inadequate AAF), a filtering/architecture issue, not "resonator saturation."
 - **"5 V cap helps" + the "electrical noise" reports + ST publishing no PSRR** → an independent
   **supply/PSRR** contributor.
 - **A tune/filter preset made one build fly perfectly** → **tune/filtering** is a large lever; a
@@ -250,10 +250,10 @@ NOT settled — the **root cause**. The "MEMS resonance in the ~25 kRPM band" wo
 - **The ICM swap is a confounded experiment:** it changed sensor + driver maturity + AAF/notch
   behavior + CLKIN jitter removal simultaneously. It does **not** isolate resonance as the cause.
 
-**Working model: multi-causal**, at least — (1) anti-alias/filtering inadequacy → aliased
+**Working model: multi-causal**, at least: (1) anti-alias/filtering inadequacy → aliased
 broadband; (2) supply/PSRR sensitivity; (3) RP2350 DRDY/sample-timing under load; (4) MEMS
 resonance/clipping at high vibration; (5) driver/tune immaturity. The ICM-42688-P is better on
-*several* of these at once, which is why it works — but the dominant factor is not isolated.
+*several* of these at once, which is why it works, but the dominant factor is not isolated.
 
 **Consequence for selection:** because the win is partly filtering/driver/PSRR (not purely a
 MEMS-element property), a same-family ICM-42605 is a *strong* bet (shares AAF+notch+driver), and
@@ -267,7 +267,7 @@ raw-noise-density deficit (its density spec is best-in-class, tied with the 4268
 - 20 dB excess is **broadband <100 Hz** = classic aliased/rectified noise, not white density.
 - "Adding a cap on 5 V helps" + "sensitive to electrical noise" = PDN/supply path.
 - A good preset made it fly fine on our board (better PDN than the FCs BF condemned).
-- ST publishes **no PSRR**, so the part's supply robustness is genuinely unknown/unbounded —
+- ST publishes **no PSRR**, so the part's supply robustness is genuinely unknown/unbounded,
   consistent with it being fragile on noisy boards even if fine on a clean one.
 
 This means the decision is partly **political** (BF approval / the 180-brand ecosystem rejects
@@ -280,35 +280,35 @@ PDN). Those can have different answers.
 
 **Reframed by §5d:** the failure is MEMS resonance saturation, and **ICM-42688-P is the
 empirically proven fix** on the sister board. The 426xx family shares the same gyro sense-element
-architecture, so a cheaper family member is the *likely* — but not yet proven — way to keep the
+architecture, so a cheaper family member is the *likely*, but not yet proven, way to keep the
 fix at a Lite price. A different-MEMS part (BMI270) is now a real risk, not a safe interim.
 
-- **A — ICM-42688-P (proven). ← lowest technical risk.** The exact part that eliminated the
+- **A: ICM-42688-P (proven). ← lowest technical risk.** The exact part that eliminated the
   resonance on the sister board, whose next revision standardizes on it. Drop-in (§4), uses wired CLKIN (GPIO15).
-  **Cost is the only problem:** €10–12, 0 LCSC stock (10k other @7-9d). Kills the sub-$5 "Lite"
+  **Cost is the only problem:** €10-12, 0 LCSC stock (10k other @7-9d). Kills the sub-$5 "Lite"
   price point. Right call for a *premium* OpenFC; painful for Lite.
-- **B — ICM-42605 (cheap same-family bet). ← leading for Lite (2026-06-02).** Same 426xx gyro
+- **B: ICM-42605 (cheap same-family bet). ← leading for Lite (2026-06-02).** Same 426xx gyro
   architecture as the 42688 → *most likely* shares the resonance immunity (same sense element,
-  different binning/noise grade). BF-supported, **10,000 in LCSC stock @ €4.90–5.60**, clean
+  different binning/noise grade). BF-supported, **10,000 in LCSC stock @ €4.90-5.60**, clean
   2.5×3 footprint, uses the wired CLKIN. **Risk: the resonance immunity is not yet confirmed on
-  the 42605 specifically** — verify by flying it (it shares the 42688 driver, so it's a config
+  the 42605 specifically**: verify by flying it (it shares the 42688 driver, so it's a config
   one-liner: `USE_GYRO_SPI_ICM42605`). If it holds, this is the answer for Lite.
-- **C — ICM-42622P** (highly rated, same family) — but **€15 / out of stock** at last check.
+- **C: ICM-42622P** (highly rated, same family), but **€15 / out of stock** at last check.
   Out on price/supply right now.
-- **D — BMI270 (cheapest, now higher risk).** €1.36–3.19, 50k stock, BF-supported, footprint
-  drop-in (§7b), only candidate with a real AC-PSRR spec. **But:** different Bosch MEMS — we now
+- **D: BMI270 (cheapest, now higher risk).** €1.36-3.19, 50k stock, BF-supported, footprint
+  drop-in (§7b), only candidate with a real AC-PSRR spec. **But:** different Bosch MEMS: we now
   know the DSV16X failure was MEMS-resonance, and there is **no evidence BMI270 survives this
   airframe's resonance band**. Bench noise density (7) is irrelevant (§5b); the resonance
-  question is not. Only choose if 42605 also fails and price dominates — and flight-test it
+  question is not. Only choose if 42605 also fails and price dominates, and flight-test it
   against the same airframe first.
-- **E — DSK320X** — BF/STM blessed, drop-in, but **not orderable** (samples gated), and per §4
+- **E: DSK320X**, BF/STM blessed, drop-in, but **not orderable** (samples gated), and per §4
   not a lower-noise gyro. Track for the premium SKU; not actionable for Rev 2 now.
-- **F — Two-SKU strategy.** Premium OpenFC = ICM-42688-P (proven). Lite = ICM-42605 if it flies
+- **F: Two-SKU strategy.** Premium OpenFC = ICM-42688-P (proven). Lite = ICM-42605 if it flies
   clean, else BMI270 as the cost-floor fallback. Aligns the premium board with the sister board's next revision.
 
 **Recommendation:** Lite-Mini Rev 2 → **ICM-42605** (in stock, cheap, same family as the proven
 fix, wired CLKIN usable), with **ICM-42688-P** as the drop-in premium/no-compromise option on the
-identical footprint. **Flight-test the 42605 against a ~25 kRPM-band airframe before committing** —
+identical footprint. **Flight-test the 42605 against a ~25 kRPM-band airframe before committing**:
 that's the one open risk, and it's cheap to close.
 
 ---
@@ -322,7 +322,7 @@ Board pins wired for the LSM6DSV16X: 1 MISO, 2 GND, 3 GND, 4 INT, 5 +3.3V, 6 GND
 **BMI270 is a drop-in, with two caveats:**
 - **Pins 2/3 = ASDx/ASCx (aux/OIS), hard-grounded on our board.** Bosch documents "VDDIO or
   DNC", *not* GND. The shared 20×20 FC footprint grounds these and BMI270 ships on it across
-  many BF boards (works empirically), but it is **outside Bosch's stated spec** — verify on a
+  many BF boards (works empirically), but it is **outside Bosch's stated spec**: verify on a
   sample; worst case a DNC cut on 2/3.
 - **Pin 9 = our CLKIN net (GPIO15).** On BMI270 pin 9 is INT2 (no clock input). No regression
   (ST part also has no CLKIN); just don't drive a clock on GPIO15 in firmware. Aligns with the
@@ -333,33 +333,33 @@ Board pins wired for the LSM6DSV16X: 1 MISO, 2 GND, 3 GND, 4 INT, 5 +3.3V, 6 GND
 
 - [x] **BMI270 LGA-14 pinout** vs our footprint → drops in; caveats on pins 2/3 (grounded aux,
       out-of-spec but field-proven) and pin 9 (CLKIN→INT2, harmless). See §7b.
-- [ ] **ICM-45686 footprint** is LGA-14 **3×2.5** (rotated vs our 2.5×3) — check pin-1 / land.
-- [ ] **Source ICM-42622P** — LCSC/DigiKey/Mouser pricing, stock, lead time.
-- [ ] **DSK320X availability + price** — DigiKey/Mouser/STM samples; realistic date beyond "June."
-- [ ] **CLKIN decision** — Rev 2 plan drops CLKIN (GPIO15); if a TDK part (42605/42688/42622/
+- [ ] **ICM-45686 footprint** is LGA-14 **3×2.5** (rotated vs our 2.5×3): check pin-1 / land.
+- [ ] **Source ICM-42622P**: LCSC/DigiKey/Mouser pricing, stock, lead time.
+- [ ] **DSK320X availability + price**: DigiKey/Mouser/STM samples; realistic date beyond "June."
+- [ ] **CLKIN decision**: Rev 2 plan drops CLKIN (GPIO15); if a TDK part (42605/42688/42622/
       45686/56686) is chosen, **keep CLKIN** for jitter removal. ST/Bosch don't use it.
-- [ ] **Get the actual FFT/blackbox** behind the hover A/B (§5) into this folder — quantify the
+- [ ] **Get the actual FFT/blackbox** behind the hover A/B (§5) into this folder: quantify the
       20 dB, identify the noise frequency signature (aliased vs supply tone vs propwash).
 - [ ] **Resolve the contradiction:** if a tune made DSV16X fly clean on our board, characterize
-      *why* BF's boards failed — PDN measurement on a noisy reference FC vs ours.
+      *why* BF's boards failed: PDN measurement on a noisy reference FC vs ours.
 - [ ] Confirm **+1.8V_GYRO rail** is fine for each finalist's VDD (all OK except BMI088's 2.4V).
 - [ ] Decide whether ICM-56686 is worth waiting for its in-development driver.
 
 ---
 
-## 8b. Log comparison — PIDtoolbox method + first run (2026-06-02)
+## 8b. Log comparison: PIDtoolbox method + first run (2026-06-02)
 
 **How PIDtoolbox (PTB) works** (Brian White / bw1129, MATLAB or compiled standalone):
 decodes BF blackbox → modules: **Spectral Analyzer** (gyro/dterm PSD in dB + **Freq×Throttle
 spectrogram**), **Step Response** (setpoint→gyro deconvolution), time-domain plots.
 - Set **`debug_mode = GYRO_SCALED`** so unfiltered gyro is logged (PTB then shows *gyro prefilt*
   vs *gyro*, and computes filter phase latency). **Modern BF (2026.x) logs `gyroUnfilt[]`
-  natively** regardless of debug_mode — our logs have it, so prefilter analysis works anyway.
-- Log at **2 kHz** (spectrograms reach ~1 kHz). Fly **throttle sweeps** (idle→full over 5–10 s, ×2–3).
+  natively** regardless of debug_mode, our logs have it, so prefilter analysis works anyway.
+- Log at **2 kHz** (spectrograms reach ~1 kHz). Fly **throttle sweeps** (idle→full over 5-10 s, ×2-3).
 - **Reading Freq×Throttle:** diagonal line rising with throttle = **motor noise (tracks RPM)**;
   horizontal line at fixed Hz = **frame resonance or electrical (throttle-independent)**;
-  <20 Hz = real craft movement (ignore for noise); 20–100 Hz should be quiet (propwash/tune).
-- **Bad-gyro test:** one axis much noisier <200 Hz; rotate FC 90° — if the noisy axis follows, gyro suspect.
+  <20 Hz = real craft movement (ignore for noise); 20-100 Hz should be quiet (propwash/tune).
+- **Bad-gyro test:** one axis much noisier <200 Hz; rotate FC 90°: if the noisy axis follows, gyro suspect.
 
 **Why prefilter (`gyroUnfilt`) is the right signal here:** it's the raw sensor before BF's filter
 stack, so comparing it removes the filter-tune confound and isolates the *sensor*.
@@ -368,22 +368,22 @@ stack, so comparing it removes the filter-tune confound and isolates the *sensor
 (numpy/scipy/matplotlib) emits `psd_overlay.png`, `spectrogram_<label>_<axis>.png`, and a
 band-RMS table. PTB GUI crashed on macOS 2026-06-02; this is the fallback + it's repo-committed.
 
-**First run — LOG00083 vs LOG00090** (both OPENFC_ECO, BF 2026.6.0-alpha, 8 kHz loop, logged
-≈1.88 kHz → 940 Hz Nyquist). **Inconclusive on sensor — the pair is not controlled:**
+**First run: LOG00083 vs LOG00090** (both built for OPENFC_ECO, the OpenFC-ECO-era firmware target since superseded by OPENFC_LITE_MINI_RP2350A; BF 2026.6.0-alpha, 8 kHz loop, logged
+≈1.88 kHz → 940 Hz Nyquist). **Inconclusive on sensor, the pair is not controlled:**
 - LOG83 = 135 s full sweep, gyro LPF off; LOG90 = **only 6 s**, sparse throttle, dyn-LPF 250/500.
 - **Which log is which sensor is unknown** (BF header doesn't name the gyro; same firmware hash
   runs either chip via autodetect). **The LOG#→sensor mapping must be recovered from test notes.**
-- Prefilter PSD floors **nearly overlap** in the noise-dominated bands (motor hump ~200–400 Hz,
-  >400 Hz). The big 0–20 Hz "RMS" differences are **flight movement, not noise** (135 s aggressive
-  vs 6 s) — not a sensor signal.
+- Prefilter PSD floors **nearly overlap** in the noise-dominated bands (motor hump ~200-400 Hz,
+  >400 Hz). The big 0-20 Hz "RMS" differences are **flight movement, not noise** (135 s aggressive
+  vs 6 s), not a sensor signal.
 - LOG83 spectrogram = **clean, healthy**: motor band tracks throttle, no fixed horizontal lines,
-  no saturation bursts. LOG90 looks hotter in 200–500 Hz but is too short/sparse to trust.
+  no saturation bursts. LOG90 looks hotter in 200-500 Hz but is too short/sparse to trust.
 
 **Verdict:** these two logs cannot decide DSV16X vs ICM. Need a **matched pair**: same craft,
 both throttle sweeps, ≥30 s each, same filter config (or compare prefilt only), and a known
 LOG#→sensor map. Then the Freq×Throttle + prefilt-PSD overlay will show whether the DSV16X has
 (a) RPM-tracking diagonal excess (vibration/alias), (b) fixed-Hz lines at idle (electrical/PSRR),
-or (c) saturation bursts (resonance/clipping) — decomposing §5d's multi-causal model.
+or (c) saturation bursts (resonance/clipping), decomposing §5d's multi-causal model.
 
 ## 8c. Universal drop-in verification (footprint + nets, working tree 2026-06-03)
 
@@ -394,8 +394,8 @@ Footprint `lib:LGA-14_L3.0-W2.5-P0.50-BR`. U9 net map (current schematic): 1 MIS
 | Pin | Board net | ST LSM6D* (DSV16X / DSK320X / DSO) | TDK ICM-426xx / IIM-426xx | Bosch BMI270 |
 |---|---|---|---|---|
 | 1 | MISO | SDO ✓ | AP_SDO ✓ | SDO ✓ |
-| **2** | **GND** | SDx — *"VDDIO or GND"* ✓ | RESV — *NC/GND* ✓ | ASDx (aux, unused→input) — table prefers *VDDIO/DNC*, GND benign ✓ |
-| **3** | **GND** | SCx — *"VDDIO or GND"* ✓ | RESV — *NC/GND* ✓ | ASCx (aux, unused→input) — GND benign ✓ |
+| **2** | **GND** | SDx: *"VDDIO or GND"* ✓ | RESV: *NC/GND* ✓ | ASDx (aux, unused→input): table prefers *VDDIO/DNC*, GND benign ✓ |
+| **3** | **GND** | SCx: *"VDDIO or GND"* ✓ | RESV: *NC/GND* ✓ | ASCx (aux, unused→input): GND benign ✓ |
 | 4 | INT | INT1 ✓ | INT1 ✓ | INT1 ✓ |
 | 5 | +3.3V | VDDIO ✓ | VDDIO ✓ | VDDIO ✓ |
 | 6 | GND | GND ✓ | GND ✓ | GNDIO ✓ |
@@ -410,30 +410,30 @@ Footprint `lib:LGA-14_L3.0-W2.5-P0.50-BR`. U9 net map (current schematic): 1 MIS
 
 ¹ pin 9 = INT2 on ST/Bosch; harmless as long as firmware does not drive a clock on GPIO15.
 
-### Verdict — pins 2/3 at GND are fine for all; footprint is universal
+### Verdict: pins 2/3 at GND are fine for all; footprint is universal
 The board grounds pins 2/3. For an **unused** aux interface this is correct/benign across all families:
 - **ST LSM6D\*** (DSV16X / DSK320X / DSO): datasheet sanctions pins 2/3 → "VDDIO **or GND**". ✓
 - **TDK ICM-426xx/IIM and ICM-456xx/56xx-gen** (confirmed from ICM-56686 pinout: pins 2/3/10/11 =
-  RESV/AUX1, pin 9 = INT2/FSYNC/CLKIN — same universal layout): RESV = "NC **or GND**". ✓
-- **Bosch BMI270 — GND is safe (mechanism verified in datasheet, 2026-06-03):** aux/OIS is disabled
+  RESV/AUX1, pin 9 = INT2/FSYNC/CLKIN, same universal layout): RESV = "NC **or GND**". ✓
+- **Bosch BMI270: GND is safe (mechanism verified in datasheet, 2026-06-03):** aux/OIS is disabled
   by default (`PWR_CTRL.aux_en=0`; BF never enables it for a bare gyro), so ASDx/ASCx are **high-Z
-  inputs** — nothing drives them, GND = no contention. The only "pull-up" is a *configurable* internal
+  inputs**: nothing drives them, GND = no contention. The only "pull-up" is a *configurable* internal
   pull-up on ASDA (`AUX_IF_TRIM.asda_pupsel`: off/40k/10k/2k) used for the aux-I2C SDA line; inactive
   when aux is off (worst case a 40k pull → ~80 µA to GND, harmless). Bosch's "VDDIO or DNC" is
   conservative guidance for the aux-*enabled* case; it does **not** mean GND damages the part. Bosch's
   own power-off note even says interface pins "must be kept close to GNDIO potential." The *only*
-  failure case is firmware enabling the aux **I2C master** (ASCx becomes a driven clock → GND short) —
+  failure case is firmware enabling the aux **I2C master** (ASCx becomes a driven clock → GND short),
   which BF does not do. **GND is the correct universal tie** (VDDIO fails TDK RESV; NC fails ST's
   "needs a level"). One firmware caveat: never enable the BMI270 aux interface.
 
 **So the footprint is a genuine universal drop-in** for every ST LSM6D\*, every TDK ICM-426xx/IIM,
-the 456xx/56xx-generation TDK parts, and the BMI270 — **no schematic change needed.**
+the 456xx/56xx-generation TDK parts, and the BMI270: **no schematic change needed.**
 
 ### Open item
 - **ICM-45686/45605 physical orientation:** pin *functions* match (per 56686), but LCSC lists the
   45686 as LGA-14 **3×2.5** vs our 2.5×3 → check body/pin-1 rotation against the footprint before
   committing. (Functional pinout is fine; this is purely a package-outline check.)
-- **Keep pin 9 (GPIO15→CLKIN) wired** — revisit the Rev 2 "drop CLKIN" note. Harmless for ST/Bosch
+- **Keep pin 9 (GPIO15→CLKIN) wired**: revisit the Rev 2 "drop CLKIN" note. Harmless for ST/Bosch
   (INT2, idle), and gives TDK 426xx/456xx sample-clock jitter removal (relevant to the noise work).
 
 ## 9. Datasheet index
