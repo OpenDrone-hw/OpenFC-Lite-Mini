@@ -2707,7 +2707,7 @@
 				)
 			)
 		)
-		(property "Value" "LSM6DSV16XTR"
+		(property "Value" "BMI270"
 			(at 60.96 70.866 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2750,7 +2750,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C5267406"
+		(property "LCSC" "C2836813"
 			(at 72.39 87.63 0)
 			(hide yes)
 			(show_name no)
@@ -2761,7 +2761,7 @@
 				)
 			)
 		)
-		(property "MPN" "LSM6DSV16XTR"
+		(property "MPN" "BMI270"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -2772,7 +2772,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "STMicroelectronics"
+		(property "Manufacturer" "Bosch"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
