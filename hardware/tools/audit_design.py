@@ -26,7 +26,7 @@ OUT = HW / "tools" / "design_audit.md"
 # ---------- Parsers ----------
 
 # kicad-skip: path setup for user-level install
-sys.path.insert(0, "/Users/stan/Library/Python/3.13/lib/python/site-packages")
+sys.path.insert(0, os.path.expanduser("~/Library/Python/3.13/lib/python/site-packages"))
 try:
     from skip import Schematic
 except ImportError:
@@ -213,7 +213,7 @@ def main():
         rows.append([name, f"`{path}`", "yes" if exists else "**MISSING**"])
     W(md_table(["Sheetname", "File", "On disk"], rows))
     W("")
-    W(f"Root schematic: `{ROOT_SCH.name}` — {len(sheets)} sub-sheet(s) referenced.\n")
+    W(f"Root schematic: `{ROOT_SCH.name}`, {len(sheets)} sub-sheet(s) referenced.\n")
 
     # ---- 2. Components ----
     W("## 2. Component Inventory\n")
@@ -335,12 +335,12 @@ def main():
             if loose:
                 found_net = loose[0]
         if not found_net:
-            rows.append([rail, "— (net not found)", "-", "-"])
+            rows.append([rail, "- (net not found)", "-", "-"])
             continue
         caps = find_caps_between({}, net2rp, found_net, "GND")
         # count how many pins are on this net (fanout size)
         fanout = len(net2rp.get(found_net, []))
-        rows.append([rail, found_net, len(caps), ", ".join(caps) if caps else "—"])
+        rows.append([rail, found_net, len(caps), ", ".join(caps) if caps else "-"])
     W(md_table(["Rail", "Net", "# Caps to GND", "Cap refs"], rows))
     W("")
     # Also report ALL nets that look like rails
@@ -360,7 +360,7 @@ def main():
     # Try to find the MCU's actual ADC pins: GPIO40,41,45,47 per CLAUDE.md
     mcu_ref = "U36"
     mcu_fp = fp_idx.get(mcu_ref, {})
-    # The ADC nets go to MCU pins — find them by following net back to U36
+    # The ADC nets go to MCU pins: find them by following net back to U36
     rows = []
     for role, candidates in adc_nets.items():
         net = None
@@ -370,7 +370,7 @@ def main():
                 net = sorted(match, key=len)[0]
                 break
         if not net:
-            rows.append([role, "— not found", "-", "-", "-"])
+            rows.append([role, "- not found", "-", "-", "-"])
             continue
         # Find MCU pad carrying this net
         mcu_pad = "-"
@@ -382,7 +382,7 @@ def main():
         res = [r for (r, _, _) in net2rp.get(net, []) if r.startswith("R")]
         caps = find_caps_between({}, net2rp, net, "GND")
         rows.append([role, net, mcu_pad,
-                     ", ".join(sorted(set(res))) or "—",
+                     ", ".join(sorted(set(res))) or "-",
                      ", ".join(caps) or "**NONE**"])
     W(md_table(["Role", "Net", "MCU pad", "Resistors on net", "Bypass caps to GND"], rows))
     W("")
@@ -404,14 +404,14 @@ def main():
     rows = []
     for role, nets in spi_nets.items():
         if not nets:
-            rows.append([role, "—", "-", "-"])
+            rows.append([role, "-", "-", "-"])
             continue
         net = nets[0]
         # list refs on that net
         refs = sorted(set(r for (r, _, _) in net2rp[net]))
         # resistors on net (pull-up candidates)
         rs = [r for r in refs if r.startswith("R")]
-        rows.append([role, net, ", ".join(refs), ", ".join(rs) or "—"])
+        rows.append([role, net, ", ".join(refs), ", ".join(rs) or "-"])
     W(md_table(["Signal", "Net", "Refs on net", "Resistors (pull-ups?)"], rows))
     W("")
 
@@ -441,7 +441,7 @@ def main():
     rows = []
     for role, net in cs_checks:
         if not net:
-            rows.append([role, "—", "—", "—"])
+            rows.append([role, "-", "-", "-"])
             continue
         rs = [r for (r, _, _) in net2rp.get(net, []) if r.startswith("R")]
         # Does any of those R's touch +3.3V or +3V3?
@@ -471,7 +471,7 @@ def main():
         pin_nets = ", ".join(f"{k}→{v}" for k, v in pads.items())
         # Try to identify MCU pin driving it (non-rail end)
         drivers = [v for v in pads.values() if not re.search(r"\+?(\d+V|GND|VBUS|VBAT)", v, re.I)]
-        rows.append([ref, led["value"], led["mpn"] or "-", pin_nets, ", ".join(drivers) or "—"])
+        rows.append([ref, led["value"], led["mpn"] or "-", pin_nets, ", ".join(drivers) or "-"])
     W(md_table(["Ref", "Value/Color", "MPN", "Pad nets", "Likely MCU-side net"], rows))
     W("")
     # Blue LED check
@@ -486,7 +486,7 @@ def main():
     rows = []
     for role, nets in (("I2C_SDA", sda_net), ("I2C_SCL", scl_net)):
         if not nets:
-            rows.append([role, "—", "-", "-"])
+            rows.append([role, "-", "-", "-"])
             continue
         net = nets[0]
         refs = sorted(set(r for (r, _, _) in net2rp[net]))
@@ -567,7 +567,7 @@ def main():
         if matches:
             for m in matches:
                 refs = sorted(set(r for (r, _, _) in net2rp[m]))
-                W(f"- **{pname}**: net `{m}` — refs: {', '.join(refs)}")
+                W(f"- **{pname}**: net `{m}`, refs: {', '.join(refs)}")
     # Look at U36 pad for RUN
     # Check if RUN net has a pull-up / button
     for pad, net in mcu_fp.get("pads", {}).items():
@@ -657,7 +657,7 @@ def main():
         if pad_net:
             rows.append([g, desc, pad_net[0], pad_net[1]])
         else:
-            rows.append([g, desc, "—", "— (GPIO not wired on MCU)"])
+            rows.append([g, desc, "-", "- (GPIO not wired on MCU)"])
     W(md_table(["GPIO", "CLAUDE.md function", "U36 pad", "Net"], rows))
     W("")
     # And report GPIOs on MCU NOT in the CLAUDE.md table (stragglers)
@@ -689,7 +689,7 @@ def main():
         cn = curr_candidates[0]
         caps = find_caps_between({}, net2rp, cn, "GND")
         if not caps:
-            findings.append(("HIGH", f"CURRENT-sense net `{cn}` has NO bypass cap to GND — add ~100nF near MCU ADC pin."))
+            findings.append(("HIGH", f"CURRENT-sense net `{cn}` has NO bypass cap to GND: add ~100nF near MCU ADC pin."))
     # VBAT bypass
     vb_candidates = [n for n in net2rp if re.search(r"VBAT.*SENSE|VBAT_?ADC", n, re.I)]
     if vb_candidates:
@@ -707,7 +707,7 @@ def main():
     # IMU CS pull-up (use pin function)
     imu_cs_pad_n, imu_cs_net = find_cs_pad("U14")
     if imu_cs_net and not has_pullup_to_3v3(imu_cs_net):
-        findings.append(("HIGH", f"IMU CS net `{imu_cs_net}` (U14 pad {imu_cs_pad_n}) has NO pull-up to 3.3V — "
+        findings.append(("HIGH", f"IMU CS net `{imu_cs_net}` (U14 pad {imu_cs_pad_n}) has NO pull-up to 3.3V: "
                                  "floating CS at boot can cause bus contention; add 10k to +3.3V."))
     # SD CS pull-up
     for ref, fp in fp_idx.items():
@@ -718,11 +718,11 @@ def main():
                 # Check if a resistor is on the net at all (might be pull-down or series)
                 rs = [r for (r, _, _) in net2rp.get(sd_cs_net, []) if r.startswith("R")]
                 if not rs:
-                    findings.append(("HIGH", f"SD CS net `{sd_cs_net}` has no pull-up to 3.3V — SD cards "
+                    findings.append(("HIGH", f"SD CS net `{sd_cs_net}` has no pull-up to 3.3V: SD cards "
                                              "require CS idle-high or they stay in SD-mode."))
                 else:
                     findings.append(("MED", f"SD CS net `{sd_cs_net}` has resistor(s) {rs} but none detected "
-                                            "going to 3.3V — verify pull-up vs series resistor."))
+                                            "going to 3.3V: verify pull-up vs series resistor."))
             break
     # MCU reset (RUN) pull-up
     run_net = None
@@ -731,7 +731,7 @@ def main():
             run_net = mcu_fp.get("pads", {}).get(pad, "")
             break
     if run_net and not has_pullup_to_3v3(run_net):
-        findings.append(("HIGH", f"MCU RUN net `{run_net}` has NO pull-up to 3.3V — "
+        findings.append(("HIGH", f"MCU RUN net `{run_net}` has NO pull-up to 3.3V: "
                                  "RP2350 datasheet requires external pull-up + cap on RUN."))
     # SD CS pull-up
     # LED blue

@@ -13,7 +13,7 @@ Generated from `OpenFC.kicad_sch` + `OpenFC.kicad_pcb` via kicad-skip + pcbnew.
 | PADS | `pads.kicad_sch` | yes |
 | POWER | `power.kicad_sch` | yes |
 
-Root schematic: `OpenFC.kicad_sch` — 6 sub-sheet(s) referenced.
+Root schematic: `OpenFC.kicad_sch`, 6 sub-sheet(s) referenced.
 
 ## 2. Component Inventory
 
@@ -161,15 +161,15 @@ VBUS(USB)-+
 | Rail | Net | # Caps to GND | Cap refs |
 |---|---|---|---|
 | +BATT | +BATT | 2 | C35, C37 |
-| +12V | — (net not found) | - | - |
+| +12V | - (net not found) | - | - |
 | +5V_BUCK | +5V_BUCK | 1 | C40 |
 | +5V | +5V | 3 | C32, C33, C48 |
-| VBUS | — (net not found) | - | - |
+| VBUS | - (net not found) | - | - |
 | +3.3V | +3.3V | 17 | C1, Card2, C3, C16, C30, C31, C34, C42, C43, C44, C49, C50, C51, C52, C65, C67, C69 |
 | +1.8V_GYRO | +1.8V_GYRO | 2 | C2, C41 |
 | +1.1V | +1.1V | 4 | C27, C28, C29, C68 |
-| +1.1V_CORE | — (net not found) | - | - |
-| DVDD | — (net not found) | - | - |
+| +1.1V_CORE | - (net not found) | - | - |
+| DVDD | - (net not found) | - | - |
 
 Rail-like nets present:
 
@@ -180,9 +180,9 @@ Rail-like nets present:
 | Role | Net | MCU pad | Resistors on net | Bypass caps to GND |
 |---|---|---|---|---|
 | VBAT_SENSE | /RP2350A/ADC_VBAT | 52 | R35, R43 | C56 |
-| CURR_SENSE | /PADS/CURRENT | 49 | — | **NONE** |
-| RSSI | /PADS/RSSI | 56 | — | **NONE** |
-| EXT | — not found | - | - | - |
+| CURR_SENSE | /PADS/CURRENT | 49 | - | **NONE** |
+| RSSI | /PADS/RSSI | 56 | - | **NONE** |
+| EXT | - not found | - | - | - |
 
 **Check**: A CURRENT-sense ADC input WITHOUT a bypass cap at the MCU pin is a Betaflight MFG-guideline violation (noise couples straight into ADC).
 
@@ -190,14 +190,14 @@ Rail-like nets present:
 
 | Signal | Net | Refs on net | Resistors (pull-ups?) |
 |---|---|---|---|
-| SPI0 SCK | — | - | - |
-| SPI0 MOSI | — | - | - |
-| SPI0 MISO | — | - | - |
-| IMU CS | /IMU/GYRO_CS | U14, U36 | — |
+| SPI0 SCK | - | - | - |
+| SPI0 MOSI | - | - | - |
+| SPI0 MISO | - | - | - |
+| IMU CS | /IMU/GYRO_CS | U14, U36 | - |
 | SD CS | /BLACKBOX/BB_CS | Card2, R2, U36 | R2 |
-| SD MOSI | — | - | - |
-| SD MISO | — | - | - |
-| SD SCK | — | - | - |
+| SD MOSI | - | - | - |
+| SD MISO | - | - | - |
+| SD SCK | - | - | - |
 
 ### CS pull-up check (to +3.3V)
 
@@ -319,7 +319,7 @@ Blue LED (Betaflight LED0 requirement): **MISSING** (none)
 
 ## 13. Reset / Boot
 
-- **RUN**: net `Net-(U36-RUN)` — refs: R36, U36
+- **RUN**: net `Net-(U36-RUN)`, refs: R36, U36
 - U36 pad 35 (RUN) connects to `Net-(U36-RUN)`; refs on net: R36, U36
 
 ## 14. Connectors & Pads
@@ -414,12 +414,12 @@ Blue LED (Betaflight LED0 requirement): **MISSING** (none)
 | GPIO29 | M3 | 37 | /PADS/M3 |
 | GPIO30 | M2 | 38 | /PADS/M2 |
 | GPIO31 | M1 | 39 | /PADS/M1 |
-| GPIO32 | OSD VBLACK | — | — (GPIO not wired on MCU) |
+| GPIO32 | OSD VBLACK | - | - (GPIO not wired on MCU) |
 | GPIO33 | OSD SYNC_IN | 42 | /OSD/OSD_W |
 | GPIO34 | OSD PIXEL_SEL | 43 | /OSD/OSD_EN |
 | GPIO35 | OSD VWHITE | 44 | /OSD/OSD_SYNC |
-| GPIO36 | OSD COLOR_SEL | — | — (GPIO not wired on MCU) |
-| GPIO37 | OSD SYNCLVL | — | — (GPIO not wired on MCU) |
+| GPIO36 | OSD COLOR_SEL | - | - (GPIO not wired on MCU) |
+| GPIO37 | OSD SYNCLVL | - | - (GPIO not wired on MCU) |
 | GPIO40 | CURRENT ADC | 49 | /PADS/CURRENT |
 | GPIO41 | VBAT ADC | 52 | /RP2350A/ADC_VBAT |
 | GPIO45 | RSSI ADC | 56 | /PADS/RSSI |
@@ -444,8 +444,8 @@ GPIOs wired on MCU but missing from the documented pin plan:
 
 | Severity | Finding |
 |---|---|
-| HIGH | CURRENT-sense net `/PADS/CURRENT` has NO bypass cap to GND — add ~100nF near MCU ADC pin. |
+| HIGH | CURRENT-sense net `/PADS/CURRENT` has NO bypass cap to GND: add ~100nF near MCU ADC pin. |
 | LOW | RSSI ADC net `/PADS/RSSI` has no bypass cap to GND (acceptable for PWM/analog RSSI). |
-| HIGH | IMU CS net `/IMU/GYRO_CS` (U14 pad 12) has NO pull-up to 3.3V — floating CS at boot can cause bus contention; add 10k to +3.3V. |
+| HIGH | IMU CS net `/IMU/GYRO_CS` (U14 pad 12) has NO pull-up to 3.3V: floating CS at boot can cause bus contention; add 10k to +3.3V. |
 | MED | No explicit BLUE LED found for Betaflight LED0 status. |
 
