@@ -6,9 +6,10 @@ The Rev 1 IMU (ST **LSM6DSV16XTR**) is populated for development only. The Betaf
 team considers it unflyable; bench/flight data agrees. This folder collects datasheets,
 sourcing data, and test evidence to pick the **Rev 2 IMU**.
 
-Footprint is **LGA-14 (2.5×3 mm)**, pins 2/3→GND and 10/11→NC, electrically safe for
-**both TDK (ICM-426xx/456xx) and ST (LSM6D\*) families**. IMU swap is a field change once
-a part is chosen.
+The footprint and its ST/TDK compatibility are described in
+[`hardware/docs/DESIGN.md`](../../docs/DESIGN.md) (IMU section). IMU swap is a
+part-population change once a part is chosen. Pin-by-pin verification against each
+candidate family is in §8c below.
 
 ```
 imu-selection/
