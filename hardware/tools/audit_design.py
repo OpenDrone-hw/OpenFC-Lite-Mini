@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """
-OpenFC-Lite Design Audit.
+OpenFC-Lite-Mini Design Audit.
 
-Parses the KiCad 9 design using kicad-skip (schematics) and pcbnew (PCB netlist)
-and produces a comprehensive hardware inventory + Betaflight MFG validation report.
+Parses the KiCad 10 design using kicad-skip (schematics) and pcbnew (PCB netlist)
+and produces a hardware inventory + Betaflight MFG validation report.
+
+STALE: the refdes and GPIO map hardcoded below (U36 MCU, U14 IMU, U34/U35/U38 OSD,
+GPIO0-47) are from the Rev 1 RP2354B/QFN-80 design. Rev 2 is RP2354A/QFN-60 with
+U10 MCU, U9 IMU, U1/U2 OSD and GPIO0-29. Re-derive them against
+hardware/docs/DESIGN.md before trusting the report. Output is not tracked in git.
 
 Run with KiCad's bundled Python so pcbnew is available:
   /Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/Current/bin/python3 \

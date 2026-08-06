@@ -1,6 +1,6 @@
 # OpenFC-Lite-Mini
 
-Open-source Betaflight flight controller with a 20 x 20 mm mounting pattern, part of the incutec OpenDrone line. Built around the RP2354A (dual Cortex-M33, QFN-60, 2 MB stacked flash), with a 6-axis IMU on SPI1, microSD blackbox on SPI0, PIO-driven analog OSD, and a switchable 10V VTX rail. External RX over UART, 3S-6S input, 6-layer PCB, designed in KiCad 10 for JLCPCB assembly. Its sibling [OpenFC-Lite](https://github.com/incutec-hw/OpenFC-Lite) (30.5 x 30.5 mm, RP2354B: bigger pads, more I/O, OSD debug pads) shares this design. Full design detail: [hardware/docs/DESIGN.md](hardware/docs/DESIGN.md).
+Open-source Betaflight flight controller with a 20 x 20 mm mounting pattern, part of the incutec OpenDrone line. Designed in KiCad 10 for JLCPCB assembly. Its sibling [OpenFC-Lite](https://github.com/incutec-hw/OpenFC-Lite) (30.5 x 30.5 mm, RP2354B: bigger pads, more I/O, OSD debug pads) shares this design. Specifications are below; full design detail is in [hardware/docs/DESIGN.md](hardware/docs/DESIGN.md).
 
 <p>
 <img src="images/openfc-lite-mini-rev2-top.png" width="400" alt="OpenFC-Lite-Mini Rev 2 top" />
@@ -52,9 +52,9 @@ Part-level detail (power tree, GPIO map, OSD front end, PIO allocation, firmware
 |---|---|
 | `hardware/` | KiCad 10 project: schematics, PCB, project-local libraries |
 | `hardware/docs/` | Design documentation ([DESIGN.md](hardware/docs/DESIGN.md)) |
-| `hardware/research/` | IMU selection, routing validation, open items |
+| `hardware/research/` | IMU selection, open items |
 | `hardware/tools/` | Analysis scripts (Python, kicad-skip / pcbnew API) |
-| `hardware/production/` | Fabrication exports per revision (generated, not tracked in git) |
+| `hardware/production/` | Fabrication exports per revision (generated, gitignored) |
 | `libs/KiCad-Library` | Shared Incutec symbol/footprint/3D library (git submodule) |
 | `images/` | Board renders and certification marks |
 

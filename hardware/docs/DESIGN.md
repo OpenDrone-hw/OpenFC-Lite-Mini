@@ -21,6 +21,8 @@ Intentionally omitted to keep the board small and cheap: barometer, integrated E
 
 Both buck inductors are 4.7uH (XRTC303020D4R7MBCA). Battery input has reverse-polarity protection (RB161QS-40 Schottky, D3/D10).
 
+Layout constraint on the core buck: RP2350 datasheet section 6.3.8.1 forbids putting the VREG input cap, L4, or the VREG output cap on the opposite side of the board from the MCU, so that cluster stays on the MCU side. Copper is cut away under the VREG_LX node on the top layer and on layer 2, and the GND return to the QFN centre pad uses two adjacent vias. Sources: [RP2350 datasheet](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf), [Hardware design with RP2350](https://datasheets.raspberrypi.com/rp2350/hardware-design-with-rp2350.pdf).
+
 ## Motor outputs
 
 4x PIO-driven DShot outputs (DShot600, bidirectional telemetry supported). M1=GPIO25, M2=GPIO24, M3=GPIO23, M4=GPIO22: descending GPIO order, mapped back to M1-M4 in the Betaflight DShot resource order (silk order left reversed to ease routing).
@@ -34,12 +36,14 @@ Both buck inductors are 4.7uH (XRTC303020D4R7MBCA). Battery input has reverse-po
 
 ## Serial and I/O
 
-- **UART0** (GPIO0/1): digital VTX / MSP DisplayPort
-- **UART1** (GPIO6/7): external serial RX (CRSF/SBUS/etc.)
-- **PIO UART0** (GPIO2/3): software UART, default GPS
-- **I2C0** (GPIO4/5): external expansion
-- **SPI1** (GPIO10/11/12, CS=GPIO13, INT=GPIO9): IMU
-- **SPI0** (GPIO18/19/20, CS=GPIO21): microSD blackbox
+Pin assignments are in the GPIO map below.
+
+- **UART0**: digital VTX / MSP DisplayPort
+- **UART1**: external serial RX (CRSF/SBUS/etc.)
+- **PIO UART0**: software UART, default GPS
+- **I2C0**: external expansion
+- **SPI1**: IMU, plus a dedicated interrupt line
+- **SPI0**: microSD blackbox
 
 ## Analog inputs
 
@@ -50,7 +54,7 @@ The QFN-60 has only 4 ADC channels; GPIO26/27 are used as digital LED0 and 10V-e
 
 ## Additional I/O
 
-- Addressable LED strip output (GPIO8, PIO2)
+- Addressable LED strip output (GPIO8)
 - Status LED: LED0, blue (GPIO26)
 - Beeper output, N-MOS low-side switch (GPIO17), flyback diode across the buzzer
 - 10V rail enable (GPIO27), exposed as PINIO1/USER1 in firmware
@@ -89,7 +93,9 @@ TDK parts use a CLKIN line to eliminate sample-timing jitter; ST parts have no C
 - COS8051SOT (U1): wide-band video op-amp output buffer (175 MHz / 150 V/us RRIO)
 - SN74LVC1G3157DTBR (U18): SPDT analog switch: camera passthrough, black-pixel inject, white-pixel inject
 - AC-coupled input with DC-restore (sync clamp) front end, biasing the sync tip off the 0 V rail before the gain stage
-- Driven by RP2354A PIO2: pixel-level timing for character overlay on PAL/NTSC composite
+- U1 and U2 both run from +3.3V
+- OSD write / enable / sync are GPIO14/15/16: three consecutive GPIO with the write line lowest, as the Betaflight FB_OSD driver requires
+- PIO-driven: pixel-level timing for character overlay on PAL/NTSC composite
 
 ## PIO allocation
 
@@ -101,6 +107,11 @@ The RP2350 has 3 PIO blocks x 4 state machines (12 total):
 | PIO1 | Software UART (PIO UART0, TX and RX programs) |
 | PIO2 | LED strip + analog OSD pixel timing |
 
+The block the LED strip runs on is unresolved: an instruction-memory budget check puts the
+OSD and WS2812 programs over the 32-slot limit of a single PIO block, which would move the
+LED strip to PIO1. Firmware configuration only, no board impact. See
+[`hardware/research/open-items.md`](../research/open-items.md).
+
 ## Firmware
 
 A custom Betaflight target (`OPENFC_LITE_MINI_RP2350A`, `MANUFACTURER_ID = OPFC`) defines:
@@ -108,7 +119,7 @@ A custom Betaflight target (`OPENFC_LITE_MINI_RP2350A`, `MANUFACTURER_ID = OPFC`
 - Motor map matching the silkscreen (M1..M4 = GPIO25..GPIO22) via the DShot resource order
 - `USE_SDCARD_SPI` on SPI0 for blackbox
 - `USE_PINIO` on GPIO27 for the switchable 10V VTX rail
-- FB_OSD wired but disabled by default. The RP2350 FB_OSD driver is merged upstream (betaflight/betaflight#14882, merged 2026-04-22).
+- FB_OSD wired but disabled by default. Upstream driver status and the pending bench verification: [`hardware/research/open-items.md`](../research/open-items.md).
 
 The target config is not yet published in [betaflight/config](https://github.com/betaflight/config); building requires adding the target files to a Betaflight checkout (with `pico-sdk` and the BF-pinned ARM toolchain):
 
@@ -120,20 +131,20 @@ make CONFIG=OPENFC_LITE_MINI_RP2350A
 
 Output is a `.uf2` in `obj/`. Hold BOOTSEL, plug in USB, and drag the UF2 onto the `RP2350` mass-storage drive that mounts.
 
-Betaflight PICO supports SD blackbox over SPI only (PR #14567, no SDIO under `src/platform/PICO/`), so the microSD is wired for SPI even though the slot routing is SDIO-compatible. SBUS inversion is handled at the RP2350 pad IO-mux (`gpio_set_inover/outover(GPIO_OVERRIDE_INVERT)`), auto-set for SBUS on native and PIO UARTs, so there is no hardware inverter: the RX line wires straight to a UART RX GPIO.
+Betaflight PICO supports SD blackbox over SPI only (PR #14567, no SDIO under `src/platform/PICO/`), so the microSD is wired for SPI even though the slot routing is SDIO-compatible. SBUS inversion is handled at the RP2350 pad IO-mux (`gpio_set_inover/outover(GPIO_OVERRIDE_INVERT)`), auto-set for SBUS on native and PIO UARTs, so there is no hardware inverter: the RX line wires straight to a UART RX GPIO. That RX line stays on hardware UART1 rather than the PIO UART, because the PIO UART path re-runs `gpio_set_function` and clears the pad inversion.
 
 ## Variants and revisions
 
-This repo is the 20x20 member of the OpenFC-Lite family. Its sibling [OpenFC-Lite](https://github.com/incutec-hw/OpenFC-Lite) (30.5 x 30.5 mm, RP2354B QFN-80: bigger pads, more I/O, OSD debug pads) shares this design. Fabrication sets are generated per revision into `hardware/production/` (gitignored) with the Fabrication Toolkit. Open engineering items are tracked in [`hardware/research/open-items.md`](../research/open-items.md).
+This repo is the 20x20 member of the OpenFC-Lite family; the 30.5 x 30.5 mm sibling is [OpenFC-Lite](https://github.com/incutec-hw/OpenFC-Lite), described in the repository README. Open engineering items are tracked in [`hardware/research/open-items.md`](../research/open-items.md).
 
 ## Revisions
 
 ## Rev2 (2026-06-04)
 
-Validated build, export set `OpenFC-Lite-Mini-rev2`. Substantial redesign over the Rev 1 prototype; all schematic and board edits made manually in KiCad. Remaining open items: [`hardware/research/open-items.md`](hardware/research/open-items.md).
+Validated build, export set `OpenFC-Lite-Mini-rev2`. Substantial redesign over the Rev 1 prototype; all schematic and board edits made manually in KiCad. Remaining open items: [`hardware/research/open-items.md`](../research/open-items.md).
 
 ### MCU
-- **RP2354B (QFN-80) to RP2354A (QFN-60).** 48 to 30 GPIO. The peripheral map was re-derived from scratch and now uses every GPIO (see [DESIGN.md](hardware/docs/DESIGN.md)). Reference designators were fully re-annotated. Dropped vs the QFN-80 layout: the second PIO UART, the SBUS hardware inverter, and the separate RSSI / external-ADC analog inputs.
+- **RP2354B (QFN-80) to RP2354A (QFN-60).** 48 to 30 GPIO. The peripheral map was re-derived from scratch and now uses every GPIO (see the GPIO map above). Reference designators were fully re-annotated. Dropped vs the QFN-80 layout: the second PIO UART, the SBUS hardware inverter, and the separate RSSI / external-ADC analog inputs.
 - **Internal core SMPS inductor (L4, 3.3uH)** added on VREG_LX for the RP2354A's integrated 1.1V buck.
 
 ### Power
@@ -150,27 +161,30 @@ Validated build, export set `OpenFC-Lite-Mini-rev2`. Substantial redesign over t
 ### LEDs
 - All indicator LEDs **0201 to 0402** (0201 too fragile: broke during nut install).
 - **D2** (LED0 status, GPIO26): green to **blue** (XL-1005UBC, C22355736), per BF section 3.1.4.6.
-- **LED series resistors recalculated for about 1mA** (greens = XL-1005UGC, C965793):
+- **LED series resistors resized down to the low-mA range** (greens = XL-1005UGC, C965793). As built on Rev 2, currents computed at Vf about 2.6 V (green) and 2.8 V (blue):
 
-  | LED | Color | Source | New R (E24) | I |
+  | LED | Color | Source | Series R | I |
   |---|---|---|---|---|
-  | D2 (LED0) | Blue | GPIO26 (~3.3V) | 510R | ~1.0mA |
-  | D7 | Green | +3.3V | 680R | ~1.0mA |
-  | D5 | Green | +5V (5V_BUCK) | 2.4k | ~1.0mA |
-  | D4 | Green | +10V | 7.5k | ~1.0mA |
+  | D2 (LED0) | Blue | GPIO26 (~3.3V) | R52 + R53 = 150R | ~3.3mA |
+  | D7 | Green | +3.3V | R36 = 510R | ~1.4mA |
+  | D5 | Green | +5V_BUCK | R50 = 2.4k | ~1.0mA |
+  | D4 | Green | +10V | R33 = 7.5k | ~1.0mA |
+  | D8 | Green | +5V, cathode via R40 to the U6 PG pin | R40 = 2.4k | ~1.0mA |
+
+  D4, D5 and D8 hit the 1 mA target. D2 and D7 sit above it. D8 lights when 1.8V_PG pulls low.
 
 ### Signals / connectivity
-- **IMU and microSD split onto separate SPI buses**: IMU on **SPI1** (SCK/MOSI/MISO = GPIO10/11/12, CS=GPIO13, INT=GPIO9); microSD on **SPI0** (SCK/MOSI/MISO = GPIO18/19/20, CS=GPIO21). CS lines grouped into each bus. IMU CLKIN/SYNC is not routed to the MCU (ST gyro, no spare GPIO).
-- **SBUS inverter removed.** BF PICO inverts at the RP2350 pad IO-mux (`gpio_set_inover/outover(GPIO_OVERRIDE_INVERT)`), auto-set for SBUS on native and PIO UARTs. The RX line wires straight to a UART RX GPIO; firmware inverts.
+- **IMU and microSD split onto separate SPI buses**: IMU on **SPI1**, microSD on **SPI0**, CS lines grouped into each bus. Pin assignments are in the GPIO map above. IMU CLKIN/SYNC is not routed to the MCU (ST gyro, no spare GPIO).
+- **SBUS inverter removed**, firmware inverts at the pad IO-mux instead. See Firmware above.
 - **ESC connector P1**: now an 8-pin JST SH (SM08B-SRSS-TB) with the corrected, mirrored pinout. Rev 1 used a reversed generic header, a safety-critical defect: the old pinout shorted VBAT to a GPIO on a standard BF harness.
 - **Beeper**: N-MOS low-side switch (Q-FET + 1k gate + 100k pulldown, BEEPER = GPIO17). Flyback diode across the buzzer.
-- **microSD** wired compatible with both SPI and SDIO; uses **SPI**. Betaflight PICO supports SD blackbox over SPI only (PR #14567); SDIO would give about 10x throughput but needs a 4-bit HW bus and firmware that does not exist.
+- **microSD** wired compatible with both SPI and SDIO; uses **SPI** (rationale under Firmware above). SDIO would give about 10x throughput but needs a 4-bit HW bus and firmware that does not exist.
 
 ### Analog OSD (front-end rework)
 OSD was non-functional on Rev 1: in pass-through the monitor switched to AV (it saw a feed) but showed snow; sync reached the monitor but was too marginal to lock. Wiring and pinouts were verified correct against datasheets; this was a component-suitability and front-end problem. Root cause: the DC-coupled gain-x2 buffer parked the sync tip on the 0 V rail.
 
 - **Op-amp**: TLV9061IDPWR to **COS8051SOT (C7463385)**, a 175 MHz / 150 V/us RRIO video amp (AD8051-class), SOT-23-5. TLV9061 was under-spec for composite video (about 5 MHz closed-loop at gain 2; chroma needs about 28 V/us vs 6.5). Ref changed U19 to **U1**.
-- **OSD output front-end**: added **AC-coupling + DC-restore (sync clamp)** to bias the sync tip 0.3-0.5 V above ground before the gain stage; op-amp powered from +5 V for headroom. New nets `VID_DC` / `VID_FILT` / `OSD_LVL`.
+- **OSD output front-end**: added **AC-coupling + DC-restore (sync clamp)** to bias the sync tip 0.3-0.5 V above ground before the gain stage. New nets `VID_DC` / `VID_FILT` / `OSD_LVL`. The op-amp runs from **+3.3 V** (U1 pin 5); output headroom at gain 2 is an open item, see [`hardware/research/open-items.md`](../research/open-items.md).
 - **Comparator (sync sep)**: TLV3201AIDBVR to **TLV7031DPWR (C2876045)**: push-pull, RRI, X2SON-5 (about 75% smaller), 7 mV hysteresis (vs 1.2 mV). Its 3 us prop delay is symmetric, preserving HSYNC/VSYNC pulse-width discrimination, and adds a constant ~22 px horizontal offset that the PIO `hshiftA/B/C` timing must absorb (about 225 clocks). Fallback if the X2SON regresses sync: TLV3201AIDCKR (SC70-5, pin-compatible, 40 ns). Ref changed U20 to **U2**.
 - **OSD_EN select pull-down**: weak pull-down on U18 pin 6 (S / OSD_EN) so the select never floats and defaults to pass-through before firmware drives the GPIO.
 - **U18 SN74LVC1G3157DTBR** and **D9 SDM02U30LP3-7B**: unchanged, verified correct.

@@ -50,8 +50,11 @@ extracted_*.json
 ext2_*.json
 netlist_*.json
 hardware/tools/.lcsc_mpn_cache.json
+hardware/tools/design_audit.md
 hardware/pcb.json
 hardware/schematic.json
+hardware/emc.json
+hardware/thermal.json
 
 # Datasheets (downloadable)
 datasheets/
