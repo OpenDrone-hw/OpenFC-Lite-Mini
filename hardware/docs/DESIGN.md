@@ -16,7 +16,7 @@ Intentionally omitted to keep the board small and cheap: barometer, integrated E
 | +5V (always-on) | +BATT | LMR51430YFDDCR (U4, 3A) | 4.7uH inductor |
 | +5V (USB/BATT mux) | +5V_BUCK + +5V_USB | TPS2116DRLR (U5) | Auto-selects active source |
 | +3.3V | +5V | LP5912-3.3DRVR (U7) | 500 mA LDO |
-| +1.8V (gyro analog) | +5V | NCV8187AMT180TAG (U6) | 1.2 A LDO, high PSRR (80 dB to 10 kHz), isolated IMU analog supply; gyro load is single-digit mA |
+| +1.8V (gyro analog) | +5V | LP5912-1.8DRVR (U12) | 500 mA low-noise LDO, 75 dB PSRR at 1 kHz, 12 uVRMS output noise. Isolated IMU analog supply; gyro load is single-digit mA |
 | +1.1V (MCU core) | +3.3V | RP2354A internal VREG | External SMPS inductor (L4, 3.3uH) on VREG_LX |
 
 Both buck inductors are 4.7uH (XRTC303020D4R7MBCA). Battery input has reverse-polarity protection (RB161QS-40 Schottky, D3/D10).
@@ -83,7 +83,7 @@ All 30 GPIO of the QFN-60 are allocated:
 
 ## IMU
 
-The IMU footprint is LGA-14 (2.5 x 3 mm), routed with pins 2/3 to GND and pins 10/11 NC, so it accepts both TDK (ICM-426xx/456xx) and ST (LSM6D*) families. Choosing the IMU is a part-population decision, not a layout change. Rev 1 and Rev 2 populate the **LSM6DSV16XTR** for development; the production IMU is selected after bench and flight testing (comparison data: `hardware/research/imu-selection/`). The IMU runs from a dedicated 1.8V analog LDO (U6).
+The IMU footprint is LGA-14 (2.5 x 3 mm), routed with pins 2/3 to GND and pins 10/11 NC, so it accepts both TDK (ICM-426xx/456xx) and ST (LSM6D*) families. Choosing the IMU is a part-population decision, not a layout change. Rev 1 and Rev 2 populated the LSM6DSV16XTR for development; production is **BMI270** (comparison data: `hardware/research/imu-selection/`). The IMU runs from a dedicated 1.8V analog LDO (U12).
 
 TDK parts use a CLKIN line to eliminate sample-timing jitter; ST parts have no CLKIN/SYNC. The IMU CLKIN net exists on the sheet but is not routed to the MCU on the QFN-60 (no spare GPIO): fine for an ST gyro, revisit if a TDK IMU is chosen.
 

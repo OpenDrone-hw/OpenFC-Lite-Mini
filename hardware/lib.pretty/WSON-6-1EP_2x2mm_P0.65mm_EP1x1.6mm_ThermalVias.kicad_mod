@@ -1,12 +1,14 @@
 (footprint "WSON-6-1EP_2x2mm_P0.65mm_EP1x1.6mm_ThermalVias"
 	(version 20260206)
-	(generator "kicad-footprint-generator")
+	(generator "pcbnew")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "WSON, 6 Pin (http://www.ti.com/lit/ds/symlink/tps61040.pdf#page=35)")
 	(tags "WSON NoLead")
 	(property "Reference" "REF**"
 		(at 0 -1.95 0)
 		(layer "F.SilkS")
+		(uuid "27aa7987-6113-4872-81c3-aa35010b572c")
 		(effects
 			(font
 				(size 1 1)
@@ -17,6 +19,7 @@
 	(property "Value" "WSON-6-1EP_2x2mm_P0.65mm_EP1x1.6mm_ThermalVias"
 		(at 0 1.95 0)
 		(layer "F.Fab")
+		(uuid "5b78338d-5788-4eff-ac57-ea5c60ee1c66")
 		(effects
 			(font
 				(size 1 1)
@@ -24,10 +27,33 @@
 			)
 		)
 	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "97176703-7e34-47ea-81bc-b44608d40360")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d7444736-7209-4e30-a835-541e0e15c6d5")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
 	(property "KiLib_Generator" "package/no_lead"
 		(at 0 0 0)
 		(layer "F.SilkS")
 		(hide yes)
+		(uuid "49388e06-682f-41c2-89fb-cff447bb0396")
 		(effects
 			(font
 				(size 1 1)
@@ -45,6 +71,7 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
+		(uuid "c9ce6193-8479-483f-b6b9-d92571038ab3")
 	)
 	(fp_line
 		(start 1.11 1.11)
@@ -54,12 +81,11 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
+		(uuid "0820d4d6-fa2a-4c12-86d8-c430fd553559")
 	)
 	(fp_poly
 		(pts
-			(xy -0.99 -1.12)
-			(xy -1.13 -1.31)
-			(xy -0.85 -1.31)
+			(xy -0.99 -1.12) (xy -1.13 -1.31) (xy -0.85 -1.31)
 		)
 		(stroke
 			(width 0.12)
@@ -67,6 +93,7 @@
 		)
 		(fill yes)
 		(layer "F.SilkS")
+		(uuid "42989fea-6b41-4b25-b382-145bc1cb6d84")
 	)
 	(fp_line
 		(start -1.33 -1.1)
@@ -76,6 +103,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "bd04709a-5000-44da-b80a-6b21b85a656b")
 	)
 	(fp_line
 		(start -1.33 1.1)
@@ -85,6 +113,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "c02dcd6c-5785-435b-bb78-f4be5caf9d70")
 	)
 	(fp_line
 		(start -1.25 -1.25)
@@ -94,6 +123,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "1a7f7480-6f8c-4157-9d36-1aa371e2ebbd")
 	)
 	(fp_line
 		(start -1.25 -1.1)
@@ -103,6 +133,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "cbb46182-c1ee-44d8-9bc6-17b434c26aef")
 	)
 	(fp_line
 		(start -1.25 1.1)
@@ -112,6 +143,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "152c8a7b-57e5-4657-8387-eb71e2d45aad")
 	)
 	(fp_line
 		(start -1.25 1.25)
@@ -121,6 +153,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "7d507ad2-9638-42b5-9bc9-9f6f15be32e4")
 	)
 	(fp_line
 		(start 1.25 -1.25)
@@ -130,6 +163,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "eb0f6fe9-ae8c-4e5e-8ea1-65fe287912d5")
 	)
 	(fp_line
 		(start 1.25 -1.1)
@@ -139,6 +173,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "fec40541-d9c6-4415-b8b5-bb8e3c01e5e8")
 	)
 	(fp_line
 		(start 1.25 1.1)
@@ -148,6 +183,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "1ce63450-424e-4487-b566-39fa222fcff0")
 	)
 	(fp_line
 		(start 1.25 1.25)
@@ -157,6 +193,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "7bd97ea0-54b6-474c-b683-7ef10ebbcb5a")
 	)
 	(fp_line
 		(start 1.33 -1.1)
@@ -166,6 +203,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "37c4b902-adf9-4d21-939d-9d02ffe50d0c")
 	)
 	(fp_line
 		(start 1.33 1.1)
@@ -175,14 +213,11 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
+		(uuid "6aa307d5-ac9c-4a9c-91b5-9bce879e723d")
 	)
 	(fp_poly
 		(pts
-			(xy -0.5 -1)
-			(xy 1 -1)
-			(xy 1 1)
-			(xy -1 1)
-			(xy -1 -0.5)
+			(xy -0.5 -1) (xy 1 -1) (xy 1 1) (xy -1 1) (xy -1 -0.5)
 		)
 		(stroke
 			(width 0.1)
@@ -190,10 +225,12 @@
 		)
 		(fill no)
 		(layer "F.Fab")
+		(uuid "86e38df8-05a7-461f-820f-8387c07471c0")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 0 0)
 		(layer "F.Fab")
+		(uuid "2e09c97d-d35f-4a94-ba9d-a5930ac8322a")
 		(effects
 			(font
 				(size 0.5 0.5)
@@ -206,63 +243,56 @@
 		(size 0.87 0.69)
 		(layers "F.Paste")
 		(roundrect_rratio 0.25)
+		(uuid "574ae4e9-022c-4e11-b692-b29f797b4892")
 	)
 	(pad "" smd roundrect
 		(at 0 0.4)
 		(size 0.87 0.69)
 		(layers "F.Paste")
 		(roundrect_rratio 0.25)
+		(uuid "47ae16cc-dba7-4df4-bd7f-bc6ce591e93d")
 	)
 	(pad "1" smd roundrect
 		(at -0.8875 -0.65)
 		(size 0.375 0.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
+		(uuid "77f235c4-3a9f-42a5-b46b-517ffcbf8ba9")
 	)
 	(pad "2" smd roundrect
 		(at -0.8875 0)
 		(size 0.375 0.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
+		(uuid "5727fbd6-03c3-472a-8015-6ea40b96aaf5")
 	)
 	(pad "3" smd roundrect
 		(at -0.8875 0.65)
 		(size 0.375 0.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
+		(uuid "d74a7019-4d5c-4f16-ac1b-e4fcf7c4fcb2")
 	)
 	(pad "4" smd roundrect
 		(at 0.8875 0.65)
 		(size 0.375 0.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
+		(uuid "805dd520-ed91-4a78-8324-475c530966b0")
 	)
 	(pad "5" smd roundrect
 		(at 0.8875 0)
 		(size 0.375 0.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
+		(uuid "19aa20a3-e47d-4782-baa4-c37dbe136176")
 	)
 	(pad "6" smd roundrect
 		(at 0.8875 -0.65)
 		(size 0.375 0.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
-	)
-	(pad "7" thru_hole circle
-		(at 0 -0.55)
-		(size 0.5 0.5)
-		(drill 0.2)
-		(property pad_prop_heatsink)
-		(layers "*.Cu")
-		(remove_unused_layers no)
-	)
-	(pad "7" smd rect
-		(at 0 0)
-		(size 0.5 1.6)
-		(property pad_prop_heatsink)
-		(layers "B.Cu")
-		(zone_connect 2)
+		(uuid "ab6edf72-d4d1-488a-86e2-d344ae392173")
 	)
 	(pad "7" smd rect
 		(at 0 0)
@@ -270,14 +300,7 @@
 		(property pad_prop_heatsink)
 		(layers "F.Cu" "F.Mask")
 		(zone_connect 2)
-	)
-	(pad "7" thru_hole circle
-		(at 0 0.55)
-		(size 0.5 0.5)
-		(drill 0.2)
-		(property pad_prop_heatsink)
-		(layers "*.Cu")
-		(remove_unused_layers no)
+		(uuid "2926a77a-feb7-4069-854a-69d0d2e97f7e")
 	)
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/lib.3dshapes/WSON-6-1EP_2x2mm_P0.65mm_EP1x1.6mm.step"

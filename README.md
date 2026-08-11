@@ -35,7 +35,7 @@ Build video: [How Flight Controllers Work (so I built my own)](https://www.youtu
 | Parameter | Value |
 |---|---|
 | MCU | RP2354A, dual Cortex-M33 @ 150 MHz, 2 MB stacked flash, QFN-60, 30 GPIO |
-| IMU | 6-axis on SPI1, LGA-14 footprint (ST and TDK compatible), LSM6DSV16XTR populated |
+| IMU | 6-axis on SPI1, LGA-14 footprint (ST and TDK compatible), BMI270 populated |
 | Blackbox | microSD card slot (TF-021B-H265) on SPI0 |
 | OSD | Analog, PIO-driven: sync separator + video op-amp + SPDT switch |
 | RX | External, over UART |

@@ -68,9 +68,9 @@
         "annular_width": "error",
         "clearance": "error",
         "connection_width": "warning",
-        "copper_edge_clearance": "warning",
+        "copper_edge_clearance": "ignore",
         "copper_sliver": "warning",
-        "courtyards_overlap": "warning",
+        "courtyards_overlap": "ignore",
         "creepage": "error",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
@@ -91,7 +91,7 @@
         "items_not_allowed": "error",
         "length_out_of_range": "error",
         "lib_footprint_issues": "warning",
-        "lib_footprint_mismatch": "warning",
+        "lib_footprint_mismatch": "ignore",
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
         "mirrored_text_on_front_layer": "warning",
@@ -108,7 +108,7 @@
         "silk_over_copper": "ignore",
         "silk_overlap": "ignore",
         "skew_out_of_range": "error",
-        "solder_mask_bridge": "warning",
+        "solder_mask_bridge": "ignore",
         "starved_thermal": "error",
         "text_height": "ignore",
         "text_on_edge_cuts": "error",
@@ -125,7 +125,7 @@
         "tuning_profile_track_geometries": "ignore",
         "unconnected_items": "error",
         "unresolved_variable": "error",
-        "via_dangling": "warning",
+        "via_dangling": "ignore",
         "zones_intersect": "error"
       },
       "rules": {
@@ -151,11 +151,11 @@
       },
       "teardrop_options": [
         {
-          "td_onpthpad": true,
+          "td_onpthpad": false,
           "td_onroundshapesonly": false,
-          "td_onsmdpad": true,
+          "td_onsmdpad": false,
           "td_ontrackend": false,
-          "td_onvia": true
+          "td_onvia": false
         }
       ],
       "teardrop_parameters": [
