@@ -1,6 +1,6 @@
 # OpenFC-Lite-Mini
 
-Open-source Betaflight flight controller with a 20 x 20 mm mounting pattern, part of the incutec OpenDrone line. Designed in KiCad 10 for JLCPCB assembly. Its sibling [OpenFC-Lite](https://github.com/incutec-hw/OpenFC-Lite) (30.5 x 30.5 mm, RP2354B: bigger pads, more I/O, OSD debug pads) shares this design. Specifications are below; full design detail is in [hardware/docs/DESIGN.md](hardware/docs/DESIGN.md).
+Open-source Betaflight flight controller with a 20 x 20 mm mounting pattern, part of the incutec OpenDrone line. Designed in KiCad 10 for JLCPCB assembly. Its sibling [OpenFC-Lite](https://github.com/OpenDrone-hw/OpenFC-Lite) (30.5 x 30.5 mm, RP2354B: bigger pads, more I/O, OSD debug pads) shares this design. Specifications are below; full design detail is in [hardware/docs/DESIGN.md](hardware/docs/DESIGN.md).
 
 <p>
 <img src="images/openfc-lite-mini-rev2-top.png" width="400" alt="OpenFC-Lite-Mini Rev 2 top" />
@@ -69,7 +69,7 @@ The project-local libraries are `hardware/lib.kicad_sym`, `hardware/lib.pretty/`
 ## Build and export
 
 ```
-git clone --recursive https://github.com/incutec-hw/OpenFC-Lite-Mini.git
+git clone --recursive https://github.com/OpenDrone-hw/OpenFC-Lite-Mini.git
 ```
 
 Open `hardware/OpenFC.kicad_pro` in KiCad 10. Production exports (gerbers, BOM, CPL) are generated with the [KiCad Fabrication Toolkit](https://github.com/bennymeg/Fabrication-Toolkit) plugin. Headless checks and exports use `kicad-cli`:

@@ -135,7 +135,7 @@ Betaflight PICO supports SD blackbox over SPI only (PR #14567, no SDIO under `sr
 
 ## Variants and revisions
 
-This repo is the 20x20 member of the OpenFC-Lite family; the 30.5 x 30.5 mm sibling is [OpenFC-Lite](https://github.com/incutec-hw/OpenFC-Lite), described in the repository README. Open engineering items are tracked in [`hardware/research/open-items.md`](../research/open-items.md).
+This repo is the 20x20 member of the OpenFC-Lite family; the 30.5 x 30.5 mm sibling is [OpenFC-Lite](https://github.com/OpenDrone-hw/OpenFC-Lite), described in the repository README. Open engineering items are tracked in [`hardware/research/open-items.md`](../research/open-items.md).
 
 ## Revisions
 
