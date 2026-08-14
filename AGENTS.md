@@ -17,7 +17,7 @@ from PIO.
 | Root schematic | `hardware/OpenFC.kicad_sch` with sub-sheets below |
 | Board | `hardware/OpenFC.kicad_pcb`, 6 layers |
 | Local library | `hardware/lib.kicad_sym`, `hardware/lib.pretty/`, `hardware/lib.3dshapes/`, nickname `lib` |
-| Shared library | [OpenDrone-hw/KiCad-Library](https://github.com/OpenDrone-hw/KiCad-Library), submodule at `libs/KiCad-Library` |
+| Shared library | [OpenDrone-hw/KiCad-Library](https://github.com/OpenDrone-hw/KiCad-Library), catalogue only; every library this board uses is local to the repo |
 | Design rules | `hardware/OpenFC.kicad_dru` |
 | Fab config | `hardware/fabrication-toolkit-options.json` |
 | License | CERN-OHL-S-2.0 |
