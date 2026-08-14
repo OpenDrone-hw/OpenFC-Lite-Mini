@@ -82,13 +82,16 @@ board this size.
 
 ```
 +BATT ─┬─► 10V buck (switchable, MCU-gated via 10V_ENABLE) ─► VTX and camera
-       └─► 5V buck (always on) ─┐
-                                ├─► +5V ─┬─► 3.3V LDO ─► MCU IO, IMU IO, microSD, OSD
-+5V_USB ────────────────────────┘        └─► 1.8V LDO ─► IMU analog
-                                              +3.3V ─► RP2354 internal switcher ─► +1.1V core
+       └─► 5V buck (always on) ─► +5V ─► external 5 V pads, D6 ─┐
+                                                               ├─► +4v5 ─┬─► 3.3V LDO ─► MCU IO, IMU IO, microSD, OSD
++5V_USB ─────────────────────────────────────────────► D10 ────┘         └─► 1.8V LDO ─► IMU analog
+                                                                              +3.3V ─► RP2354 internal switcher ─► +1.1V core
 ```
 
 The 10 V rail is gated by the MCU so a VTX can be switched off in firmware.
+D6 and D10 are a DSK24 diode-OR: battery and USB feed +4v5 with no pass
+element, and the external 5 V pads hang directly on the buck output, so USB
+never back-feeds them.
 
 ## Connectors and I/O
 
@@ -120,5 +123,7 @@ rail. Do not merge them to save a regulator.
 
 | Rev | Change |
 |---|---|
-| Rev2 | Current, flown. |
+| Rev3.1 | Current. 4V5 rework: TPS2116 mux replaced by DSK24 diode-OR into the +4v5 rail. |
+| Rev3 | LDO/IMU swap, pad attribute fixes. |
+| Rev2 | Flown. |
 | Rev1 | First prototype, bench tested. |
