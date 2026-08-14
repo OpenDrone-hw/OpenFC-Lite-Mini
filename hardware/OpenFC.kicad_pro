@@ -142,10 +142,10 @@
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
-        "min_through_hole_diameter": 0.15,
+        "min_through_hole_diameter": 0.2,
         "min_track_width": 0.09,
         "min_via_annular_width": 0.075,
-        "min_via_diameter": 0.2,
+        "min_via_diameter": 0.35,
         "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
@@ -518,7 +518,7 @@
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.09,
         "tuning_profile": "",
-        "via_diameter": 0.3,
+        "via_diameter": 0.35,
         "via_drill": 0.2,
         "wire_width": 6
       }
@@ -727,7 +727,7 @@
         "uuid": "fb88b6f9-ee39-4640-a9d4-04a17ceeac64"
       }
     ],
-    "used_designators": "",
+    "used_designators": "D6,D10,#PWR66-67,#PWR70-72,#PWR75-77,#PWR167",
     "variants": []
   },
   "sheets": [
