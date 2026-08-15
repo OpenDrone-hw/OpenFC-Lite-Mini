@@ -1,8 +1,7 @@
 # OpenFC-Lite-Mini
 
 Open source Betaflight flight controller built on the RP2354A, 20 x 20 mm
-mounting pattern, part of the incutec OpenDrone line. Motor outputs are
-signal-level DShot to an external 4-in-1 ESC: no onboard motor drivers.
+mounting pattern, part of the incutec OpenDrone line.
 
 <p>
 <img src="images/openfc-lite-mini-rev2-top.png" width="400" alt="OpenFC-Lite-Mini top" />
