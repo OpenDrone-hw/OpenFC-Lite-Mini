@@ -1,10 +1,10 @@
 # OpenFC-Lite-Mini
 
-Open source Betaflight flight controller built on the RP2354A, 20 x 20 mm mounting
-pattern. Motor outputs are signal-level DShot to an external 4-in-1 ESC over the
-standard 8-pin connector: there are **no onboard motor drivers**, no barometer
-and no integrated receiver. Blackbox is a microSD slot; OSD is analog, driven
-from PIO.
+Open source Betaflight flight controller built on the RP2354A, 20 x 20 mm
+mounting pattern. Motor outputs are signal-level DShot to an external 4-in-1 ESC
+over the standard 8-pin connector: there are **no onboard motor drivers**, no
+barometer and no integrated receiver. Blackbox is a microSD slot; OSD is analog,
+generated on PIO, plus digital over the VTX UART.
 
 ## Repo
 
@@ -14,12 +14,13 @@ from PIO.
 | Status | See the `status-*` topic on the repo. Never written here. |
 | Designed in | KiCad 10 |
 | KiCad project | `hardware/OpenFC.kicad_pro` |
-| Root schematic | `hardware/OpenFC.kicad_sch` with sub-sheets below |
-| Board | `hardware/OpenFC.kicad_pcb`, 6 layers |
+| Root schematic | `hardware/OpenFC.kicad_sch` plus sub-sheets `rp2350a`, `power`, `imu`, `osd`, `blackbox`, `pads` |
+| Board | `hardware/OpenFC.kicad_pcb`, 6 layers, 1.6 mm |
 | Local library | `hardware/lib.kicad_sym`, `hardware/lib.pretty/`, `hardware/lib.3dshapes/`, nickname `lib` |
 | Shared library | [OpenDrone-hw/KiCad-Library](https://github.com/OpenDrone-hw/KiCad-Library), catalogue only; every library this board uses is local to the repo |
-| Design rules | `hardware/OpenFC.kicad_dru` |
+| Design rules | `hardware/OpenFC.kicad_dru`, canonical block, no board-specific rules |
 | Fab config | `hardware/fabrication-toolkit-options.json` |
+| Board setup | Line standard: 6 layers, 0.09 mm clearance and track, via 0.35 on 0.20 drill |
 | License | CERN-OHL-S-2.0 |
 
 **The project is called `OpenFC` in both this repo and
@@ -27,97 +28,154 @@ from PIO.
 repo you are in before importing a part or running an export: a part imported
 into the wrong one looks exactly like a broken import.
 
-### Sheets
-
-| Sheet | Contents |
-|---|---|
-| `rp2350a.kicad_sch` | MCU, USB-C, 12 MHz crystal, boot button, buzzer and LED-strip FETs |
-| `power.kicad_sch` | 10 V and 5 V bucks, USB/BATT power path, 1.8 V gyro LDO, 3.3 V LDO |
-| `imu.kicad_sch` | IMU on SPI0 |
-| `osd.kicad_sch` | Analog OSD chain |
-| `blackbox.kicad_sch` | microSD slot on SPI1 |
-| `pads.kicad_sch` | JST SH connectors and through-hole solder pads |
-
 ## Rules
 
-Identical in every OpenDrone repo. Do not edit here; edit the template.
+Identical in every OpenDrone board repo. Do not edit here; edit the template.
 
 - **Never text-edit** `.kicad_sch`, `.kicad_pcb` or `.kicad_dru`. Use KiCad, or
   kicad-skip / the pcbnew API for scripted changes. `.kicad_pro` is JSON and may
   be edited directly for metadata.
 - **Metadata yes, connections no.** An agent may write BOM and documentation
-  fields. An agent may not change nets, wiring, routing, placement, footprint
-  assignment, or any value that changes the circuit.
-- **Close KiCad before any write to a KiCad file.**
+  fields (MPN, Manufacturer, LCSC, Cost, Datasheet, text variables). An agent
+  may not change nets, wiring, routing, placement, footprint assignment, or any
+  value that changes the circuit.
+- **Close KiCad before any write to a KiCad file.** KiCad caches library tables
+  at process start and overwrites files on save.
 - **Reuse before you draw.** Check
   [KiCad-Library](https://github.com/OpenDrone-hw/KiCad-Library) and its
-  `PARTS-USED.md` first, and copy what fits into `lib`.
+  `PARTS-USED.md` first. If the part is there we have already sourced,
+  footprinted and shipped it: copy the symbol and footprint into this repo's
+  `lib` library and use it. Draw a new part only when the library has nothing
+  that fits, and import it with `easyeda2kicad` from its LCSC number.
 - **One person holds a board layout at a time.** KiCad files do not merge. Say
   on Discord that you are taking it. See [CONTRIBUTING.md](CONTRIBUTING.md).
-- **ERC and DRC clean before every pull request.**
+- **ERC and DRC clean before every pull request.** Commands below.
+
+## Environment
 
 ```sh
+# schematic and board checks
 kicad-cli sch erc --exit-code-violations hardware/OpenFC.kicad_sch
 kicad-cli pcb drc --schematic-parity --refill-zones --exit-code-violations hardware/OpenFC.kicad_pcb
+
+# netlist, for scripted analysis
+kicad-cli sch export netlist --format kicadsexpr -o /tmp/OpenFC.net hardware/OpenFC.kicad_sch
 ```
+
+On macOS `kicad-cli` is at
+`/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli`, and `pcbnew` imports
+only under KiCad's bundled Python. Shared scripts (renders, STEP export,
+packaging art) live in `OpenDrone-Scripts`; board-specific scripts live in
+`hardware/tools/`.
 
 ## Architecture
 
-An RP2354-series MCU runs Betaflight against a custom target. The IMU sits on
-SPI0 with its own interrupt line and its own 1.8 V analog supply, kept separate
-from the 3.3 V logic rail so gyro noise is not shared with the digital side.
-Blackbox logging goes to a microSD card on SPI1. Analog OSD is generated by the
-MCU through PIO and mixed into the composite video path by a discrete front end,
-which is why there is no dedicated OSD chip.
+An RP2354A runs Betaflight against a custom target (`rp2350a` sheet: MCU,
+USB-C, 12 MHz crystal, boot button, buzzer and LED-strip FETs). The IMU sits on
+SPI1 (`imu`) with its own interrupt line and its own 1.8 V analog supply, kept
+separate from the 3.3 V logic rail so gyro noise is not shared with the digital
+side. Blackbox logging goes to a microSD card on SPI0 (`blackbox`). Analog OSD
+is generated by the MCU through PIO and mixed into the composite video path by
+a discrete front end (`osd`), which is why there is no dedicated OSD chip.
 
 Motor control is signal only: M1 to M4 leave as DShot on the 8-pin ESC
 connector, alongside battery voltage sense, ESC current sense and an ESC
 telemetry UART. Everything that drives current lives on the ESC.
 
-Serial capacity is four UARTs, two hardware and two synthesised with PIO, which
-is what lets the board carry a receiver, a VTX and a peripheral at once on a
-board this size.
+Serial capacity is three UARTs, two hardware and one synthesised with PIO,
+which is what lets the board carry a receiver, a VTX and a peripheral at once
+on a board this size. PIO allocation: PIO0 DShot, PIO1 PIO UART, PIO2 LED
+strip and OSD.
+
+## Key parts
+
+| Function | Ref | Part | LCSC | Note |
+|---|---|---|---|---|
+| MCU | U10 | RP2354A, QFN-60, 2 MB flash, 30 GPIO | C41378174 | 12 MHz crystal X1, 3.3 uH L4 on VREG_LX |
+| IMU | U9 | BMI270 | C2836813 | multi-source land pattern, note below |
+| 10 V buck | U3 | LMR51430YFDDCR | C5219261 | 3 A, switched rail |
+| 5 V buck | U4 | LMR51430YFDDCR | C5219261 | 3 A, always on |
+| 3.3 V LDO | U7 | LP5912-3.3DRVR | C524780 | 500 mA, fed from +4v5 |
+| 1.8 V LDO | U12 | LP5912-1.8DRVR | C2876234 | IMU analog supply |
+| Diode-OR | D6, D10 | DSK24 | C64890 | battery 5 V and USB into +4v5 |
+| OSD video buffer | U1 | COS8051SOT | C7463385 | op-amp |
+| OSD sync separator | U2 | TLV7031DPWR | C2876045 | comparator |
+| OSD pixel switch | U18 | SN74LVC1G3157DTBR | C2673087 | SPDT analog switch |
+| microSD slot | Card1 | TF-021B-H265 | C498185 | |
+
+The IMU land pattern is LGA-14 3.0 x 2.5 mm with pads 2 and 3 grounded and 10
+and 11 unconnected, electrically safe for Bosch BMI2xx, TDK ICM-4xxxx and ST
+LSM6D parts alike: swapping the IMU is a field change, not a layout change.
+Pad 9 (INT2 on the BMI270, CLKIN on TDK parts) dead-ends on the `imu` sheet,
+so a TDK part would run without external clock sync.
 
 ## Power
 
 ```
-+BATT ─┬─► 10V buck (switchable, MCU-gated via 10V_ENABLE) ─► VTX and camera
-       └─► 5V buck (always on) ─► +5V ─► external 5 V pads, D6 ─┐
-                                                               ├─► +4v5 ─┬─► 3.3V LDO ─► MCU IO, IMU IO, microSD, OSD
-+5V_USB ─────────────────────────────────────────────► D10 ────┘         └─► 1.8V LDO ─► IMU analog
-                                                                              +3.3V ─► RP2354 internal switcher ─► +1.1V core
++BATT (3S-6S) ─┬─► U3 10V buck (10V_ENABLE) ─► +10V ─► VTX and camera
+               └─► U4 5V buck (always on) ─► +5V ─► external 5 V pads, D6 ─┐
+                                                                          ├─► +4v5 ─┬─► U7 3.3V LDO ─► MCU IO, IMU IO, microSD, OSD
++5V_USB ──────────────────────────────────────────────────────► D10 ──────┘         └─► U12 1.8V LDO ─► IMU analog
+                                                                                        +3.3V ─► RP2354 internal switcher ─► +1.1V core
 ```
 
 The 10 V rail is gated by the MCU so a VTX can be switched off in firmware.
-D6 and D10 are a DSK24 diode-OR: battery and USB feed +4v5 with no pass
-element, and the external 5 V pads hang directly on the buck output, so USB
-never back-feeds them.
+D6 and D10 diode-OR battery and USB into +4v5 with no pass element, and the
+external 5 V pads hang directly on the buck output, so USB never back-feeds
+them. There is no reverse-polarity protection: +BATT from the ESC connector
+feeds both buck inputs directly.
 
 ## Connectors and I/O
 
-| Connector | Function |
-|---|---|
-| 8-pin JST SH | ESC harness: +BATT, GND, current sense, ESC telemetry UART, M1-M4 |
-| 6-pin JST SH | VTX: +10 V, GND, UART TX/RX |
-| 6-pin JST SH | Peripheral: +5 V, GND, PIO UART RX/TX, I2C SDA/SCL |
-| 4-pin JST SH | Receiver: +5 V, GND, PIO UART RX/TX |
-| 3-pin JST SH | Camera: +5 V, GND, video in |
-| USB-C | Configuration and flashing, USB full speed |
+| Connector | Ref | Part | Function |
+|---|---|---|---|
+| ESC, 8-pin JST SH | P1 | SM08B-SRSS-TB, C160407 | 1 +BATT, 2 GND, 3 current sense, 4 ESC telemetry (PIO UART RX), 5-8 M1-M4 |
+| VTX, 6-pin JST SH | U8 | SM06B-SRSS-TB, C160405 | 1 +10V, 2 GND, 3 UART0 TX, 4 UART0 RX, 5 GND, 6 UART1 RX; the Betaflight digital VTX pinout |
+| USB-C | USB1 | 16-pin Type-C | Configuration and flashing, USB full speed |
 
-Analog inputs, each through an RC filter: battery voltage divider, ESC current
-sense, analog RSSI, one spare ADC pad. Through-hole solder pads expose the same
-rails and signals for direct wiring.
+Everything else is through-hole solder pads (`pads` sheet): rails, all three
+UARTs, I2C0, motors, LED strip, buzzer, video in and out, current sense.
+
+GPIO map (QFN-60, 30 GPIO, all used):
+
+| GPIO | Function |
+|---|---|
+| 0, 1 | UART0 TX/RX, VTX connector |
+| 2, 3 | PIO UART TX/RX; RX doubles as ESC telemetry on P1 pin 4 |
+| 4, 5 | I2C0 SDA/SCL, pulled up to 3.3 V |
+| 6, 7 | UART1 TX/RX, receiver; SBUS inversion at the IO mux in firmware |
+| 8 | LED strip |
+| 9 | IMU interrupt |
+| 10-13 | SPI1 SCK/MOSI/MISO/CS, IMU |
+| 14-16 | OSD_W, OSD_EN, OSD_SYNC |
+| 17 | Beeper, low-side N-FET |
+| 18-21 | SPI0 SCK/MOSI/MISO/CS, microSD |
+| 22-25 | Motors, descending: M4, M3, M2, M1 |
+| 26 | Status LED, blue |
+| 27 | 10V_ENABLE (PINIO) |
+| 28, 29 | ADC2 ESC current through a 1 k + 100 nF RC, ADC3 battery voltage through a 100 k / 10 k divider with 100 nF |
+
+The QFN-60 exposes only four ADC channels, and the ADC0/ADC1 pins are spent on
+the status LED and 10V_ENABLE, so battery voltage and ESC current are the only
+analog inputs: the RSSI and spare ADC pads of the QFN-80 OpenFC-Lite do not
+exist here.
 
 ## Firmware
 
-[Betaflight](https://github.com/betaflight/betaflight) against a custom target
-for this board. The OSD is driven from PIO rather than a dedicated chip, so the
-target carries the PIO program with it.
+[Betaflight](https://github.com/betaflight/betaflight) on the PICO/RP2350A
+platform, target `OPENFC_LITE_MINI_RP2350A`, manufacturer id `OPFC`. A built
+UF2 lives in `firmware/`. First flash: hold the boot button, plug in USB and
+copy the UF2 onto the BOOTSEL mass-storage drive. SWD is not broken out, so
+USB is the only flashing path. The analog OSD is driven from PIO rather than a
+dedicated chip, so the target carries the PIO program with it.
 
 ## Layout rules
 
-The IMU's 1.8 V analog supply is deliberately separate from the 3.3 V logic
-rail. Do not merge them to save a regulator.
+- The IMU's 1.8 V analog supply is deliberately separate from the 3.3 V logic
+  rail. Do not merge them to save a regulator.
+- RP2350 core buck placement follows the RP2350 datasheet, section 6.3.8.1:
+  L4 and its input and output capacitors stay tight to U10, with copper pulled
+  back under the switch node.
 
 ## Revisions
 
