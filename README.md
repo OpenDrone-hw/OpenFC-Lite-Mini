@@ -9,7 +9,7 @@ signal-level DShot to an external 4-in-1 ESC: no onboard motor drivers.
 <img src="images/openfc-lite-mini-rev2-bottom.png" width="400" alt="OpenFC-Lite-Mini bottom" />
 </p>
 
-[![Status](https://img.shields.io/badge/status-alpha-e08c00)](https://github.com/OpenDrone-hw/.github/blob/main/CONTRIBUTING.md#the-life-of-a-project)
+[![Status](https://img.shields.io/endpoint?url=https://opendrone.be/api/status/OpenFC-Lite-Mini.json)](https://github.com/OpenDrone-hw/.github/blob/main/CONTRIBUTING.md#the-life-of-a-project)
 [![Shop](https://img.shields.io/badge/shop-opendrone.be-ffb700)](https://opendrone.be/products/openfc-lite)
 [![Discord](https://img.shields.io/badge/Discord-%23flight--controllers-5865F2?logo=discord&logoColor=white)](https://discord.com/channels/1494019459822653512/1494783056026796262)
 [![Video](https://img.shields.io/badge/YouTube-How%20Flight%20Controllers%20Work-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=XDYZoMRJFeQ)
