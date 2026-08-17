@@ -11,7 +11,7 @@
 # Board Setup > Import Settings from Another Board, pointed at
 # kicad/templates/OpenDrone-6L. The line standard is:
 #
-#   clearance 0.09   track 0.09   via 0.35 / 0.20 drill
+#   clearance 0.1   track 0.1   via 0.35 / 0.20 drill
 #   annular 0.075    hole-to-hole 0.20        edge clearance 0.20
 #
 # Do not restate those here. Two copies of a number drift, and the one you are
