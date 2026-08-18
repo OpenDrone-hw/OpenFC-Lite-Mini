@@ -117,14 +117,14 @@ it. A prebuilt uf2 lives in `firmware/`.
 
 Betaflight is GPL-3.0, so the source matching that uf2 ships with it. Tag
 `opendrone-2026.6.0-alpha-20260806` in
-[Just4Stan/betaflight](https://github.com/Just4Stan/betaflight/tree/opendrone-2026.6.0-alpha-20260806),
+[OpenDrone-hw/betaflight](https://github.com/OpenDrone-hw/betaflight/tree/opendrone-2026.6.0-alpha-20260806),
 target definitions in the pinned
-[Just4Stan/config](https://github.com/Just4Stan/config/tree/opendrone-2026.6.0-alpha-20260806)
+[OpenDrone-hw/betaflight-config](https://github.com/OpenDrone-hw/betaflight-config/tree/opendrone-2026.6.0-alpha-20260806)
 submodule:
 
 ```
 git clone --recurse-submodules=src/config \
-  -b opendrone-2026.6.0-alpha-20260806 https://github.com/Just4Stan/betaflight
+  -b opendrone-2026.6.0-alpha-20260806 https://github.com/OpenDrone-hw/betaflight
 ```
 
 Rebuild a uf2 with any later firmware and the tag has to move with it.
