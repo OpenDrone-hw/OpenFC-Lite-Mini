@@ -80,14 +80,6 @@
         [
           "clearance|156485000|87965000|a51fb303-24fc-46fb-976d-9b3a4f8e9c00|b8878e88-dd9a-438a-a417-e1da96a1e7ce",
           "Ignore, this is part of a component, and should not be changed."
-        ],
-        [
-          "clearance|157220000|87470000|769688db-323f-499d-8483-022051c5536d|9ed0215c-b92e-4f44-9848-da7b83ecd142",
-          "Ignored, this is part of the component and should not be adjusted."
-        ],
-        [
-          "hole_clearance|144970000|86040000|ea4dda7b-ca49-4a91-8a06-cc827ddf4c2d|2839a30f-cce6-411c-8a7c-ccc9102761d5",
-          "Ignoring this because pad should still work and we need the hole for the usb port."
         ]
       ],
       "meta": {
@@ -792,12 +784,12 @@
   "text_variables": {
     "DOC_FIRMWARE": "Betaflight",
     "DOC_HANDLE": "openfc-lite-mini",
-    "DOC_INPUT": "+BATT 3S-6S",
+    "DOC_INPUT": "+BATT 3S–6S",
     "DOC_MCU": "RP2354A (QFN-60)",
     "DOC_NAME": "OpenFC-Lite-Mini",
     "DOC_PROTOCOL": "DShot",
-    "DOC_RATING": "3S-6S input; rail currents not yet bench-characterized",
-    "DOC_TAGLINE": "RP2354A Betaflight flight controller, microSD blackbox, analog OSD, external RX",
+    "DOC_RATING": "3S–6S input; rail currents not yet bench-characterized",
+    "DOC_TAGLINE": "RP2354A Betaflight flight controller — microSD blackbox, analog OSD, external RX",
     "DOC_VARIANT": "20×20"
   },
   "tuning_profiles": {
