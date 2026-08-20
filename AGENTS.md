@@ -162,6 +162,24 @@ exist here.
 
 ## Firmware
 
+[Betaflight](https://github.com/betaflight/betaflight) against a custom target
+for this board, `BOARD_NAME = OPENFC_LITE_MINI_RP2350A`. The OSD is driven from
+PIO rather than a dedicated chip, so the target carries the PIO program with
+it. A prebuilt uf2 lives in `firmware/`.
+
+Betaflight is GPL-3.0, so the source matching that uf2 ships with it. Tag
+`opendrone-2026.6.0-alpha-20260806` in
+[OpenDrone-hw/betaflight](https://github.com/OpenDrone-hw/betaflight/tree/opendrone-2026.6.0-alpha-20260806),
+target definitions in the pinned
+[OpenDrone-hw/betaflight-config](https://github.com/OpenDrone-hw/betaflight-config/tree/opendrone-2026.6.0-alpha-20260806)
+submodule:
+
+```
+git clone --recurse-submodules=src/config \
+  -b opendrone-2026.6.0-alpha-20260806 https://github.com/OpenDrone-hw/betaflight
+```
+
+Rebuild a uf2 with any later firmware and the tag has to move with it.
 [Betaflight](https://github.com/betaflight/betaflight) on the PICO/RP2350A
 platform, target `OPENFC_LITE_MINI_RP2350A`, manufacturer id `OPFC`. A built
 UF2 lives in `firmware/`. First flash: hold the boot button, plug in USB and
