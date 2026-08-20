@@ -32,7 +32,7 @@
 	(fp_line (start -1.40 -0.90) (end 1.40 -0.90) (layer F.CrtYd) (width 0.05))
 	(fp_line (start 1.40 -0.90) (end 1.40 0.90) (layer F.CrtYd) (width 0.05))
 	(fp_line (start 1.40 0.90) (end -1.40 0.90) (layer F.CrtYd) (width 0.05))
-	(model "/Users/stan/OpenDrone/hardware/OpenFC-Lite-Mini/hardware/lib.3dshapes/SOD-123_L2.8-W1.8-LS3.7-RD.wrl"
+	(model "${KIPRJMOD}/lib.3dshapes/SOD-123_L2.8-W1.8-LS3.7-RD.wrl"
 		(offset (xyz 0.000 0.000 0.000))
 		(scale (xyz 1 1 1))
 		(rotate (xyz 0 0 0))
