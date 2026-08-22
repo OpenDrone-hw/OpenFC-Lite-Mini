@@ -627,15 +627,15 @@
 			(uuid "3c976a56-24d9-4975-87bf-fda69d4363aa")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/LGA-14_L3.0-W2.5-P0.50-BR.wrl"
+		(model "${KICAD10_3DMODEL_DIR}/Package_LGA.3dshapes/Bosch_LGA-14_3x2.5mm_P0.5mm.step"
 			(offset
-				(xyz -0 0 -0)
+				(xyz 0 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 180)
+				(xyz 0 0 0)
 			)
 		)
 	)
@@ -821,9 +821,9 @@
 			(uuid "459658f6-54b6-4e89-9cba-e6c568bb1e7d")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/IND-SMD_L2.0-W1.6_AOTA-B201610S3R3-101-T.wrl"
+		(model "${KICAD10_3DMODEL_DIR}/Inductor_SMD.3dshapes/L_Murata_DFE201610P.step"
 			(offset
-				(xyz 0 -0 -0)
+				(xyz 0 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -12196,9 +12196,9 @@
 			(uuid "0bee5016-eada-4a3f-ae90-3b358783079f")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/SOT-23-6_L2.9-W1.6-P0.95-LS2.9-BL.wrl"
+		(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TSOT-23-6.step"
 			(offset
-				(xyz 0 -0 -0)
+				(xyz 0 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -12784,9 +12784,9 @@
 			(uuid "27be825c-2378-4ec9-83d5-6ac3725ea0e0")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/IND-SMD_L3.0-W3.0_AFE303020S.wrl"
+		(model "${KICAD10_3DMODEL_DIR}/Inductor_SMD.3dshapes/L_Changjiang_FTC303020D.step"
 			(offset
-				(xyz 0 -0 0)
+				(xyz 0 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -13634,15 +13634,15 @@
 			(uuid "7ff9a618-9c26-461e-9be7-7ff5cc179d54")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/CONN-SMD_SR1.00-WS-6P.wrl"
+		(model "${KICAD10_3DMODEL_DIR}/Connector_JST.3dshapes/JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal.step"
 			(offset
-				(xyz -2.5 -0.61 -0)
+				(xyz 0 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz -0 -0 -0)
+				(xyz 0 0 0)
 			)
 		)
 	)
@@ -15206,7 +15206,7 @@
 			(uuid "8bf86894-a01a-4010-b195-f0ef60691cab")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/SOD-123_L2.8-W1.8-LS3.7-RD.step"
+		(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SOD-123.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -16362,7 +16362,7 @@
 			(uuid "8af3172e-20c7-4b0f-921b-80d9094e4edc")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/SOD-123_L2.8-W1.8-LS3.7-RD.step"
+		(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SOD-123.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -16936,9 +16936,9 @@
 			(uuid "7845b8f4-740b-4a7c-aa1d-529ddcef10ae")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/IND-SMD_L3.0-W3.0_AFE303020S.wrl"
+		(model "${KICAD10_3DMODEL_DIR}/Inductor_SMD.3dshapes/L_Changjiang_FTC303020D.step"
 			(offset
-				(xyz 0 -0 0)
+				(xyz 0 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -18998,9 +18998,9 @@
 			(uuid "6f4f6eb2-9f6f-4a04-a485-f97453360a2e")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/SOT-23-6_L2.9-W1.6-P0.95-LS2.9-BL.wrl"
+		(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TSOT-23-6.step"
 			(offset
-				(xyz 0 -0 -0)
+				(xyz 0 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -23992,15 +23992,15 @@
 			(uuid "7c9fa647-38be-44c8-b58e-932fb679f30f")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/SOT-23-5_L2.9-W1.6-H1.1-LS2.8-P0.95.wrl"
+		(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-23-5.step"
 			(offset
-				(xyz 0 -0 -0)
+				(xyz 0 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 180)
+				(xyz 0 0 0)
 			)
 		)
 	)
@@ -24891,15 +24891,15 @@
 			(uuid "5fcdf4ec-b827-4815-a9e6-ae9b0029d993")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/CONN-SMD_SR1.00-WS-8P.wrl"
+		(model "${KICAD10_3DMODEL_DIR}/Connector_JST.3dshapes/JST_SH_SM08B-SRSS-TB_1x08-1MP_P1.00mm_Horizontal.step"
 			(offset
-				(xyz -3.5 -0.67 0)
+				(xyz 0 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz -0 -0 -0)
+				(xyz 0 0 0)
 			)
 		)
 	)
