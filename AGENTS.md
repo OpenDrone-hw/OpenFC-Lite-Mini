@@ -199,7 +199,9 @@ dedicated chip, so the target carries the PIO program with it.
 
 | Rev | Change |
 |---|---|
-| Rev3.1 | Current. 4V5 rework: TPS2116 mux replaced by DSK24 diode-OR into the +4v5 rail. |
+| Rev3.3 | Current. Export `OpenFC-Lite-Mini-rev3.3`. Silkscreen rebranded OpenDrone -> incutec; rev text pipeline-synced. RSSI/ADC2 solder pads removed from the schematic (never fitted on built boards). Thickness ruled 1.6 mm. |
+| Rev3.2 | Export `OpenFC-Lite-Mini-rev3.2`. |
+| Rev3.1 | 4V5 rework: TPS2116 mux replaced by DSK24 diode-OR into the +4v5 rail. |
 | Rev3 | LDO/IMU swap, pad attribute fixes. |
 | Rev2 | Flown. |
 | Rev1 | First prototype, bench tested. |
