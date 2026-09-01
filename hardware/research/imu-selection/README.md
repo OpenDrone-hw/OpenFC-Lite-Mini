@@ -330,21 +330,18 @@ Board pins wired for the LSM6DSV16X: 1 MISO, 2 GND, 3 GND, 4 INT, 5 +3.3V, 6 GND
   Rev 2 "drop CLKIN" plan.
 - All other pins (SPI 1/12/13/14, VDD 8 @1.8V, VDDIO 5 @3.3V, INT1 4, GND 6/7, NC 10/11) match 1:1.
 
-## 8. Open verification tasks
+## 8. Verification state
 
-- [x] **BMI270 LGA-14 pinout** vs our footprint → drops in; caveats on pins 2/3 (grounded aux,
-      out-of-spec but field-proven) and pin 9 (CLKIN→INT2, harmless). See §7b.
-- [ ] **ICM-45686 footprint** is LGA-14 **3×2.5** (rotated vs our 2.5×3): check pin-1 / land.
-- [ ] **Source ICM-42622P**: LCSC/DigiKey/Mouser pricing, stock, lead time.
-- [ ] **DSK320X availability + price**: DigiKey/Mouser/STM samples; realistic date beyond "June."
-- [ ] **CLKIN decision**: Rev 2 plan drops CLKIN (GPIO15); if a TDK part (42605/42688/42622/
-      45686/56686) is chosen, **keep CLKIN** for jitter removal. ST/Bosch don't use it.
-- [ ] **Get the actual FFT/blackbox** behind the hover A/B (§5) into this folder: quantify the
-      20 dB, identify the noise frequency signature (aliased vs supply tone vs propwash).
-- [ ] **Resolve the contradiction:** if a tune made DSV16X fly clean on our board, characterize
-      *why* BF's boards failed: PDN measurement on a noisy reference FC vs ours.
-- [ ] Confirm **+1.8V_GYRO rail** is fine for each finalist's VDD (all OK except BMI088's 2.4V).
-- [ ] Decide whether ICM-56686 is worth waiting for its in-development driver.
+- **Verified:** BMI270 LGA-14 fits the existing footprint. Pins 2/3 remain an
+  out-of-spec, field-proven grounding caveat; pin 9 maps CLKIN to unused INT2.
+- **Not evidenced here:** ICM-45686 land-pattern orientation; current distributor
+  stock and pricing for ICM-42622P or LSM6DSK320X; and ICM-56686 driver maturity.
+- **Design-dependent:** CLKIN is useful for the listed TDK parts and unused by
+  the ST and Bosch candidates. Its routing follows the selected IMU.
+- **Not present in this repository:** the source FFT/blackbox data behind the
+  hover comparison, a cross-board PDN comparison, and measured 1.8 V rail
+  compatibility for every candidate. Claims depending on those data are not
+  treated as verified.
 
 ---
 

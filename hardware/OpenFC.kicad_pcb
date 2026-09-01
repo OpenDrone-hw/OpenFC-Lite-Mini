@@ -12207,7 +12207,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz 0 0 -90)
 			)
 		)
 	)
@@ -15605,13 +15605,13 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/lib.3dshapes/DFN-3L_L1.0-W0.6-H0.5-P0.65-BR.wrl"
 			(offset
-				(xyz 0.01 0 0)
+				(xyz 0 0 0.5)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz -0 -0 -0)
+				(xyz 0 0 0)
 			)
 		)
 	)
@@ -16560,7 +16560,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/lib.3dshapes/DFN-3L_L1.0-W0.6-H0.5-P0.65-BR.wrl"
 			(offset
-				(xyz 0.01 -0 -0)
+				(xyz 0 0 0.5)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -19009,7 +19009,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz 0 0 -90)
 			)
 		)
 	)
@@ -23707,15 +23707,15 @@
 			(uuid "f5830ec0-614b-42e8-adc1-b2ba0942fa46")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib.3dshapes/TF-SMD_TF-021B-H265.step"
+		(model "${KIPRJMOD}/lib.3dshapes/TF-SMD_TF-021B-H265.wrl"
 			(offset
-				(xyz 0.25 -0.85 -0)
+				(xyz 0.25 -0.85 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz -0 -0 -0)
+				(xyz 0 0 0)
 			)
 		)
 	)
@@ -24003,7 +24003,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz 0 0 180)
 			)
 		)
 	)
