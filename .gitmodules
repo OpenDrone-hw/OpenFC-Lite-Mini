@@ -1,0 +1,3 @@
+[submodule "hardware/KiCad-Library"]
+	path = hardware/KiCad-Library
+	url = https://github.com/OpenDrone-hw/KiCad-Library.git

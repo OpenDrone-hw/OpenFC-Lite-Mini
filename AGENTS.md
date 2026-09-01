@@ -15,7 +15,7 @@ Blackbox is a microSD slot, analog OSD generated on PIO (pixel OSD)
 | Root schematic | `hardware/OpenFC.kicad_sch` plus sub-sheets `rp2350a`, `power`, `imu`, `osd`, `blackbox`, `pads` |
 | Board | `hardware/OpenFC.kicad_pcb`, 6 layers, 1.6 mm |
 | Local library | `hardware/lib.kicad_sym`, `hardware/lib.pretty/`, `hardware/lib.3dshapes/`, nickname `lib` |
-| Shared library | OpenDrone-hw/KiCad-Library, Contains all components used on produced (Alpha onwards) hardware. Work in local library and migrate to shared library once component selection is fixed. |
+| Shared library | `hardware/KiCad-Library/`, pinned submodule of [OpenDrone-hw/KiCad-Library](https://github.com/OpenDrone-hw/KiCad-Library), nickname `OpenDrone`; 3D models and exact component datasheets resolve through `OPENDRONE_LIB` |
 | Design rules | `hardware/OpenFC.kicad_dru`, canonical block, no board-specific rules |
 | Fab config | `hardware/fabrication-toolkit-options.json` |
 | Board setup | Line standard: 6 layers, 0.09 mm clearance and track, via 0.35 on 0.20 drill |
@@ -41,12 +41,12 @@ Identical in every OpenDrone board repo. Do not edit here; edit the template.
   value that changes the circuit.
 - **Close KiCad before any write to a KiCad file.** KiCad caches library tables
   at process start and overwrites files on save.
-- **Reuse before you draw.** Check
-  [KiCad-Library](https://github.com/OpenDrone-hw/KiCad-Library) and its
+- **Reuse before you draw.** Check the `OpenDrone` library and its
   `PARTS-USED.md` first. If the part is there we have already sourced,
-  footprinted and shipped it: copy the symbol and footprint into this repo's
-  `lib` library and use it. Draw a new part only when the library has nothing
-  that fits, and import it with `easyeda2kicad` from its LCSC number.
+  footprinted and shipped it, and its symbol links to the exact committed
+  datasheet: place it from `OpenDrone`. Draw a new part only when the catalogue
+  has nothing that fits, and import it with `easyeda2kicad` from its LCSC
+  number. Pulling a newer catalogue is a deliberate, reviewed submodule commit.
 - **One person holds a board layout at a time.** KiCad files do not merge. Say
   on Discord that you are taking it. See [CONTRIBUTING.md](CONTRIBUTING.md).
 - **ERC and DRC clean before every pull request.** Commands below.

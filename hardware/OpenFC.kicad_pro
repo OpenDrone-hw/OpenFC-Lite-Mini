@@ -782,6 +782,7 @@
     ]
   ],
   "text_variables": {
+    "OPENDRONE_LIB": "${KIPRJMOD}/KiCad-Library",
     "DOC_FIRMWARE": "Betaflight",
     "DOC_HANDLE": "openfc-lite-mini",
     "DOC_INPUT": "+BATT 3S–6S",
