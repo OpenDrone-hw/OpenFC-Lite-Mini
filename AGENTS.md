@@ -7,9 +7,10 @@ Blackbox is a microSD slot, analog OSD generated on PIO (pixel OSD)
 
 ## Repo
 
-| Maintainer | @Just4Stan (Discord: juststan_) |
+| | |
 |---|---|
-| Status | See the `status-*` topic on the repo. |
+| Maintainer | @Just4Stan (Discord: juststan_) |
+| Status | See the `status-*` topic on the repo. Never written here. |
 | Designed in | KiCad 10 |
 | KiCad project | `hardware/OpenFC.kicad_pro` |
 | Root schematic | `hardware/OpenFC.kicad_sch` plus sub-sheets `rp2350a`, `power`, `imu`, `osd`, `blackbox`, `pads` |
@@ -25,8 +26,6 @@ Blackbox is a microSD slot, analog OSD generated on PIO (pixel OSD)
 [OpenFC-Lite](https://github.com/OpenDrone-hw/OpenFC-Lite).** Check which repo
 you are in before importing a part or running an export: a part imported into
 the wrong one looks exactly like a broken import.
-
-## Sheets (to copy from OpenFC-Lite)
 
 ## Rules
 
@@ -44,9 +43,11 @@ Identical in every OpenDrone board repo. Do not edit here; edit the template.
 - **Reuse before you draw.** Check the `OpenDrone` library and its
   `PARTS-USED.md` first. If the part is there we have already sourced,
   footprinted and shipped it, and its symbol links to the exact committed
-  datasheet: place it from `OpenDrone`. Draw a new part only when the catalogue
-  has nothing that fits, and import it with `easyeda2kicad` from its LCSC
-  number. Pulling a newer catalogue is a deliberate, reviewed submodule commit.
+  datasheet: place it from `OpenDrone`. Draw a new part into `lib` only when
+  the catalogue has nothing that fits, imported with
+  `easyeda2kicad` from its LCSC number. Pulling a newer catalogue is a
+  deliberate, reviewed commit: `git submodule update --remote
+  hardware/KiCad-Library`, then DRC.
 - **One person holds a board layout at a time.** KiCad files do not merge. Say
   on Discord that you are taking it. See [CONTRIBUTING.md](CONTRIBUTING.md).
 - **Run ERC and DRC before every pull request.** Existing approved findings
@@ -64,9 +65,13 @@ kicad-cli pcb drc --schematic-parity --refill-zones hardware/OpenFC.kicad_pcb
 kicad-cli sch export netlist --format kicadsexpr -o /tmp/OpenFC.net hardware/OpenFC.kicad_sch
 ```
 
-Reusable scripts (renders, STEP export, packaging art) come from Incutec
-hardware tooling; the OpenDrone release standard lives in OpenDrone-hw/.github/RELEASES.md;
-board-specific scripts live in hardware/tools/.
+On macOS `kicad-cli` is at
+`/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli`, and `pcbnew` imports
+only under KiCad's bundled Python. Reusable scripts for renders, STEP export,
+and packaging art come from Incutec hardware tooling. The OpenDrone release
+standard is
+[RELEASES.md](https://github.com/OpenDrone-hw/.github/blob/main/RELEASES.md).
+Board-specific scripts, where a board has any, live in `hardware/tools/`.
 
 ## Architecture
 
@@ -131,7 +136,7 @@ them. There is no reverse-polarity protection.
 | VTX, 6-pin JST SH | U8 | SM06B-SRSS-TB, C160405 | 1 +10V, 2 GND, 3 UART0 TX, 4 UART0 RX, 5 GND, 6 UART1 RX |
 | USB-C | USB1 | 16-pin Type-C | Configuration and flashing, USB full speed |
 
-Everything else issolder pads (`pads` sheet)
+Everything else is solder pads (`pads` sheet).
 
 ## GPIO map
 
@@ -176,7 +181,7 @@ device; after that the configurator flashes over USB.
 
 | Rev | Change |
 |---|---|
-| Rev3.3 | Current. Export `OpenFC-Lite-Mini-rev3.3`. Silkscreen rebranded OpenDrone -> incutec for export restriction reasons on flagging anything containing 'Drone'. First Incutec production run. |
+| Rev3.3 | Export `OpenFC-Lite-Mini-rev3.3`. Silkscreen rebranded OpenDrone -> incutec for export restriction reasons on flagging anything containing 'Drone'. First Incutec production run. |
 | Rev3.2 | Export `OpenFC-Lite-Mini-rev3.2`. |
 | Rev3.1 | TPS2116 mux replaced by the DSK24 diode-OR into +4v5. |
 | Rev3 | LDO/IMU swap, pad attribute fixes. |
