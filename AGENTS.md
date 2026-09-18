@@ -5,69 +5,6 @@ Open-Source RP2350 based Flight Controller (FC), 20 x 20 mm mounting pattern
 
 Blackbox is a microSD slot, analog OSD generated on PIO (pixel OSD)
 
-## Repo
-
-| Maintainer | @Just4Stan (Discord: juststan_) |
-|---|---|
-| Status | See the `status-*` topic on the repo. |
-| Designed in | KiCad 10 |
-| KiCad project | `hardware/OpenFC.kicad_pro` |
-| Root schematic | `hardware/OpenFC.kicad_sch` plus sub-sheets `rp2350a`, `power`, `imu`, `osd`, `blackbox`, `pads` |
-| Board | `hardware/OpenFC.kicad_pcb`, 6 layers, 1.6 mm |
-| Local library | `hardware/lib.kicad_sym`, `hardware/lib.pretty/`, `hardware/lib.3dshapes/`, nickname `lib` |
-| Shared library | `hardware/KiCad-Library/`, pinned submodule of [OpenDrone-hw/KiCad-Library](https://github.com/OpenDrone-hw/KiCad-Library), nickname `OpenDrone`; 3D models and exact component datasheets resolve through `OPENDRONE_LIB` |
-| Design rules | `hardware/OpenFC.kicad_dru`, canonical block, no board-specific rules |
-| Fab config | `hardware/fabrication-toolkit-options.json` |
-| Board setup | Line standard: 6 layers, 0.09 mm clearance and track, via 0.35 on 0.20 drill |
-| License | CERN-OHL-S-2.0 |
-
-**The project is called `OpenFC` in both this repo and
-[OpenFC-Lite](https://github.com/OpenDrone-hw/OpenFC-Lite).** Check which repo
-you are in before importing a part or running an export: a part imported into
-the wrong one looks exactly like a broken import.
-
-## Sheets (to copy from OpenFC-Lite)
-
-## Rules
-
-Identical in every OpenDrone board repo. Do not edit here; edit the template.
-
-- **Never text-edit** `.kicad_sch`, `.kicad_pcb` or `.kicad_dru`. Use KiCad, or
-  kicad-skip / the pcbnew API for scripted changes. `.kicad_pro` is JSON and may
-  be edited directly for metadata.
-- **Metadata yes, connections no.** An agent may write BOM and documentation
-  fields (MPN, Manufacturer, LCSC, Cost, Datasheet, text variables). An agent
-  may not change nets, wiring, routing, placement, footprint assignment, or any
-  value that changes the circuit.
-- **Close KiCad before any write to a KiCad file.** KiCad caches library tables
-  at process start and overwrites files on save.
-- **Reuse before you draw.** Check the `OpenDrone` library and its
-  `PARTS-USED.md` first. If the part is there we have already sourced,
-  footprinted and shipped it, and its symbol links to the exact committed
-  datasheet: place it from `OpenDrone`. Draw a new part only when the catalogue
-  has nothing that fits, and import it with `easyeda2kicad` from its LCSC
-  number. Pulling a newer catalogue is a deliberate, reviewed submodule commit.
-- **One person holds a board layout at a time.** KiCad files do not merge. Say
-  on Discord that you are taking it. See [CONTRIBUTING.md](CONTRIBUTING.md).
-- **Run ERC and DRC before every pull request.** Existing approved findings
-  may remain; a new type or increased count must be reviewed before merge.
-  Commands below.
-
-## Environment
-
-```sh
-# schematic and board checks
-kicad-cli sch erc hardware/OpenFC.kicad_sch
-kicad-cli pcb drc --schematic-parity --refill-zones hardware/OpenFC.kicad_pcb
-
-# netlist, for scripted analysis
-kicad-cli sch export netlist --format kicadsexpr -o /tmp/OpenFC.net hardware/OpenFC.kicad_sch
-```
-
-Reusable scripts (renders, STEP export, packaging art) come from Incutec
-hardware tooling; the OpenDrone release standard lives in OpenDrone-hw/.github/RELEASES.md;
-board-specific scripts live in hardware/tools/.
-
 ## Architecture
 
 An RP2354A runs Betaflight against a custom target (`rp2350` sheet: MCU, USB-C,
@@ -84,6 +21,22 @@ sense and an ESC telemetry UART. Everything that drives current lives on the
 ESC.
 
 Serial capacity is three UARTs, two hardware and one synthesised with PIO.
+
+## Power
+
+```
++BATT (3S-6S) ─┬─► U3 10V buck +10V ─► VTX
+               └─► U4 5V buck ─► +5V ─► D6 ─┐
+                                            ├─► +4v5 ─┬─► U7 3.3V LDO ─► MCU IO, IMU IO, microSD, OSD
++5V_USB ────────────────────────► D10 ──────┘         └─► U12 1.8V LDO ─► IMU
+
++3.3V ─► RP2354 internal switcher ─► +1.1V core
+```
+
+The 10 V rail is gated by the MCU so a VTX can be switched off in firmware. D6
+and D10 diode-OR battery and USB into +4v5 with no pass element, and the
+external 5 V pads hang directly on the buck output, so USB never back-feeds
+them. There is no reverse-polarity protection.
 
 ## Key parts
 
@@ -107,22 +60,6 @@ LSM6D parts alike: swapping the IMU is a not a layout change. Pad 9 (INT2 on the
 BMI270, CLKIN on TDK parts) dead-ends on the `imu` sheet, so a TDK part would
 run without external clock sync.
 
-## Power
-
-```
-+BATT (3S-6S) ─┬─► U3 10V buck +10V ─► VTX
-               └─► U4 5V buck ─► +5V ─► D6 ─┐
-                                            ├─► +4v5 ─┬─► U7 3.3V LDO ─► MCU IO, IMU IO, microSD, OSD
-+5V_USB ────────────────────────► D10 ──────┘         └─► U12 1.8V LDO ─► IMU
-
-+3.3V ─► RP2354 internal switcher ─► +1.1V core
-```
-
-The 10 V rail is gated by the MCU so a VTX can be switched off in firmware. D6
-and D10 diode-OR battery and USB into +4v5 with no pass element, and the
-external 5 V pads hang directly on the buck output, so USB never back-feeds
-them. There is no reverse-polarity protection.
-
 ## Connectors and I/O
 
 | Connector | Ref | Part | Function |
@@ -131,7 +68,7 @@ them. There is no reverse-polarity protection.
 | VTX, 6-pin JST SH | U8 | SM06B-SRSS-TB, C160405 | 1 +10V, 2 GND, 3 UART0 TX, 4 UART0 RX, 5 GND, 6 UART1 RX |
 | USB-C | USB1 | 16-pin Type-C | Configuration and flashing, USB full speed |
 
-Everything else issolder pads (`pads` sheet)
+Everything else is solder pads (`pads` sheet).
 
 ## GPIO map
 
@@ -157,13 +94,6 @@ the status LED and 10V_ENABLE, so battery voltage and ESC current are the only
 analog inputs: the RSSI and spare ADC pads of the QFN-80 OpenFC-Lite do not
 exist here.
 
-## Firmware
-
-Betaflight against a custom target: BOARD_NAME = OPENFC_LITE_MINI_RP2350A,
-MANUFACTURER_ID = OPFC. A prebuilt uf2 lives in firmware/. First flash: hold the
-boot button, plug in USB-C, and copy the uf2 onto the RP2350 UF2 mass-storage
-device; after that the configurator flashes over USB.
-
 ## Layout rules
 
 - The IMU's 1.8 V analog supply is deliberately separate from the 3.3 V logic
@@ -172,11 +102,86 @@ device; after that the configurator flashes over USB.
   L4 and its input and output capacitors stay tight to U10, with copper pulled
   back under the switch node.
 
+## Firmware
+
+Betaflight against a custom target: BOARD_NAME = OPENFC_LITE_MINI_RP2350A,
+MANUFACTURER_ID = OPFC. A prebuilt uf2 lives in firmware/. First flash: hold the
+boot button, plug in USB-C, and copy the uf2 onto the RP2350 UF2 mass-storage
+device; after that the configurator flashes over USB.
+
+## Repo
+
+| | |
+|---|---|
+| Maintainer | @Just4Stan (Discord: juststan_) |
+| Status | See the `status-*` topic on the repo. Never written here. |
+| Designed in | KiCad 10 |
+| KiCad project | `hardware/OpenFC.kicad_pro` |
+| Root schematic | `hardware/OpenFC.kicad_sch` plus sub-sheets `rp2350a`, `power`, `imu`, `osd`, `blackbox`, `pads` |
+| Board | `hardware/OpenFC.kicad_pcb`, 6 layers, 1.6 mm |
+| Local library | `hardware/lib.kicad_sym`, `hardware/lib.pretty/`, `hardware/lib.3dshapes/`, nickname `lib` |
+| Shared library | `hardware/KiCad-Library/`, pinned submodule of [OpenDrone-hw/KiCad-Library](https://github.com/OpenDrone-hw/KiCad-Library), nickname `OpenDrone`; 3D models and exact component datasheets resolve through `OPENDRONE_LIB` |
+| Design rules | `hardware/OpenFC.kicad_dru`, canonical block, no board-specific rules |
+| Fab config | `hardware/fabrication-toolkit-options.json` |
+| Board setup | Line standard: 6 layers, 0.09 mm clearance and track, via 0.35 on 0.20 drill |
+| License | CERN-OHL-S-2.0 |
+
+**The project is called `OpenFC` in both this repo and
+[OpenFC-Lite](https://github.com/OpenDrone-hw/OpenFC-Lite).** Check which repo
+you are in before importing a part or running an export: a part imported into
+the wrong one looks exactly like a broken import.
+
+## Environment
+
+```sh
+# schematic and board checks
+kicad-cli sch erc hardware/OpenFC.kicad_sch
+kicad-cli pcb drc --schematic-parity --refill-zones hardware/OpenFC.kicad_pcb
+
+# netlist, for scripted analysis
+kicad-cli sch export netlist --format kicadsexpr -o /tmp/OpenFC.net hardware/OpenFC.kicad_sch
+```
+
+On macOS `kicad-cli` is at
+`/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli`, and `pcbnew` imports
+only under KiCad's bundled Python. Reusable scripts for renders, STEP export,
+and packaging art come from Incutec hardware tooling. The OpenDrone release
+standard is
+[RELEASES.md](https://github.com/OpenDrone-hw/.github/blob/main/RELEASES.md).
+Board-specific scripts, where a board has any, live in `hardware/tools/`.
+
+## Rules
+
+Identical in every OpenDrone board repo. Do not edit here; edit the template.
+
+- **Never text-edit** `.kicad_sch`, `.kicad_pcb` or `.kicad_dru`. Use KiCad, or
+  kicad-skip / the pcbnew API for scripted changes. `.kicad_pro` is JSON and may
+  be edited directly for metadata.
+- **Metadata yes, connections no.** An agent may write BOM and documentation
+  fields (MPN, Manufacturer, LCSC, Cost, Datasheet, text variables). An agent
+  may not change nets, wiring, routing, placement, footprint assignment, or any
+  value that changes the circuit.
+- **Close KiCad before any write to a KiCad file.** KiCad caches library tables
+  at process start and overwrites files on save.
+- **Reuse before you draw.** Check the `OpenDrone` library and its
+  `PARTS-USED.md` first. If the part is there we have already sourced,
+  footprinted and shipped it, and its symbol links to the exact committed
+  datasheet: place it from `OpenDrone`. Draw a new part into `lib` only when
+  the catalogue has nothing that fits, imported with
+  `easyeda2kicad` from its LCSC number. Pulling a newer catalogue is a
+  deliberate, reviewed commit: `git submodule update --remote
+  hardware/KiCad-Library`, then DRC.
+- **One person holds a board layout at a time.** KiCad files do not merge. Say
+  on Discord that you are taking it. See [CONTRIBUTING.md](CONTRIBUTING.md).
+- **Run ERC and DRC before every pull request.** Existing approved findings
+  may remain; a new type or increased count must be reviewed before merge.
+  Commands are in Environment above.
+
 ## Revisions
 
 | Rev | Change |
 |---|---|
-| Rev3.3 | Current. Export `OpenFC-Lite-Mini-rev3.3`. Silkscreen rebranded OpenDrone -> incutec for export restriction reasons on flagging anything containing 'Drone'. First Incutec production run. |
+| Rev3.3 | Export `OpenFC-Lite-Mini-rev3.3`. Silkscreen rebranded OpenDrone -> incutec for export restriction reasons on flagging anything containing 'Drone'. First Incutec production run. |
 | Rev3.2 | Export `OpenFC-Lite-Mini-rev3.2`. |
 | Rev3.1 | TPS2116 mux replaced by the DSK24 diode-OR into +4v5. |
 | Rev3 | LDO/IMU swap, pad attribute fixes. |
