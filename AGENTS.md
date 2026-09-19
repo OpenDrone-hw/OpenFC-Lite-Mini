@@ -3,8 +3,6 @@
 Open-Source RP2350 based Flight Controller (FC), 20 x 20 mm mounting pattern
 (FPV Drone standard). Part of OpenDrone by Incutec product lineup.
 
-Blackbox is a microSD slot, analog OSD generated on PIO (pixel OSD)
-
 ## Architecture
 
 An RP2354A runs Betaflight against a custom target (`rp2350` sheet: MCU, USB-C,
@@ -33,10 +31,10 @@ Serial capacity is three UARTs, two hardware and one synthesised with PIO.
 +3.3V ─► RP2354 internal switcher ─► +1.1V core
 ```
 
-The 10 V rail is gated by the MCU so a VTX can be switched off in firmware. D6
-and D10 diode-OR battery and USB into +4v5 with no pass element, and the
-external 5 V pads hang directly on the buck output, so USB never back-feeds
-them. There is no reverse-polarity protection.
+The 10 V rail is gated by the MCU so firmware can switch a VTX off. D6 and D10
+diode-OR battery and USB into +4v5 with no pass element, and the external 5 V
+pads hang directly on the buck output, so USB never back-feeds them. There is no
+reverse-polarity protection.
 
 ## Key parts
 
@@ -54,11 +52,10 @@ them. There is no reverse-polarity protection.
 | OSD pixel switch | U18 | SN74LVC1G3157DTBR | C2673087 | SPDT analog switch |
 | microSD slot | Card1 | TF-021B-H265 | C498185 | smaller footprint |
 
-The IMU land pattern is LGA-14 3.0 x 2.5 mm with pads 2 and 3 grounded and 10
-and 11 unconnected, electrically safe for Bosch BMI2xx, TDK ICM-4xxxx and ST
-LSM6D parts alike: swapping the IMU is a not a layout change. Pad 9 (INT2 on the
-BMI270, CLKIN on TDK parts) dead-ends on the `imu` sheet, so a TDK part would
-run without external clock sync.
+The IMU land pattern is LGA-14 3.0 x 2.5 mm with pads 2 and 3 grounded and 10 and
+11 unconnected, electrically safe for Bosch BMI2xx, TDK ICM-4xxxx and ST LSM6D
+parts alike: swapping the IMU is not a layout change. Pad 9 (INT2 on the BMI270,
+CLKIN on TDK parts) dead-ends on the `imu` sheet, so a TDK part runs without clock sync.
 
 ## Connectors and I/O
 
@@ -70,7 +67,7 @@ run without external clock sync.
 
 Everything else is solder pads (`pads` sheet).
 
-## GPIO map
+### GPIO map
 
 | GPIO | Function |
 |---|---|
@@ -104,10 +101,10 @@ exist here.
 
 ## Firmware
 
-Betaflight against a custom target: BOARD_NAME = OPENFC_LITE_MINI_RP2350A,
-MANUFACTURER_ID = OPFC. A prebuilt uf2 lives in firmware/. First flash: hold the
-boot button, plug in USB-C, and copy the uf2 onto the RP2350 UF2 mass-storage
-device; after that the configurator flashes over USB.
+[Betaflight](https://github.com/betaflight/betaflight) against a custom target:
+`BOARD_NAME = OPENFC_LITE_MINI_RP2350A`, `MANUFACTURER_ID = OPFC`. A prebuilt
+uf2 lives in `firmware/`. First flash: hold the boot button, plug in USB-C, copy
+the uf2 onto the RP2350 UF2 drive; after that the configurator flashes over USB.
 
 ## Repo
 
@@ -124,12 +121,12 @@ device; after that the configurator flashes over USB.
 | Design rules | `hardware/OpenFC.kicad_dru`, canonical block, no board-specific rules |
 | Fab config | `hardware/fabrication-toolkit-options.json` |
 | Board setup | Line standard: 6 layers, 0.09 mm clearance and track, via 0.35 on 0.20 drill |
+| Datasheets and shared parts | `hardware/KiCad-Library/datasheet/`, indexed with SHA-256 hashes in `datasheet/manifest.json`; `hardware/KiCad-Library/PARTS-USED.md` lists every proven shared part, column `Boards` filtered for `OpenFC-Lite-Mini` |
 | License | CERN-OHL-S-2.0 |
 
-**The project is called `OpenFC` in both this repo and
-[OpenFC-Lite](https://github.com/OpenDrone-hw/OpenFC-Lite).** Check which repo
-you are in before importing a part or running an export: a part imported into
-the wrong one looks exactly like a broken import.
+**The project is called `OpenFC` here and in [OpenFC-Lite](https://github.com/OpenDrone-hw/OpenFC-Lite)**,
+the 30.5 x 30.5 mm RP2354B sibling: check which repo you are in before importing
+a part or running an export. A part imported into the wrong one looks like a broken import.
 
 ## Environment
 
@@ -142,11 +139,11 @@ kicad-cli pcb drc --schematic-parity --refill-zones hardware/OpenFC.kicad_pcb
 kicad-cli sch export netlist --format kicadsexpr -o /tmp/OpenFC.net hardware/OpenFC.kicad_sch
 ```
 
-On macOS `kicad-cli` is at
-`/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli`, and `pcbnew` imports
-only under KiCad's bundled Python. Reusable scripts for renders, STEP export,
-and packaging art come from Incutec hardware tooling. The OpenDrone release
-standard is
+On macOS `kicad-cli` is at `/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli`
+and `KPY`, KiCad's bundled Python and the only one that imports `pcbnew`, is
+`/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/Current/bin/python3`.
+Reusable scripts for renders, STEP export and packaging art come from Incutec
+hardware tooling. The OpenDrone release standard is
 [RELEASES.md](https://github.com/OpenDrone-hw/.github/blob/main/RELEASES.md).
 Board-specific scripts, where a board has any, live in `hardware/tools/`.
 
@@ -187,3 +184,14 @@ Identical in every OpenDrone board repo. Do not edit here; edit the template.
 | Rev3 | LDO/IMU swap, pad attribute fixes. |
 | Rev2 | Flown. |
 | Rev1 | First prototype, bench tested. |
+
+## By task
+
+Board-specific paths are in Environment above. `KPY` is KiCad's bundled
+Python named there.
+
+- Check the design: run the ERC and DRC commands in Environment before every pull request.
+- Add a part: place it from the `OpenDrone` library if `hardware/KiCad-Library/PARTS-USED.md` lists it; otherwise import it into `lib` with `$KPY <hardware-tooling>/hardware/kicad/import_part.py` (read `--help` first), KiCad closed.
+- Render the board for the README: `$KPY <hardware-tooling>/hardware/kicad/render_board.py hardware/OpenFC.kicad_pcb --outdir images`, KiCad closed.
+- Analyse the netlist: export it with the netlist command in Environment, then read it with a script; never hand-write a second BOM.
+- Update the shared library: `git submodule update --remote hardware/KiCad-Library`, run DRC, commit as its own reviewed change.

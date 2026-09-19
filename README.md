@@ -14,8 +14,6 @@ mounting pattern, part of the incutec OpenDrone line.
 [![Video](https://img.shields.io/badge/YouTube-How%20Flight%20Controllers%20Work-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=XDYZoMRJFeQ)
 [![OSHWA](https://img.shields.io/badge/OSHWA-BE000027-0099b0)](https://certification.oshwa.org/be000027.html)
 
-Maintained by [@Just4Stan](https://github.com/Just4Stan).
-
 ## Specifications
 
 | | |
