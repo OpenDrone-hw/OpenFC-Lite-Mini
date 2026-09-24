@@ -7,7 +7,7 @@ team considers it unflyable; bench/flight data agrees. This folder collects data
 sourcing data, and test evidence to pick the **Rev 2 IMU**.
 
 The footprint and its ST/TDK compatibility are described in
-[`hardware/docs/DESIGN.md`](../../docs/DESIGN.md) (IMU section). IMU swap is a
+[`AGENTS.md`](../../../AGENTS.md) (Key parts section). IMU swap is a
 part-population change once a part is chosen. Pin-by-pin verification against each
 candidate family is in §8c below.
 
