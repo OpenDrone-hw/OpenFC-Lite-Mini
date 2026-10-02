@@ -1,10 +1,13 @@
 # IMU Selection Investigation: OpenFC-Lite-Mini Rev 2
 
-**Status:** open · **Started:** 2026-06-02
+**Superseded.** Rev 1 decision record, kept as history. The current IMU is the Bosch
+BMI270 (U9), per the [README](../../../README.md) and [AGENTS.md](../../../AGENTS.md).
+
+**Status:** superseded · **Started:** 2026-06-02
 
 The Rev 1 IMU (ST **LSM6DSV16XTR**) is populated for development only. The Betaflight
-team considers it unflyable; bench/flight data agrees. This folder collects datasheets,
-sourcing data, and test evidence to pick the **Rev 2 IMU**.
+team considers it unflyable; bench/flight data agrees. This folder collects datasheets
+and test evidence to pick the **Rev 2 IMU**.
 
 The footprint and its ST/TDK compatibility are described in
 [`AGENTS.md`](../../../AGENTS.md) (Key parts section). IMU swap is a
@@ -27,8 +30,8 @@ imu-selection/
 | R1 | **Betaflight driver on current master** | No driver = no flyable firmware. Authoritative list below. |
 | R2 | **Drops into LGA-14 (2.5×3 mm), pins 2/3 GND, 10/11 NC** | Existing footprint; pin-1 orientation must match. |
 | R3 | **Flyable**: low in-band gyro noise, robust to electrical + vibration noise | The whole reason DSV16X is being replaced. |
-| R4 | **Sourceable at volume** (LCSC/JLC preferred, real stock) | Selling the board; rest of BOM < $5. |
-| R5 | **Price target**: ideally ≤ ~$3-4 to keep the "Lite" price point | IMU currently dominates BOM cost. |
+| R4 | **Sourceable at volume** | Selling the board. |
+| R5 | **Low cost**, to keep the "Lite" price point | The IMU is a large share of BOM cost. |
 | R6 | **VDDIO works at 1.8 V analog / 3.3 V IO** | Board runs IMU off +1.8V_GYRO (U6 NCV8187) + 3.3V IO. |
 
 A part failing R1 or R2 is out unless someone commits to adding the driver / reworking the
@@ -57,25 +60,25 @@ BMI323, BMI088, ICM-42670-P, LSM6DSV320X (the *V* high-g, ≠ the *K*).
 
 ## 3. Candidate matrix
 
-Pricing/stock from LCSC paste **2026-06-02** (EUR). "BF" = on master. Footprint column
+"BF" = on master. Footprint column
 flags anything that isn't a clean drop-in.
 
-| Part | BF | Price (qty) | LCSC stock | Footprint | Gyro noise mdps/√Hz | Verdict |
-|---|---|---|---|---|---|---|
-| **ICM-42688-P** | ✓ king | €12.15 / €10.49 lt | 0 (10k @7-9d other) | LGA-14 2.5×3 ✓ | **2.8** | Best-flying, too expensive + tight supply |
-| **ICM-42622P** | ✓ | not in paste, source | ? | LGA-14 ✓ | ~2.8 (class) | strong reports, **find pricing/stock** |
-| **IIM-42652** | ✓ | (see paste; IIM-42653 €13.15) | 42653: 4,969 | LGA-14 ✓ | 3.8 | Industrial temp, pricey |
-| **ICM-45686** | ✓ | €18.20 / €6.23 lt | 0 (353 other) | **LGA-14 3×2.5** ⚠ rotated | ~ | Newer; verify pin-1, costly |
-| **ICM-45605** | ✓ | €6.35 | 0 | LGA-14 | - | budget 456xx, 0 stock |
-| **ICM-42605** | ✓ | €5.60 / €4.90 lt | 10,000 ✓ | LGA-14 2.5×3 ✓ | (class) | **In stock, supported: solid fallback** |
-| **BMI270** | ✓ | €3.19 / €1.36 lt | 0 (50k @6-8d other) | LGA-14 2.5×3 | 7 (perf) | **Cheap + available + only AC-PSRR spec'd** ⚠ verify Bosch pinout |
-| **LSM6DSO** | ✓ | €3.70 | 6,312 ✓ | LGA-14 2.5×3 ✓ | (older) | cheap, available, older gen |
-| **LSM6DSV16X** | ✓ | €4.07 | 4,350 | LGA-14 2.5×3 ✓ | 2.8 | **Current Rev 1: unflyable, being replaced** |
-| **LSM6DSK320X** | ✓ | not released | 0 | LGA-14 2.5×3 ✓ | **3.8** | BF/STM target; **not orderable**, samples gated |
-| ICM-56686 | ✗ | (RPi sharing ds) | - | LGA-14 2.5×3 | 2.9 | No BF driver yet (RPi adding); 29.3kHz MEMS |
-| BMI323 | ✗ | €3.28 | 2,920 | LGA-14 | - | No BF driver; Bosch filters undocumented |
-| BMI088 | ✗ | €8.16 | 3,468 | **LGA-16 3×4.5** ✗ | 14 | No driver, wrong footprint, 2.4V floor: out |
-| LSM6DSV320X | ✗ | €10.95 | 0 | LGA-14L | - | *V* variant, no BF driver (≠ DSK) |
+| Part | BF | Footprint | Gyro noise mdps/√Hz | Verdict |
+|---|---|---|---|---|
+| **ICM-42688-P** | ✓ king | LGA-14 2.5×3 ✓ | **2.8** | Best-flying, high cost |
+| **ICM-42622P** | ✓ | LGA-14 ✓ | ~2.8 (class) | strong reports |
+| **IIM-42652** | ✓ | LGA-14 ✓ | 3.8 | Industrial temp, high cost |
+| **ICM-45686** | ✓ | **LGA-14 3×2.5** ⚠ rotated | ~ | Newer; verify pin-1, high cost |
+| **ICM-45605** | ✓ | LGA-14 | - | budget 456xx |
+| **ICM-42605** | ✓ | LGA-14 2.5×3 ✓ | (class) | **Supported: solid fallback** |
+| **BMI270** | ✓ | LGA-14 2.5×3 | 7 (perf) | **Low cost, only AC-PSRR spec'd** ⚠ verify Bosch pinout |
+| **LSM6DSO** | ✓ | LGA-14 2.5×3 ✓ | (older) | low cost, older gen |
+| **LSM6DSV16X** | ✓ | LGA-14 2.5×3 ✓ | 2.8 | **Rev 1 part: unflyable, replaced** |
+| **LSM6DSK320X** | ✓ | LGA-14 2.5×3 ✓ | **3.8** | BF/STM target; **not orderable**, samples gated |
+| ICM-56686 | ✗ | LGA-14 2.5×3 | 2.9 | No BF driver yet (RPi adding); 29.3kHz MEMS |
+| BMI323 | ✗ | LGA-14 | - | No BF driver; Bosch filters undocumented |
+| BMI088 | ✗ | **LGA-16 3×4.5** ✗ | 14 | No driver, wrong footprint, 2.4V floor: out |
+| LSM6DSV320X | ✗ | LGA-14L | - | *V* variant, no BF driver (≠ DSK) |
 
 ---
 
@@ -145,7 +148,7 @@ Mined from the PDFs in `datasheets/`. "n/s" = not specified in datasheet.
   environment is likely *better* than the cheap FCs the DSV16X was condemned on, so those
   failures may be PCB/PDN-specific, not intrinsic to the part. (For comparison, at least
   one well-regarded reference design uses a ~75 dB PSRR IMU LDO, worse than ours.)
-- DSK320X has **different MEMS hardware**. DSV320X is €5-6 at DigiKey (the *V* high-g).
+- DSK320X has **different MEMS hardware**. DSV320X is the *V* high-g variant.
 - One proposed strategy: ship the Lite with **BMI270** (cheap, holds the price point) now;
   a premium board with a higher-end IMU later.
 
@@ -286,17 +289,17 @@ fix at a Lite price. A different-MEMS part (BMI270) is now a real risk, not a sa
 
 - **A: ICM-42688-P (proven). ← lowest technical risk.** The exact part that eliminated the
   resonance on the sister board, whose next revision standardizes on it. Drop-in (§4), uses wired CLKIN (GPIO15).
-  **Cost is the only problem:** €10-12, 0 LCSC stock (10k other @7-9d). Kills the sub-$5 "Lite"
+  **Cost is the only problem:** too expensive for the "Lite"
   price point. Right call for a *premium* OpenFC; painful for Lite.
 - **B: ICM-42605 (cheap same-family bet). ← leading for Lite (2026-06-02).** Same 426xx gyro
   architecture as the 42688 → *most likely* shares the resonance immunity (same sense element,
-  different binning/noise grade). BF-supported, **10,000 in LCSC stock @ €4.90-5.60**, clean
+  different binning/noise grade). BF-supported, lower cost, clean
   2.5×3 footprint, uses the wired CLKIN. **Risk: the resonance immunity is not yet confirmed on
   the 42605 specifically**: verify by flying it (it shares the 42688 driver, so it's a config
   one-liner: `USE_GYRO_SPI_ICM42605`). If it holds, this is the answer for Lite.
-- **C: ICM-42622P** (highly rated, same family), but **€15 / out of stock** at last check.
-  Out on price/supply right now.
-- **D: BMI270 (cheapest, now higher risk).** €1.36-3.19, 50k stock, BF-supported, footprint
+- **C: ICM-42622P** (highly rated, same family), but out on cost and availability
+  at the time.
+- **D: BMI270 (cheapest, now higher risk).** Lowest cost, BF-supported, footprint
   drop-in (§7b), only candidate with a real AC-PSRR spec. **But:** different Bosch MEMS: we now
   know the DSV16X failure was MEMS-resonance, and there is **no evidence BMI270 survives this
   airframe's resonance band**. Bench noise density (7) is irrelevant (§5b); the resonance
@@ -307,7 +310,7 @@ fix at a Lite price. A different-MEMS part (BMI270) is now a real risk, not a sa
 - **F: Two-SKU strategy.** Premium OpenFC = ICM-42688-P (proven). Lite = ICM-42605 if it flies
   clean, else BMI270 as the cost-floor fallback. Aligns the premium board with the sister board's next revision.
 
-**Recommendation:** Lite-Mini Rev 2 → **ICM-42605** (in stock, cheap, same family as the proven
+**Recommendation:** Lite-Mini Rev 2 → **ICM-42605** (lower cost, same family as the proven
 fix, wired CLKIN usable), with **ICM-42688-P** as the drop-in premium/no-compromise option on the
 identical footprint. **Flight-test the 42605 against a ~25 kRPM-band airframe before committing**:
 that's the one open risk, and it's cheap to close.
@@ -334,8 +337,8 @@ Board pins wired for the LSM6DSV16X: 1 MISO, 2 GND, 3 GND, 4 INT, 5 +3.3V, 6 GND
 
 - **Verified:** BMI270 LGA-14 fits the existing footprint. Pins 2/3 remain an
   out-of-spec, field-proven grounding caveat; pin 9 maps CLKIN to unused INT2.
-- **Not evidenced here:** ICM-45686 land-pattern orientation; current distributor
-  stock and pricing for ICM-42622P or LSM6DSK320X; and ICM-56686 driver maturity.
+- **Not evidenced here:** ICM-45686 land-pattern orientation; availability of
+  ICM-42622P or LSM6DSK320X; and ICM-56686 driver maturity.
 - **Design-dependent:** CLKIN is useful for the listed TDK parts and unused by
   the ST and Bosch candidates. Its routing follows the selected IMU.
 - **Not present in this repository:** the source FFT/blackbox data behind the
@@ -428,8 +431,8 @@ The board grounds pins 2/3. For an **unused** aux interface this is correct/beni
 the 456xx/56xx-generation TDK parts, and the BMI270: **no schematic change needed.**
 
 ### Open item
-- **ICM-45686/45605 physical orientation:** pin *functions* match (per 56686), but LCSC lists the
-  45686 as LGA-14 **3×2.5** vs our 2.5×3 → check body/pin-1 rotation against the footprint before
+- **ICM-45686/45605 physical orientation:** pin *functions* match (per 56686), but the 45686 is listed
+  as LGA-14 **3×2.5** vs our 2.5×3 → check body/pin-1 rotation against the footprint before
   committing. (Functional pinout is fine; this is purely a package-outline check.)
 - **Keep pin 9 (GPIO15→CLKIN) wired**: revisit the Rev 2 "drop CLKIN" note. Harmless for ST/Bosch
   (INT2, idle), and gives TDK 426xx/456xx sample-clock jitter removal (relevant to the noise work).
