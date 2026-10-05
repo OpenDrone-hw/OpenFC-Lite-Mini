@@ -27,13 +27,15 @@ mounting pattern, part of the incutec OpenDrone line.
 | UARTs | 3 |
 | Motor outputs | 4x DShot, bidirectional |
 | RX | External, CRSF or SBUS |
-| Input | 3-6S LiPo (9.0-25.2 V) |
+| Input | 3-6S* LiPo (9.0-25.2 V) |
 | BEC | 10 V switchable + 5 V always-on, 3 A |
 | Current sense | Yes |
 | USB | USB-C |
 | Mounting | 20 x 20 mm, 3.0 mm holes |
 | Dimensions | 26.9 x 26.9 mm |
 | PCB | 6-layer, 1.6 mm |
+
+* Also runs on 2S; the 10 V VTX output then follows the battery voltage instead of holding 10 V.
 
 Technical write-up, part list and layout constraints: [AGENTS.md](AGENTS.md).
 
