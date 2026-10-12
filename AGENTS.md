@@ -102,8 +102,8 @@ exist here.
 ## Firmware
 
 [Betaflight](https://github.com/betaflight/betaflight) against a custom target:
-`BOARD_NAME = OPENFC_LITE_MINI_RP2350A`, `MANUFACTURER_ID = OPFC`. A prebuilt
-uf2 lives in `firmware/`. First flash: hold the boot button, plug in USB-C, copy
+`BOARD_NAME = OPENFC_LITE_MINI_RP2350A`, `MANUFACTURER_ID = OPFC`. The prebuilt
+uf2 is `firmware/OpenFC-Lite-Mini-<rev>_*.uf2`, one per hardware revision. First flash: hold the boot button, plug in USB-C, copy
 the uf2 onto the RP2350 UF2 drive; after that the configurator flashes over USB.
 
 ## Repo
