@@ -37,7 +37,7 @@ mounting pattern, part of the incutec OpenDrone line.
 
 * Also runs on 2S; the 10 V VTX output then follows the battery voltage instead of holding 10 V.
 
-Technical write-up, part list and layout constraints: in the git history of AGENTS.md, `git show 160562f:AGENTS.md`.
+Technical write-up, part list and layout constraints: [AGENTS.md](AGENTS.md).
 
 ## In the line
 
