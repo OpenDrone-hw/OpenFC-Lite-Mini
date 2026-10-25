@@ -109,8 +109,9 @@ USB-C, copy the uf2 onto the RP2350 UF2 drive. Later updates: CLI `bl rom`, then
 the same copy.
 
 The current rev3.3 image is Betaflight master `d593400` plus
-betaflight/betaflight#15900 (`LED_STRIP_INVERTED`, branch
-`Just4Stan:pico-ledstrip-inverted` `0b1c266`), with the config from
+betaflight/betaflight#15900 (`LED_STRIP_INVERTED`; built from `0b1c266`, kept as
+tag `openfc-lite-mini-rev3.3-2026-10-25` in OpenDrone-hw/betaflight, same tree as
+the PR head), with the config from
 OpenDrone-hw/betaflight-config `opfc-targets` `9eada21`; sha256
 `555f9ff49a374a0531c7d90cfb5ea4abee7dc82d7e3092c5bba98b667241660a`. The
 config puts the LED strip on PIO1: on the default PIO2 the FB OSD program
