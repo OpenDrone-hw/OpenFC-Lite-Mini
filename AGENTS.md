@@ -102,9 +102,21 @@ exist here.
 ## Firmware
 
 [Betaflight](https://github.com/betaflight/betaflight) against a custom target:
-`BOARD_NAME = OPENFC_LITE_MINI_RP2350A`, `MANUFACTURER_ID = OPFC`. The prebuilt
-uf2 is `firmware/OpenFC-Lite-Mini-<rev>_*.uf2`, one per hardware revision. First flash: hold the boot button, plug in USB-C, copy
-the uf2 onto the RP2350 UF2 drive; after that the configurator flashes over USB.
+`BOARD_NAME = OPENFC_LITE_MINI_RP2350A`, `MANUFACTURER_ID = OPDR`. The prebuilt
+uf2 is `firmware/OpenFC-Lite-Mini-<rev>_*.uf2`, one per hardware revision; older
+images are in `firmware/archive/`. First flash: hold the boot button, plug in
+USB-C, copy the uf2 onto the RP2350 UF2 drive. Later updates: CLI `bl rom`, then
+the same copy.
+
+The current rev3.3 image is Betaflight master `d593400` plus
+betaflight/betaflight#15900 (`LED_STRIP_INVERTED`, branch
+`Just4Stan:pico-ledstrip-inverted` `0b1c266`), with the config from
+OpenDrone-hw/betaflight-config `opfc-targets` `9eada21`; sha256
+`555f9ff49a374a0531c7d90cfb5ea4abee7dc82d7e3092c5bba98b667241660a`. The
+config puts the LED strip on PIO1: on the default PIO2 the FB OSD program
+(31 of 32 instructions) no longer fits next to it and the OSD stays blank.
+The LED pad is driven through Q6 (N-FET, 2.4k to 5 V), which inverts the
+signal, hence `LED_STRIP_INVERTED`.
 
 ## Repo
 
