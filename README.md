@@ -39,6 +39,25 @@ mounting pattern, part of the incutec OpenDrone line.
 
 Technical write-up, part list and layout constraints: [AGENTS.md](AGENTS.md).
 
+## Firmware
+
+Betaflight, target `OPENFC_LITE_MINI_RP2350A`. The current image is in
+[`firmware/`](firmware/); older ones are in `firmware/archive/`.
+
+Boards flashed before 2026-10-25 show no analog OSD while the LED strip
+feature is on, and a WS2812 strip on the LED pad shows wrong colours. The
+current image fixes both. To update:
+
+1. In Betaflight Configurator, CLI tab: run `diff all` and save the output.
+2. Run `bl rom`. The board reboots as a USB drive named `RP2350`.
+3. Copy the `.uf2` from `firmware/` onto that drive. The board restarts on
+   its own.
+4. Reconnect and check your settings; paste the saved `diff all` back if
+   anything is missing.
+
+Without updating, `feature -LED_STRIP` then `save` in the CLI brings the
+OSD back (the LED strip is then off).
+
 ## In the line
 
 What pairs with what, and what is available:
