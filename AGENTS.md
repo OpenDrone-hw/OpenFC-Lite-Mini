@@ -118,6 +118,30 @@ config puts the LED strip on PIO1: on the default PIO2 the FB OSD program
 The LED pad is driven through Q6 (N-FET, 2.4k to 5 V), which inverts the
 signal, hence `LED_STRIP_INVERTED`.
 
+Upstream (opened 2026-10-25): betaflight/betaflight#15900 (`LED_STRIP_INVERTED`),
+betaflight/betaflight#15901 (a receive-only PIO UART claims one PIO state machine,
+not two) and betaflight/config#1242 (this target, manufacturer `OPDR`; the PR also
+sets `MSP_DISPLAYPORT_UART SERIAL_PORT_UART0`, which the image above does not
+have yet). Once those are merged, app.betaflight.com builds the image: Firmware
+Flasher, board `OPENFC_LITE_MINI_RP2350A`, Flash, then save the uf2 onto the
+`RP2350` drive. Until then the repo image is the update path.
+
+Debugging notes from the 2026-10-25 bench session:
+
+- `status` showing `OSD: FBOSD` does not prove the OSD draws: when the OSD PIO
+  program does not fit, `pio_add_program` returns -9, Betaflight does not check
+  it, and the state machine hangs while the status line stays the same.
+- Without a scope the RP2350 can measure its own pins: a busy loop on the SIO
+  input register gives pulse counts and widths on OSD_SYNC (the NTSC camera
+  tested gave about 16,300 low pulses/s, most 4-6 us wide) and on OSD_EN
+  while the PIO draws. Driving OSD_EN and OSD_W high from SIO turns the whole picture grey,
+  which checks U18 and the buffer.
+- The sync stage compares the clamped video against 0 V (U2 IN- on GND, D9
+  Schottky clamp) with a TLV7031, a 315 nA comparator with a typical
+  propagation delay of 3 us (TI datasheet). It gave a clean sync train with the camera tested, but its
+  margin with low-amplitude cameras was not measured. A biased threshold or a
+  faster comparator is the change to consider in a later revision.
+
 ## Repo
 
 | | |
