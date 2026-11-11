@@ -1,4 +1,4 @@
-# IMU Selection Investigation: OpenFC-Lite-Mini Rev 2
+# IMU Selection Investigation: OpenFC Lite 20x20 Rev 2
 
 **Superseded.** Rev 1 decision record, kept as history. The current IMU is the Bosch
 BMI270 (U9), per the [README](../../../README.md) and [AGENTS.md](../../../AGENTS.md).
@@ -310,7 +310,7 @@ fix at a Lite price. A different-MEMS part (BMI270) is now a real risk, not a sa
 - **F: Two-SKU strategy.** Premium OpenFC = ICM-42688-P (proven). Lite = ICM-42605 if it flies
   clean, else BMI270 as the cost-floor fallback. Aligns the premium board with the sister board's next revision.
 
-**Recommendation:** Lite-Mini Rev 2 → **ICM-42605** (lower cost, same family as the proven
+**Recommendation:** OpenFC Lite 20x20 Rev 2 → **ICM-42605** (lower cost, same family as the proven
 fix, wired CLKIN usable), with **ICM-42688-P** as the drop-in premium/no-compromise option on the
 identical footprint. **Flight-test the 42605 against a ~25 kRPM-band airframe before committing**:
 that's the one open risk, and it's cheap to close.
