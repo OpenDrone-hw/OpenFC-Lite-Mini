@@ -1,11 +1,11 @@
-# OpenFC-Lite-Mini
+# OpenFC Lite 20x20
 
 Open source Betaflight flight controller built on the RP2354A, 20 x 20 mm
 mounting pattern, part of the incutec OpenDrone line.
 
 <p>
-<img src="images/front.png" width="400" alt="OpenFC-Lite-Mini top" />
-<img src="images/back.png" width="400" alt="OpenFC-Lite-Mini bottom" />
+<img src="images/front.png" width="400" alt="OpenFC Lite 20x20 top" />
+<img src="images/back.png" width="400" alt="OpenFC Lite 20x20 bottom" />
 </p>
 
 [![Status](https://img.shields.io/endpoint?url=https://opendrone.be/api/status/OpenFC-Lite-Mini.json)](https://github.com/OpenDrone-hw/.github/blob/main/CONTRIBUTING.md#the-life-of-a-project)

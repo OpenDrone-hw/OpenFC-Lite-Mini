@@ -1,4 +1,4 @@
-# OpenFC-Lite-Mini
+# OpenFC Lite 20x20
 
 Open-Source RP2350 based Flight Controller (FC), 20 x 20 mm mounting pattern
 (FPV Drone standard). Part of OpenDrone by Incutec product lineup.
@@ -88,7 +88,7 @@ Everything else is solder pads (`pads` sheet).
 
 The QFN-60 exposes only four ADC channels, and the ADC0/ADC1 pins are spent on
 the status LED and 10V_ENABLE, so battery voltage and ESC current are the only
-analog inputs: the RSSI and spare ADC pads of the QFN-80 OpenFC-Lite do not
+analog inputs: the RSSI and spare ADC pads of the QFN-80 OpenFC Lite 30x30 do not
 exist here.
 
 ## Layout rules
@@ -161,7 +161,7 @@ Debugging notes from the 2026-10-25 bench session:
 | Datasheets and shared parts | `hardware/KiCad-Library/datasheet/`, indexed with SHA-256 hashes in `datasheet/manifest.json`; `hardware/KiCad-Library/PARTS-USED.md` lists every proven shared part, column `Boards` filtered for `OpenFC-Lite-Mini` |
 | License | CERN-OHL-S-2.0 |
 
-**The project is called `OpenFC` here and in [OpenFC-Lite](https://github.com/OpenDrone-hw/OpenFC-Lite)**,
+**The project is called `OpenFC` here and in [OpenFC Lite 30x30](https://github.com/OpenDrone-hw/OpenFC-Lite)**,
 the 30.5 x 30.5 mm RP2354B sibling: check which repo you are in before importing
 a part or running an export. A part imported into the wrong one looks like a broken import.
 
