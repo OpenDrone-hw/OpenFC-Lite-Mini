@@ -782,7 +782,6 @@
     ]
   ],
   "text_variables": {
-    "OPENDRONE_LIB": "${KIPRJMOD}/KiCad-Library",
     "DOC_FIRMWARE": "Betaflight",
     "DOC_HANDLE": "openfc-lite-mini",
     "DOC_INPUT": "+BATT 3S–6S",
@@ -791,7 +790,8 @@
     "DOC_PROTOCOL": "DShot",
     "DOC_RATING": "3S–6S input; rail currents not yet bench-characterized",
     "DOC_TAGLINE": "RP2354A Betaflight flight controller — microSD blackbox, analog OSD, external RX",
-    "DOC_VARIANT": "20×20"
+    "DOC_VARIANT": "20×20",
+    "OPENDRONE_LIB": "${KIPRJMOD}/KiCad-Library"
   },
   "tuning_profiles": {
     "meta": {
