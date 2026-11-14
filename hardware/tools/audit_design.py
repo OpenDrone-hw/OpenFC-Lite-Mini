@@ -551,8 +551,8 @@ def main():
     W(md_table(["Ref", "Value", "Footprint", "Pad → Net"], rows))
     W("")
 
-    # ---- 12. Motor outputs ----
-    W("## 12. Motor Outputs (M1-M4)\n")
+    # ---- 12. General-purpose I/O on the connector (nets M1-M4) ----
+    W("## 12. General-purpose I/O (nets M1-M4)\n")
     motor_nets = []
     for k in ["M1", "M2", "M3", "M4", "MOTOR1", "MOTOR2", "MOTOR3", "MOTOR4"]:
         motor_nets.extend([n for n in net2rp if re.search(r"(^|/)" + k + "$", n, re.I)])
@@ -561,7 +561,7 @@ def main():
     for mn in motor_nets:
         refs = sorted(set(r for (r, _, _) in net2rp[mn]))
         rows.append([mn, ", ".join(refs)])
-    W(md_table(["Motor net", "Refs on net"], rows))
+    W(md_table(["I/O net", "Refs on net"], rows))
     W("")
 
     # ---- 13. Reset / Boot ----
