@@ -119,15 +119,13 @@ config puts the LED strip on PIO1: on the default PIO2 the FB OSD program
 The LED pad is driven through Q6 (N-FET, 2.4k to 5 V), which inverts the
 signal, hence `LED_STRIP_INVERTED`.
 
-Upstream (opened 2026-10-25): betaflight/betaflight#15900 (`LED_STRIP_INVERTED`),
-betaflight/betaflight#15901 (a receive-only PIO UART claims one PIO state machine,
-not two) and betaflight/config#1242 (this target, manufacturer `OPDR`; the PR also
-sets `MSP_DISPLAYPORT_UART SERIAL_PORT_UART0`, which the image above does not
-have yet). Once those are merged, app.betaflight.com builds the image: Firmware
-Flasher, board `OPENFC_LITE_MINI_RP2350A`, Flash, then save the uf2 onto the
-`RP2350` drive. Until then the repo image is the update path.
+Updates use the image in `firmware/`. Upstream pull requests:
+betaflight/betaflight#15900 (`LED_STRIP_INVERTED`), betaflight/betaflight#15901
+(a receive-only PIO UART claims one PIO state machine, not two) and
+betaflight/config#1242 (this target, manufacturer `OPDR`; it also sets
+`MSP_DISPLAYPORT_UART SERIAL_PORT_UART0`, which the image above does not have).
 
-Debugging notes from the 2026-10-25 bench session:
+Bench debugging notes:
 
 - `status` showing `OSD: FBOSD` does not prove the OSD draws: when the OSD PIO
   program does not fit, `pio_add_program` returns -9, Betaflight does not check
@@ -151,10 +149,7 @@ Debugging notes from the 2026-10-25 bench session:
 | KiCad project | `hardware/OpenFC.kicad_pro` |
 | Root schematic | `hardware/OpenFC.kicad_sch` plus sub-sheets `rp2350a`, `power`, `imu`, `osd`, `blackbox`, `pads` |
 | Board | `hardware/OpenFC.kicad_pcb`, 6 layers, 1.6 mm |
-| Shared library | `hardware/KiCad-Library/`, pinned submodule of [OpenDrone-hw/KiCad-Library](https://github.com/OpenDrone-hw/KiCad-Library), nickname `OpenDrone`; 3D models and exact component datasheets resolve through `OPENDRONE_LIB` |
 | Design rules | `hardware/OpenFC.kicad_dru`, canonical block, no board-specific rules |
-| Board setup | Line standard: 6 layers, 0.09 mm clearance and track, via 0.35 on 0.20 drill |
-| Datasheets and shared parts | `hardware/KiCad-Library/datasheet/`, indexed with SHA-256 hashes in `datasheet/manifest.json`; `hardware/KiCad-Library/PARTS-USED.md` lists every proven shared part, column `Boards` filtered for `OpenFC-Lite-Mini` |
 
 **The project is called `OpenFC` here and in [OpenFC Lite 30x30](https://github.com/OpenDrone-hw/OpenFC-Lite)**,
 the 30.5 x 30.5 mm RP2354B sibling: check which repo you are in before importing
@@ -177,18 +172,21 @@ The [Board rules](#board-rules) at the end of this file apply, a CI-checked copy
 
 ## Revisions
 
-| Rev | Change |
-|---|---|
-| Rev3.3 | Export `OpenFC-Lite-Mini-rev3.3`. Silkscreen rebranded OpenDrone -> incutec for export restriction reasons on flagging anything containing 'Drone'. First Incutec production run. |
-| Rev3.2 | Export `OpenFC-Lite-Mini-rev3.2`. |
-| Rev3.1 | TPS2116 mux replaced by the DSK24 diode-OR into +4v5. |
-| Rev3 | LDO/IMU swap, pad attribute fixes. |
-| Rev2 | Flown. |
-| Rev1 | First prototype, bench tested. |
+| Rev | Date | Change |
+|---|---|---|
+| Rev3.3 | 2026-08-25 | Export `OpenFC-Lite-Mini-rev3.3`. Silkscreen rebranded OpenDrone -> incutec for export restriction reasons on flagging anything containing 'Drone'. |
+| Rev3.2 | 2026-08-18 | Export `OpenFC-Lite-Mini-rev3.2`. |
+| Rev3.1 | 2026-08-14 | TPS2116 mux replaced by the DSK24 diode-OR into +4v5. |
+| Rev3 | 2026-08-11 | LDO/IMU swap, pad attribute fixes. |
+| Rev2 | 2026-08-06 | Flown. |
+| Rev1 |  | First prototype, bench tested. Untagged. |
 
 ## By task
 
 - Render the board for the README: `$KPY <hardware-tooling>/hardware/kicad/render_board.py hardware/OpenFC.kicad_pcb --outdir images`, KiCad closed.
+- Fill MPN and Manufacturer fields from the LCSC numbers: `python3 hardware/tools/add_mpn_fields.py` (dry run; `--write` saves through kicad-skip, which cannot round-trip KiCad 10 schematics, so do not use `--write`).
+- `hardware/tools/audit_design.py` (`$KPY`) writes a part and GPIO report to `hardware/tools/design_audit.md`; its hardcoded references and GPIO map are Rev 1's, so the report does not describe the current board.
+- `hardware/tools/add_emc_note.py` adds an EMC checklist textbox to the root schematic from `hardware/tools/EMC_CHECKLIST.md`, which is not in the repository, so it exits with an error.
 
 ## Board rules
 
