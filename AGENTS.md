@@ -5,7 +5,7 @@ Open-Source RP2350 based Flight Controller (FC), 20 x 20 mm mounting pattern
 
 ## Architecture
 
-An RP2354A runs Betaflight against a custom target (`rp2350` sheet: MCU, USB-C,
+An RP2354A runs Betaflight against a custom target (`rp2350a` sheet: MCU, USB-C,
 12 MHz crystal, boot button, buzzer and LED-strip FETs). The IMU sits on SPI1
 (`imu`) with its own interrupt line and its own 1.8 V analog supply, kept
 separate from the 3.3 V logic rail so gyro noise is not shared with the digital
