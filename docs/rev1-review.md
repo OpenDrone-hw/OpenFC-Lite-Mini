@@ -1,6 +1,5 @@
 ---
 date: 2026-06
-notion: https://app.notion.com/p/7da9518ed3034b59ab49da37762b862d
 ---
 
 # Rev 1 bench review
