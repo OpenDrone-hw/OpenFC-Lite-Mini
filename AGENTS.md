@@ -185,8 +185,7 @@ The [Board rules](#board-rules) at the end of this file apply, a CI-checked copy
 
 - Render the board for the README: `$KPY <hardware-tooling>/hardware/kicad/render_board.py hardware/OpenFC.kicad_pcb --outdir images`, KiCad closed.
 - Fill MPN and Manufacturer fields from the LCSC numbers: `python3 hardware/tools/add_mpn_fields.py` (dry run; `--write` saves through kicad-skip, which cannot round-trip KiCad 10 schematics, so do not use `--write`).
-- `hardware/tools/audit_design.py` (`$KPY`) writes a part and GPIO report to `hardware/tools/design_audit.md`; its hardcoded references and GPIO map are Rev 1's, so the report does not describe the current board.
-- `hardware/tools/add_emc_note.py` adds an EMC checklist textbox to the root schematic from `hardware/tools/EMC_CHECKLIST.md`, which is not in the repository, so it exits with an error.
+- Audit the schematic against this file: `python3 hardware/tools/audit_design.py` exports the netlist with kicad-cli, checks every MCU GPIO against the GPIO map above, ADC filter capacitors, SPI CS and I2C pull-ups, RUN and the blue status LED, and writes `hardware/tools/design_audit.md` (not committed); exit status 1 on a finding.
 
 ## Board rules
 
