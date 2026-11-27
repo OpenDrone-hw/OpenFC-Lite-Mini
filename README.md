@@ -39,6 +39,10 @@ mounting pattern, part of the incutec OpenDrone line.
 
 Technical write-up, part list and layout constraints: [AGENTS.md](AGENTS.md).
 
+The schematic is also published as a PDF, so you can read it without KiCad:
+open the [latest release](https://github.com/OpenDrone-hw/OpenFC-Lite-Mini/releases/latest)
+and download `OpenFC-Lite-Mini-<rev>-schematic.pdf` from its assets.
+
 ## Firmware
 
 Betaflight, target `OPENFC_LITE_MINI_RP2350A`. The current image is in
